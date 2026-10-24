@@ -1,0 +1,2458 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DEALZY | Discover Live Local Offers & Trusted Stores</title>
+    <meta name="description" content="Dealzy is your neighborhood sales discovery platform. Explore verified local discounts, flash sales, and exclusive in-store vouchers right around you.">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Base Stylesheets -->
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/responsive.css">
+    <link rel="stylesheet" href="css/animations.css">
+    
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <style>
+        :root {
+            --font-display: 'Plus Jakarta Sans', sans-serif;
+            --font-body: 'Inter', sans-serif;
+            --primary-orange: #FF5D00;
+            --primary-pink: #FF1053;
+            --primary-yellow: #FFB300;
+            --gradient-primary: linear-gradient(135deg, #FF1053 0%, #FF5D00 50%, #FFB300 100%);
+            --gradient-subtle: linear-gradient(180deg, #FDFAF4 0%, #FFFDF9 100%);
+            --bg-body: #FDFBF8;
+            --bg-card: #FFFFFF;
+            --border-subtle: #EFE9DE;
+            --border-hover: #F2994A;
+            --text-dark: #1A1A1E;
+            --text-body: #4A4A54;
+            --text-muted: #7E7E8A;
+            --badge-green: #10B981;
+            --badge-orange: #FF5D00;
+            --shadow-card: 0 4px 18px rgba(0, 0, 0, 0.04), 0 1px 3px rgba(0, 0, 0, 0.02);
+            --shadow-hover: 0 16px 36px rgba(255, 93, 0, 0.1), 0 4px 12px rgba(0, 0, 0, 0.04);
+            --radius-box: 20px;
+        }
+
+        body {
+            background-color: var(--bg-body);
+            font-family: var(--font-body);
+            color: var(--text-dark);
+            line-height: 1.5;
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3, h4, .brand-font {
+            font-family: var(--font-display);
+        }
+
+        /* Announcement Top Bar */
+        .top-announcement {
+            background: linear-gradient(90deg, #18181B, #27272A);
+            color: #FAF5EE;
+            padding: 8px 16px;
+            font-size: 0.8rem;
+            text-align: center;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+        }
+
+        .announcement-badge {
+            background: var(--gradient-primary);
+            color: #FFFFFF;
+            font-size: 0.7rem;
+            font-weight: 700;
+            padding: 2px 8px;
+            border-radius: var(--radius-pill);
+            text-transform: uppercase;
+            letter-spacing: 0.04em;
+        }
+
+        /* Sticky Navigation Bar */
+        .site-header {
+            position: sticky;
+            top: 0;
+            background: rgba(255, 255, 255, 0.94);
+            backdrop-filter: blur(16px);
+            border-bottom: 1px solid var(--border-subtle);
+            z-index: 100;
+            transition: all 0.25s ease;
+        }
+
+        .nav-inner {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: 76px;
+            gap: 20px;
+        }
+
+        .brand-logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            text-decoration: none;
+            color: var(--text-dark);
+            flex-shrink: 0;
+        }
+
+        .brand-logo-icon {
+            width: 38px;
+            height: 38px;
+            background: var(--gradient-primary);
+            border-radius: 11px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #FFFFFF;
+            box-shadow: 0 6px 14px rgba(255, 93, 0, 0.25);
+            transform: rotate(-6deg);
+            transition: transform 0.2s;
+        }
+
+        .brand-logo:hover .brand-logo-icon {
+            transform: rotate(0deg) scale(1.05);
+        }
+
+        .brand-logo-text {
+            font-size: 1.55rem;
+            font-weight: 800;
+            letter-spacing: -0.04em;
+            color: #1A1A1E;
+        }
+
+        /* Location Picker Trigger */
+        .location-selector {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 8px 14px;
+            background: #F7F3EB;
+            border: 1px solid #EAE3D5;
+            border-radius: var(--radius-pill);
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: #3F3F46;
+            cursor: pointer;
+            transition: all 0.2s;
+            flex-shrink: 0;
+        }
+
+        .location-selector:hover {
+            background: #EFE9DC;
+            border-color: #D6CEBE;
+            color: var(--primary-orange);
+        }
+
+        .location-dot {
+            width: 8px;
+            height: 8px;
+            background: var(--primary-orange);
+            border-radius: 50%;
+        }
+
+        /* Search Bar */
+        .header-search-bar {
+            flex: 1;
+            max-width: 520px;
+            position: relative;
+        }
+
+        .search-input-field {
+            width: 100%;
+            height: 46px;
+            padding: 0 40px 0 44px;
+            border-radius: var(--radius-pill);
+            border: 1.5px solid var(--border-subtle);
+            background: #FAFAFC;
+            font-size: 0.9rem;
+            color: var(--text-dark);
+            outline: none;
+            transition: all 0.2s;
+        }
+
+        .search-input-field:focus {
+            background: #FFFFFF;
+            border-color: var(--primary-orange);
+            box-shadow: 0 0 0 3px rgba(255, 93, 0, 0.12);
+        }
+
+        .search-lead-icon {
+            position: absolute;
+            left: 16px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #9CA3AF;
+            pointer-events: none;
+        }
+
+        .search-clear-btn {
+            position: absolute;
+            right: 14px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: none;
+            border: none;
+            color: #9CA3AF;
+            cursor: pointer;
+            display: none;
+        }
+
+        /* Header Navigation & Buttons */
+        .header-nav-actions {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            flex-shrink: 0;
+        }
+
+        .icon-circle-btn {
+            position: relative;
+            width: 42px;
+            height: 42px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid var(--border-subtle);
+            background: #FFFFFF;
+            color: #4A4A54;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .icon-circle-btn:hover {
+            border-color: var(--primary-orange);
+            color: var(--primary-orange);
+            background: #FFFBF7;
+            transform: translateY(-1px);
+        }
+
+        .icon-count-badge {
+            position: absolute;
+            top: -2px;
+            right: -2px;
+            width: 18px;
+            height: 18px;
+            background: var(--primary-pink);
+            color: #FFFFFF;
+            font-size: 0.7rem;
+            font-weight: 700;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 2px solid #FFFFFF;
+        }
+
+        .btn-post-offer {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 9px 18px;
+            border-radius: var(--radius-pill);
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: #27272A;
+            background: #FFFFFF;
+            border: 1.5px solid #E4E4E7;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .btn-post-offer:hover {
+            border-color: var(--primary-orange);
+            color: var(--primary-orange);
+            background: #FFF8F5;
+        }
+
+        .btn-signin-nav {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 22px;
+            border-radius: var(--radius-pill);
+            font-size: 0.875rem;
+            font-weight: 700;
+            color: #FFFFFF;
+            background: var(--gradient-primary);
+            box-shadow: 0 4px 14px rgba(255, 93, 0, 0.24);
+            border: none;
+            cursor: pointer;
+            text-decoration: none;
+            transition: all 0.2s;
+        }
+
+        .btn-signin-nav:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 6px 18px rgba(255, 93, 0, 0.35);
+        }
+
+        /* Hero Spotlight Section */
+        .hero-spotlight {
+            padding: 32px 0 16px;
+        }
+
+        .spotlight-card {
+            background: linear-gradient(135deg, #1C1917 0%, #292524 60%, #44403C 100%);
+            border-radius: 28px;
+            overflow: hidden;
+            position: relative;
+            color: #FFFFFF;
+            padding: 56px 48px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.12);
+        }
+
+        .spotlight-badge-row {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 6px 14px;
+            background: rgba(255, 255, 255, 0.12);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: var(--radius-pill);
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: #FED7AA;
+            margin-bottom: 20px;
+            backdrop-filter: blur(8px);
+        }
+
+        .spotlight-content {
+            max-width: 580px;
+            z-index: 2;
+        }
+
+        .spotlight-content h1 {
+            font-size: 3.25rem;
+            font-weight: 800;
+            line-height: 1.12;
+            letter-spacing: -0.03em;
+            margin-bottom: 16px;
+        }
+
+        .spotlight-content h1 span.gradient-text {
+            background: linear-gradient(135deg, #FF7A00, #FFAE00);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .spotlight-content p {
+            font-size: 1.1rem;
+            color: #D6D3D1;
+            line-height: 1.6;
+            margin-bottom: 28px;
+            max-width: 500px;
+        }
+
+        .spotlight-cta-row {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            flex-wrap: wrap;
+        }
+
+        .btn-spotlight-primary {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 14px 28px;
+            background: var(--gradient-primary);
+            color: #FFFFFF;
+            border-radius: var(--radius-pill);
+            font-size: 1rem;
+            font-weight: 700;
+            text-decoration: none;
+            box-shadow: 0 8px 24px rgba(255, 93, 0, 0.35);
+            transition: all 0.2s;
+        }
+
+        .btn-spotlight-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 28px rgba(255, 93, 0, 0.45);
+        }
+
+        .btn-spotlight-ghost {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 14px 24px;
+            background: rgba(255, 255, 255, 0.1);
+            color: #FFFFFF;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: var(--radius-pill);
+            font-size: 0.95rem;
+            font-weight: 600;
+            text-decoration: none;
+            backdrop-filter: blur(8px);
+            transition: all 0.2s;
+        }
+
+        .btn-spotlight-ghost:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        .spotlight-visual {
+            position: relative;
+            z-index: 2;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .spotlight-image-frame {
+            position: relative;
+            width: 380px;
+            height: 320px;
+            border-radius: 24px;
+            overflow: hidden;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.35);
+            border: 2px solid rgba(255, 255, 255, 0.15);
+        }
+
+        .spotlight-image-frame img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.4s ease;
+        }
+
+        .spotlight-card:hover .spotlight-image-frame img {
+            transform: scale(1.04);
+        }
+
+        .floating-deal-badge {
+            position: absolute;
+            bottom: 20px;
+            left: -20px;
+            background: rgba(255, 255, 255, 0.95);
+            color: #1A1A1E;
+            padding: 12px 18px;
+            border-radius: 18px;
+            box-shadow: 0 12px 28px rgba(0, 0, 0, 0.2);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            backdrop-filter: blur(12px);
+            border: 1px solid #FFFFFF;
+        }
+
+        .floating-badge-icon {
+            width: 36px;
+            height: 36px;
+            border-radius: 10px;
+            background: #FEE2E2;
+            color: #EF4444;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .floating-badge-text {
+            font-size: 0.8rem;
+            line-height: 1.2;
+        }
+
+        .floating-badge-text strong {
+            display: block;
+            font-size: 0.95rem;
+            color: #111827;
+        }
+
+        /* Quick Filters & Category Strip */
+        .category-filter-section {
+            padding: 28px 0 10px;
+        }
+
+        .category-scroll-container {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            overflow-x: auto;
+            padding-bottom: 8px;
+            scrollbar-width: none;
+        }
+
+        .category-scroll-container::-webkit-scrollbar {
+            display: none;
+        }
+
+        .category-pill-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 9px;
+            padding: 10px 20px;
+            background: #FFFFFF;
+            border: 1.5px solid var(--border-subtle);
+            border-radius: var(--radius-pill);
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: var(--text-body);
+            cursor: pointer;
+            white-space: nowrap;
+            transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+            user-select: none;
+        }
+
+        .category-pill-btn:hover {
+            border-color: var(--primary-orange);
+            color: var(--primary-orange);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(255, 93, 0, 0.08);
+        }
+
+        .category-pill-btn.active {
+            background: var(--primary-orange);
+            border-color: var(--primary-orange);
+            color: #FFFFFF;
+            box-shadow: 0 6px 16px rgba(255, 93, 0, 0.25);
+        }
+
+        .category-pill-btn.active i {
+            stroke: #FFFFFF;
+        }
+
+        /* Secondary Quick Sort / Filter Bar */
+        .deals-filter-bar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 16px 0;
+            margin-bottom: 20px;
+            border-bottom: 1px solid var(--border-subtle);
+            flex-wrap: wrap;
+            gap: 14px;
+        }
+
+        .filter-counter-text {
+            font-size: 1rem;
+            color: var(--text-muted);
+            font-weight: 500;
+        }
+
+        .filter-counter-text strong {
+            color: var(--text-dark);
+            font-weight: 700;
+        }
+
+        .filter-chips-row {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+
+        .filter-chip-toggle {
+            padding: 6px 14px;
+            background: #F4EFE6;
+            border: 1px solid #E8E1D5;
+            border-radius: var(--radius-pill);
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: #52525B;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .filter-chip-toggle:hover {
+            border-color: var(--primary-orange);
+            color: var(--primary-orange);
+        }
+
+        .filter-chip-toggle.active {
+            background: #18181B;
+            border-color: #18181B;
+            color: #FFFFFF;
+        }
+
+        /* Deals Grid */
+        .deals-grid-layout {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 24px;
+            margin-bottom: 48px;
+        }
+
+        .deal-item-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-subtle);
+            border-radius: var(--radius-box);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            box-shadow: var(--shadow-card);
+            transition: all 0.28s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+        }
+
+        .deal-item-card:hover {
+            transform: translateY(-6px);
+            box-shadow: var(--shadow-hover);
+            border-color: rgba(255, 93, 0, 0.25);
+        }
+
+        .deal-card-visual {
+            position: relative;
+            height: 200px;
+            background: #E5E7EB;
+            overflow: hidden;
+        }
+
+        .deal-card-visual img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.35s ease;
+        }
+
+        .deal-item-card:hover .deal-card-visual img {
+            transform: scale(1.06);
+        }
+
+        .badge-discount-tag {
+            position: absolute;
+            top: 14px;
+            left: 14px;
+            background: var(--gradient-primary);
+            color: #FFFFFF;
+            font-size: 0.775rem;
+            font-weight: 800;
+            padding: 5px 11px;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            letter-spacing: 0.02em;
+        }
+
+        .btn-card-wishlist {
+            position: absolute;
+            top: 14px;
+            right: 14px;
+            width: 36px;
+            height: 36px;
+            background: rgba(255, 255, 255, 0.92);
+            border-radius: 50%;
+            border: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #9CA3AF;
+            cursor: pointer;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(8px);
+            transition: all 0.2s;
+        }
+
+        .btn-card-wishlist:hover,
+        .btn-card-wishlist.active {
+            color: #EF4444;
+            transform: scale(1.08);
+        }
+
+        .btn-card-wishlist.active i {
+            fill: #EF4444;
+        }
+
+        .deal-card-body {
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            flex: 1;
+        }
+
+        .deal-category-tag {
+            font-size: 0.75rem;
+            font-weight: 700;
+            color: var(--primary-orange);
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+            margin-bottom: 6px;
+        }
+
+        .deal-card-title {
+            font-size: 1.15rem;
+            font-weight: 700;
+            color: #111827;
+            margin-bottom: 6px;
+            line-height: 1.3;
+        }
+
+        .deal-card-store {
+            font-size: 0.875rem;
+            color: var(--text-muted);
+            margin-bottom: 14px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .deal-card-meta {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 10px 0;
+            border-top: 1px dashed var(--border-subtle);
+            border-bottom: 1px dashed var(--border-subtle);
+            margin-bottom: 16px;
+            font-size: 0.8rem;
+            color: #52525B;
+        }
+
+        .meta-rating {
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            font-weight: 700;
+            color: #18181B;
+        }
+
+        .meta-distance {
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            color: #71717A;
+        }
+
+        .meta-validity {
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            color: #DC2626;
+            font-weight: 600;
+        }
+
+        .deal-card-footer {
+            margin-top: auto;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .btn-claim-deal {
+            flex: 1;
+            height: 44px;
+            background: #18181B;
+            color: #FFFFFF;
+            border: none;
+            border-radius: var(--radius-pill);
+            font-size: 0.875rem;
+            font-weight: 700;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            transition: all 0.2s;
+        }
+
+        .btn-claim-deal:hover {
+            background: var(--primary-orange);
+            box-shadow: 0 6px 16px rgba(255, 93, 0, 0.28);
+            transform: translateY(-1px);
+        }
+
+        /* Trusted Stores Section */
+        .stores-showcase-section {
+            background: #F7F3EB;
+            border-radius: 28px;
+            padding: 44px;
+            margin-bottom: 56px;
+        }
+
+        .section-headline-row {
+            display: flex;
+            align-items: flex-end;
+            justify-content: space-between;
+            margin-bottom: 32px;
+            flex-wrap: wrap;
+            gap: 16px;
+        }
+
+        .section-headline-row h2 {
+            font-size: 2.15rem;
+            font-weight: 800;
+            color: #18181B;
+            letter-spacing: -0.025em;
+            margin-bottom: 6px;
+        }
+
+        .section-headline-row p {
+            color: #71717A;
+            font-size: 0.95rem;
+        }
+
+        .stores-grid-layout {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 20px;
+        }
+
+        .store-profile-card {
+            background: #FFFFFF;
+            border-radius: 20px;
+            border: 1px solid #EFE8DC;
+            padding: 20px;
+            display: flex;
+            gap: 16px;
+            align-items: center;
+            box-shadow: 0 4px 14px rgba(0, 0, 0, 0.03);
+            transition: all 0.25s ease;
+        }
+
+        .store-profile-card:hover {
+            transform: translateY(-3px);
+            border-color: rgba(255, 93, 0, 0.3);
+            box-shadow: 0 10px 24px rgba(0, 0, 0, 0.06);
+        }
+
+        .store-avatar-img {
+            width: 76px;
+            height: 76px;
+            border-radius: 16px;
+            object-fit: cover;
+            flex-shrink: 0;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+        }
+
+        .store-details {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .store-name-row {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            margin-bottom: 4px;
+        }
+
+        .store-name-row h4 {
+            font-size: 1.05rem;
+            font-weight: 700;
+            color: #18181B;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .verified-check-icon {
+            color: #0284C7;
+            flex-shrink: 0;
+        }
+
+        .store-category-text {
+            font-size: 0.8rem;
+            color: #71717A;
+            margin-bottom: 8px;
+        }
+
+        .store-info-pills {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 0.775rem;
+            color: #52525B;
+        }
+
+        .pill-active-deals {
+            background: #FFF1EE;
+            color: #E11D48;
+            font-weight: 700;
+            padding: 2px 8px;
+            border-radius: 6px;
+        }
+
+        .btn-visit-store {
+            padding: 8px 14px;
+            background: #F4F4F5;
+            color: #18181B;
+            border-radius: var(--radius-pill);
+            font-size: 0.8rem;
+            font-weight: 600;
+            border: none;
+            cursor: pointer;
+            transition: all 0.2s;
+            flex-shrink: 0;
+        }
+
+        .btn-visit-store:hover {
+            background: var(--primary-orange);
+            color: #FFFFFF;
+        }
+
+        /* How Dealzy Works 3-Step Strip */
+        .how-it-works-strip {
+            background: #FFFFFF;
+            border: 1px solid var(--border-subtle);
+            border-radius: 28px;
+            padding: 48px;
+            margin-bottom: 56px;
+            box-shadow: var(--shadow-card);
+        }
+
+        .how-header {
+            text-align: center;
+            max-width: 600px;
+            margin: 0 auto 40px;
+        }
+
+        .how-header h2 {
+            font-size: 2rem;
+            font-weight: 800;
+            color: #18181B;
+            margin-bottom: 8px;
+        }
+
+        .how-header p {
+            color: #71717A;
+            font-size: 0.95rem;
+        }
+
+        .steps-container {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 32px;
+            position: relative;
+        }
+
+        .step-item-card {
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .step-icon-bubble {
+            width: 68px;
+            height: 68px;
+            border-radius: 22px;
+            background: #FFF5EE;
+            color: var(--primary-orange);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 18px;
+            box-shadow: 0 8px 20px rgba(255, 93, 0, 0.12);
+            position: relative;
+        }
+
+        .step-number-tag {
+            position: absolute;
+            top: -6px;
+            right: -6px;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            background: #18181B;
+            color: #FFFFFF;
+            font-size: 0.75rem;
+            font-weight: 800;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .step-item-card h4 {
+            font-size: 1.15rem;
+            font-weight: 700;
+            color: #18181B;
+            margin-bottom: 8px;
+        }
+
+        .step-item-card p {
+            font-size: 0.875rem;
+            color: #6B7280;
+            line-height: 1.5;
+            max-width: 260px;
+        }
+
+        /* Merchant Callout Banner */
+        .merchant-join-banner {
+            background: linear-gradient(135deg, #FF5D00 0%, #FF1053 100%);
+            border-radius: 28px;
+            padding: 48px;
+            color: #FFFFFF;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 64px;
+            box-shadow: 0 20px 40px rgba(255, 93, 0, 0.25);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .merchant-banner-content h3 {
+            font-size: 2.2rem;
+            font-weight: 800;
+            margin-bottom: 10px;
+        }
+
+        .merchant-banner-content p {
+            font-size: 1.05rem;
+            color: rgba(255, 255, 255, 0.9);
+            max-width: 540px;
+        }
+
+        .btn-merchant-register {
+            padding: 16px 32px;
+            background: #FFFFFF;
+            color: #18181B;
+            border-radius: var(--radius-pill);
+            font-size: 1rem;
+            font-weight: 700;
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+            transition: all 0.2s;
+            white-space: nowrap;
+        }
+
+        .btn-merchant-register:hover {
+            transform: translateY(-2px);
+            background: #FFFDF9;
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.25);
+        }
+
+        /* Deal Claim / Voucher Modal */
+        .deal-voucher-modal {
+            position: fixed;
+            inset: 0;
+            background: rgba(15, 23, 42, 0.65);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.25s ease;
+        }
+
+        .deal-voucher-modal.active {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .voucher-card-popup {
+            background: #FFFFFF;
+            border-radius: 28px;
+            max-width: 480px;
+            width: 100%;
+            overflow: hidden;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.3);
+            transform: scale(0.92);
+            transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+            position: relative;
+        }
+
+        .deal-voucher-modal.active .voucher-card-popup {
+            transform: scale(1);
+        }
+
+        .voucher-header-img {
+            height: 160px;
+            position: relative;
+            background: #E5E7EB;
+        }
+
+        .voucher-header-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .popup-close-icon {
+            position: absolute;
+            top: 16px;
+            right: 16px;
+            width: 34px;
+            height: 34px;
+            border-radius: 50%;
+            background: rgba(0, 0, 0, 0.5);
+            color: #FFFFFF;
+            border: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            backdrop-filter: blur(4px);
+            transition: background 0.2s;
+        }
+
+        .popup-close-icon:hover {
+            background: rgba(0, 0, 0, 0.8);
+        }
+
+        .voucher-body {
+            padding: 28px;
+            text-align: center;
+        }
+
+        .voucher-discount-pill {
+            display: inline-block;
+            background: #FEE2E2;
+            color: #DC2626;
+            font-size: 0.85rem;
+            font-weight: 800;
+            padding: 4px 14px;
+            border-radius: var(--radius-pill);
+            margin-bottom: 10px;
+        }
+
+        .voucher-title {
+            font-size: 1.45rem;
+            font-weight: 800;
+            color: #111827;
+            margin-bottom: 4px;
+        }
+
+        .voucher-store {
+            font-size: 0.9rem;
+            color: #6B7280;
+            margin-bottom: 20px;
+        }
+
+        /* Promo code ticket box */
+        .coupon-code-ticket {
+            background: #F8FAFC;
+            border: 2px dashed #CBD5E1;
+            border-radius: 16px;
+            padding: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 20px;
+        }
+
+        .ticket-code-val {
+            font-family: monospace;
+            font-size: 1.35rem;
+            font-weight: 800;
+            letter-spacing: 0.08em;
+            color: #0F172A;
+        }
+
+        .btn-copy-code {
+            padding: 8px 16px;
+            background: var(--primary-orange);
+            color: #FFFFFF;
+            border: none;
+            border-radius: var(--radius-pill);
+            font-size: 0.85rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .btn-copy-code:hover {
+            background: #E05200;
+        }
+
+        .voucher-instructions {
+            font-size: 0.8rem;
+            color: #64748B;
+            line-height: 1.4;
+            margin-bottom: 22px;
+        }
+
+        .voucher-actions-row {
+            display: flex;
+            gap: 12px;
+        }
+
+        .btn-navigate-store {
+            flex: 1;
+            height: 46px;
+            background: #0284C7;
+            color: #FFFFFF;
+            border-radius: var(--radius-pill);
+            font-size: 0.9rem;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            text-decoration: none;
+        }
+
+        /* Location Picker Modal */
+        .location-select-modal {
+            position: fixed;
+            inset: 0;
+            background: rgba(15, 23, 42, 0.6);
+            backdrop-filter: blur(8px);
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.2s;
+        }
+
+        .location-select-modal.active {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .location-modal-card {
+            background: #FFFFFF;
+            border-radius: 24px;
+            max-width: 440px;
+            width: 100%;
+            padding: 28px;
+            position: relative;
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.25);
+        }
+
+        .location-options-list {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin-top: 18px;
+            max-height: 280px;
+            overflow-y: auto;
+        }
+
+        .location-option-item {
+            padding: 12px 16px;
+            border-radius: 12px;
+            border: 1px solid #E2E8F0;
+            background: #F8FAFC;
+            font-size: 0.95rem;
+            font-weight: 600;
+            color: #1E293B;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            transition: all 0.2s;
+        }
+
+        .location-option-item:hover,
+        .location-option-item.active {
+            border-color: var(--primary-orange);
+            background: #FFF8F5;
+            color: var(--primary-orange);
+        }
+
+        /* Notifications Popover */
+        .notifications-drawer {
+            position: absolute;
+            top: 76px;
+            right: 48px;
+            width: 320px;
+            background: #FFFFFF;
+            border-radius: 18px;
+            border: 1px solid var(--border-subtle);
+            box-shadow: 0 16px 36px rgba(0, 0, 0, 0.12);
+            padding: 16px;
+            display: none;
+            z-index: 1000;
+        }
+
+        .notifications-drawer.active {
+            display: block;
+            animation: fadeInTab 0.2s ease forwards;
+        }
+
+        .noti-item {
+            padding: 10px 0;
+            border-bottom: 1px solid #F1F5F9;
+            font-size: 0.85rem;
+        }
+
+        .noti-item:last-child {
+            border-bottom: none;
+        }
+
+        .noti-time {
+            font-size: 0.75rem;
+            color: #94A3B8;
+            margin-top: 2px;
+        }
+
+        /* Classy Footer */
+        .site-footer {
+            background: #18181B;
+            color: #A1A1AA;
+            padding: 64px 0 32px;
+            border-top: 1px solid #27272A;
+        }
+
+        .footer-cols-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 48px;
+            margin-bottom: 56px;
+        }
+
+        .footer-brand-title {
+            color: #FFFFFF;
+            font-size: 1.6rem;
+            font-weight: 800;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .footer-brand-desc {
+            font-size: 0.9rem;
+            line-height: 1.6;
+            max-width: 340px;
+            margin-bottom: 24px;
+        }
+
+        .footer-col h5 {
+            color: #FFFFFF;
+            font-size: 1rem;
+            font-weight: 700;
+            margin-bottom: 18px;
+        }
+
+        .footer-links-list {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .footer-links-list a {
+            color: #A1A1AA;
+            text-decoration: none;
+            font-size: 0.875rem;
+            transition: color 0.2s;
+        }
+
+        .footer-links-list a:hover {
+            color: var(--primary-orange);
+        }
+
+        .footer-bottom-bar {
+            border-top: 1px solid #27272A;
+            padding-top: 28px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            font-size: 0.85rem;
+            flex-wrap: wrap;
+            gap: 16px;
+        }
+
+        /* Responsive Breakpoints */
+        @media (max-width: 1024px) {
+            .spotlight-card {
+                flex-direction: column;
+                padding: 40px 32px;
+                text-align: center;
+                gap: 36px;
+            }
+
+            .spotlight-content {
+                max-width: 100%;
+            }
+
+            .spotlight-cta-row {
+                justify-content: center;
+            }
+
+            .spotlight-visual {
+                width: 100%;
+            }
+
+            .spotlight-image-frame {
+                width: 100%;
+                max-width: 440px;
+                height: 260px;
+            }
+
+            .steps-container {
+                grid-template-columns: 1fr;
+                gap: 36px;
+            }
+
+            .merchant-join-banner {
+                flex-direction: column;
+                text-align: center;
+                gap: 24px;
+            }
+
+            .footer-cols-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-inner {
+                height: auto;
+                padding: 14px 0;
+                flex-wrap: wrap;
+            }
+
+            .header-search-bar {
+                order: 3;
+                width: 100%;
+                max-width: 100%;
+                margin-top: 8px;
+            }
+
+            .btn-post-offer {
+                display: none;
+            }
+
+            .spotlight-content h1 {
+                font-size: 2.3rem;
+            }
+
+            .stores-showcase-section {
+                padding: 28px 18px;
+            }
+
+            .how-it-works-strip {
+                padding: 32px 20px;
+            }
+
+            .footer-cols-grid {
+                grid-template-columns: 1fr;
+                gap: 32px;
+            }
+
+            .notifications-drawer {
+                right: 16px;
+                width: calc(100vw - 32px);
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Top Announcement Strip -->
+    <div class="top-announcement">
+        <span class="announcement-badge">Live Deals</span>
+        <span>🔥 Weekend Special: Over 450+ verified local shops running exclusive 30-70% off discounts!</span>
+    </div>
+
+    <!-- Sticky Navigation Header -->
+    <header class="site-header">
+        <div class="container nav-inner">
+            
+            <!-- Logo -->
+            <a href="home.html" class="brand-logo" title="DEALZY">
+                <div class="brand-logo-icon">
+                    <i data-lucide="tag" size="20" stroke-width="2.5"></i>
+                </div>
+                <span class="brand-logo-text">dealzy</span>
+            </a>
+
+            <!-- Location Selector -->
+            <button class="location-selector" id="btn-open-location" aria-label="Change current location">
+                <span class="location-dot"></span>
+                <span id="current-location-label">Sector 17, Chandigarh</span>
+                <i data-lucide="chevron-down" size="14"></i>
+            </button>
+
+            <!-- Search Bar -->
+            <div class="header-search-bar">
+                <i data-lucide="search" size="18" class="search-lead-icon"></i>
+                <input 
+                    type="text" 
+                    id="search-input" 
+                    class="search-input-field" 
+                    placeholder="Search sales by store name, category, or deal..."
+                    autocomplete="off"
+                >
+                <button type="button" class="search-clear-btn" id="btn-clear-search">
+                    <i data-lucide="x" size="16"></i>
+                </button>
+            </div>
+
+            <!-- Header Action Controls -->
+            <div class="header-nav-actions">
+                <!-- Saved Wishlist Deals -->
+                <button class="icon-circle-btn" id="btn-header-wishlist" title="Saved Deals">
+                    <i data-lucide="heart" size="19"></i>
+                    <span class="icon-count-badge" id="wishlist-counter">2</span>
+                </button>
+
+                <!-- Notifications -->
+                <button class="icon-circle-btn" id="btn-header-notifications" title="Notifications">
+                    <i data-lucide="bell" size="19"></i>
+                    <span class="icon-count-badge" style="background:#FF5D00;">3</span>
+                </button>
+
+                <!-- Post Offer (Merchant Hook) -->
+                <button class="btn-post-offer" id="btn-list-store">
+                    <i data-lucide="plus-circle" size="16"></i>
+                    <span>List a Deal</span>
+                </button>
+
+                <!-- Sign In / Profile Button -->
+                <a href="login.html" class="btn-signin-nav">
+                    <i data-lucide="user" size="16"></i>
+                    <span>Sign In</span>
+                </a>
+            </div>
+
+        </div>
+
+        <!-- Notifications Dropdown Popover -->
+        <div class="notifications-drawer" id="notifications-popover">
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px;">
+                <h4 style="font-size:0.95rem; font-weight:700;">Live Deal Alerts</h4>
+                <span style="font-size:0.75rem; color:var(--primary-orange); cursor:pointer;">Mark all read</span>
+            </div>
+            <div class="noti-item">
+                <strong>Gulati Luxury Textiles</strong> posted 40% OFF Festive Collection!
+                <div class="noti-time">10 mins ago • Sector 17</div>
+            </div>
+            <div class="noti-item">
+                <strong>Brew & Roast Cafe</strong> added Buy 1 Get 1 on Artisan Brews.
+                <div class="noti-time">45 mins ago • Sector 35</div>
+            </div>
+            <div class="noti-item">
+                Flash sale: <strong>Machi Sneakers</strong> ending in 3 hours!
+                <div class="noti-time">2 hours ago • Sector 22</div>
+            </div>
+        </div>
+    </header>
+
+    <main class="container">
+
+        <!-- Hero Spotlight Section -->
+        <section class="hero-spotlight animate-fade-in">
+            <div class="spotlight-card">
+                <div class="spotlight-content">
+                    <div class="spotlight-badge-row">
+                        <i data-lucide="sparkles" size="14"></i>
+                        <span>Your Neighborhood Sale Radar</span>
+                    </div>
+
+                    <h1>
+                        Big Deals.<br>
+                        <span class="gradient-text">Right Around You.</span>
+                    </h1>
+
+                    <p>
+                        Explore verified sales, flash discounts & exclusive digital vouchers from top local boutiques, cafes, electronics & neighborhood stores.
+                    </p>
+
+                    <div class="spotlight-cta-row">
+                        <a href="#browse-deals" class="btn-spotlight-primary">
+                            <span>Explore 450+ Live Deals</span>
+                            <i data-lucide="arrow-right" size="18"></i>
+                        </a>
+                        <a href="#trusted-stores" class="btn-spotlight-ghost">
+                            <i data-lucide="store" size="18"></i>
+                            <span>Browse Verified Stores</span>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="spotlight-visual">
+                    <div class="spotlight-image-frame">
+                        <img 
+                            src="https://images.unsplash.com/photo-1483985988355-763728e1935b?auto=format&fit=crop&q=80&w=900" 
+                            alt="Shopping sales discovery"
+                        >
+                    </div>
+
+                    <div class="floating-deal-badge">
+                        <div class="floating-badge-icon">
+                            <i data-lucide="percent" size="18"></i>
+                        </div>
+                        <div class="floating-badge-text">
+                            <strong>Instant In-Store Savings</strong>
+                            <span>Show voucher code at checkout</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Category Discovery Filter Strip (Sale Discovery & Store Offers) -->
+        <section class="category-filter-section" id="browse-deals">
+            <div class="category-scroll-container">
+                <button class="category-pill-btn active" data-category="all">
+                    <i data-lucide="sparkles" size="16"></i>
+                    <span>All Deals (12)</span>
+                </button>
+                <button class="category-pill-btn" data-category="fashion">
+                    <i data-lucide="shirt" size="16"></i>
+                    <span>Fashion & Apparel</span>
+                </button>
+                <button class="category-pill-btn" data-category="dining">
+                    <i data-lucide="coffee" size="16"></i>
+                    <span>Cafes & Dining</span>
+                </button>
+                <button class="category-pill-btn" data-category="footwear">
+                    <i data-lucide="footprints" size="16"></i>
+                    <span>Footwear & Sneakers</span>
+                </button>
+                <button class="category-pill-btn" data-category="electronics">
+                    <i data-lucide="smartphone" size="16"></i>
+                    <span>Electronics & Gadgets</span>
+                </button>
+                <button class="category-pill-btn" data-category="beauty">
+                    <i data-lucide="sparkle" size="16"></i>
+                    <span>Beauty & Wellness</span>
+                </button>
+                <button class="category-pill-btn" data-category="home">
+                    <i data-lucide="lamp" size="16"></i>
+                    <span>Home Decor & Living</span>
+                </button>
+                <button class="category-pill-btn" data-category="grocery">
+                    <i data-lucide="shopping-bag" size="16"></i>
+                    <span>Supermarkets & Fresh</span>
+                </button>
+            </div>
+        </section>
+
+        <!-- Secondary Sort / Distance Filter Row -->
+        <div class="deals-filter-bar">
+            <div class="filter-counter-text">
+                Showing <strong id="active-deals-count">12</strong> verified offers in <strong id="filter-locality-name">Sector 17, Chandigarh</strong>
+            </div>
+
+            <div class="filter-chips-row">
+                <button class="filter-chip-toggle active" data-filter="all">All Offers</button>
+                <button class="filter-chip-toggle" data-filter="nearby">&lt; 2 km Nearby</button>
+                <button class="filter-chip-toggle" data-filter="mega">40%+ Mega Discounts</button>
+                <button class="filter-chip-toggle" data-filter="bogo">Buy 1 Get 1</button>
+            </div>
+        </div>
+
+        <!-- Dynamic Deals Listing Grid -->
+        <section class="deals-grid-layout" id="deals-grid-container">
+
+            <!-- Deal Card 1: Fashion -->
+            <div class="deal-item-card" data-category="fashion" data-discount="40" data-distance="1.2" data-type="percent">
+                <div class="deal-card-visual">
+                    <img src="https://images.unsplash.com/photo-1490481651871-ab68de25d43d?auto=format&fit=crop&q=80&w=600" alt="Autumn Festive Kurtis & Silks">
+                    <div class="badge-discount-tag">40% OFF</div>
+                    <button class="btn-card-wishlist" title="Save deal"><i data-lucide="heart" size="18"></i></button>
+                </div>
+                <div class="deal-card-body">
+                    <div class="deal-category-tag">Fashion & Apparel</div>
+                    <h3 class="deal-card-title">Festive Silks & Designer Kurtis</h3>
+                    <div class="deal-card-store">
+                        <i data-lucide="store" size="14"></i>
+                        <span>Gulati Luxury Textiles • Sector 17</span>
+                    </div>
+                    <div class="deal-card-meta">
+                        <span class="meta-rating"><i data-lucide="star" size="13" fill="#F59E0B" color="#F59E0B"></i> 4.8 (320)</span>
+                        <span class="meta-distance"><i data-lucide="map-pin" size="13"></i> 1.2 km</span>
+                        <span class="meta-validity"><i data-lucide="clock" size="13"></i> 3 days left</span>
+                    </div>
+                    <div class="deal-card-footer">
+                        <button class="btn-claim-deal" onclick="openVoucherModal('Festive Silks & Designer Kurtis', 'Gulati Luxury Textiles', '40% OFF', 'GULATI40', 'Sector 17 Plaza, Chandigarh', 'https://images.unsplash.com/photo-1490481651871-ab68de25d43d?auto=format&fit=crop&q=80&w=600')">
+                            <span>Claim Voucher</span>
+                            <i data-lucide="ticket" size="16"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Deal Card 2: Footwear -->
+            <div class="deal-item-card" data-category="footwear" data-discount="50" data-distance="1.8" data-type="bogo">
+                <div class="deal-card-visual">
+                    <img src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?auto=format&fit=crop&q=80&w=600" alt="Sneakers & Running Shoes">
+                    <div class="badge-discount-tag">BUY 1 GET 1 FREE</div>
+                    <button class="btn-card-wishlist" title="Save deal"><i data-lucide="heart" size="18"></i></button>
+                </div>
+                <div class="deal-card-body">
+                    <div class="deal-category-tag">Footwear & Sneakers</div>
+                    <h3 class="deal-card-title">Pro Running & Casual Sneakers</h3>
+                    <div class="deal-card-store">
+                        <i data-lucide="store" size="14"></i>
+                        <span>Machi Footwear • Sector 22</span>
+                    </div>
+                    <div class="deal-card-meta">
+                        <span class="meta-rating"><i data-lucide="star" size="13" fill="#F59E0B" color="#F59E0B"></i> 4.6 (180)</span>
+                        <span class="meta-distance"><i data-lucide="map-pin" size="13"></i> 1.8 km</span>
+                        <span class="meta-validity"><i data-lucide="clock" size="13"></i> Ends Today!</span>
+                    </div>
+                    <div class="deal-card-footer">
+                        <button class="btn-claim-deal" onclick="openVoucherModal('Pro Running & Casual Sneakers', 'Machi Footwear', 'BUY 1 GET 1 FREE', 'MACHIBOGO', 'SCO 42, Sector 22-B, Chandigarh', 'https://images.unsplash.com/photo-1542291026-7eec264c27ff?auto=format&fit=crop&q=80&w=600')">
+                            <span>Claim Voucher</span>
+                            <i data-lucide="ticket" size="16"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Deal Card 3: Dining / Cafe -->
+            <div class="deal-item-card" data-category="dining" data-discount="25" data-distance="0.8" data-type="percent">
+                <div class="deal-card-visual">
+                    <img src="https://images.unsplash.com/photo-1554118811-1e0d58224f24?auto=format&fit=crop&q=80&w=600" alt="Artisan Cafe & Bakery">
+                    <div class="badge-discount-tag">FLAT 25% OFF</div>
+                    <button class="btn-card-wishlist" title="Save deal"><i data-lucide="heart" size="18"></i></button>
+                </div>
+                <div class="deal-card-body">
+                    <div class="deal-category-tag">Cafes & Dining</div>
+                    <h3 class="deal-card-title">Artisan Coffee & Gourmet Brunch</h3>
+                    <div class="deal-card-store">
+                        <i data-lucide="store" size="14"></i>
+                        <span>The Roastery & Bakehouse • Sector 35</span>
+                    </div>
+                    <div class="deal-card-meta">
+                        <span class="meta-rating"><i data-lucide="star" size="13" fill="#F59E0B" color="#F59E0B"></i> 4.9 (512)</span>
+                        <span class="meta-distance"><i data-lucide="map-pin" size="13"></i> 0.8 km</span>
+                        <span class="meta-validity"><i data-lucide="clock" size="13"></i> Valid this week</span>
+                    </div>
+                    <div class="deal-card-footer">
+                        <button class="btn-claim-deal" onclick="openVoucherModal('Artisan Coffee & Gourmet Brunch', 'The Roastery & Bakehouse', 'FLAT 25% OFF', 'ROAST25', 'Sector 35-C Inner Market, Chandigarh', 'https://images.unsplash.com/photo-1554118811-1e0d58224f24?auto=format&fit=crop&q=80&w=600')">
+                            <span>Claim Voucher</span>
+                            <i data-lucide="ticket" size="16"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Deal Card 4: Electronics -->
+            <div class="deal-item-card" data-category="electronics" data-discount="35" data-distance="1.5" data-type="percent">
+                <div class="deal-card-visual">
+                    <img src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format&fit=crop&q=80&w=600" alt="Wireless Audio & Headphones">
+                    <div class="badge-discount-tag">35% OFF</div>
+                    <button class="btn-card-wishlist" title="Save deal"><i data-lucide="heart" size="18"></i></button>
+                </div>
+                <div class="deal-card-body">
+                    <div class="deal-category-tag">Electronics & Gadgets</div>
+                    <h3 class="deal-card-title">Premium Noise-Cancelling Headphones</h3>
+                    <div class="deal-card-store">
+                        <i data-lucide="store" size="14"></i>
+                        <span>Horizon Digital Zone • Sector 17</span>
+                    </div>
+                    <div class="deal-card-meta">
+                        <span class="meta-rating"><i data-lucide="star" size="13" fill="#F59E0B" color="#F59E0B"></i> 4.7 (240)</span>
+                        <span class="meta-distance"><i data-lucide="map-pin" size="13"></i> 1.5 km</span>
+                        <span class="meta-validity"><i data-lucide="clock" size="13"></i> 4 days left</span>
+                    </div>
+                    <div class="deal-card-footer">
+                        <button class="btn-claim-deal" onclick="openVoucherModal('Premium Noise-Cancelling Headphones', 'Horizon Digital Zone', '35% OFF', 'HORIZON35', 'Sector 17 Bridge Market, Chandigarh', 'https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format&fit=crop&q=80&w=600')">
+                            <span>Claim Voucher</span>
+                            <i data-lucide="ticket" size="16"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Deal Card 5: Beauty & Wellness -->
+            <div class="deal-item-card" data-category="beauty" data-discount="50" data-distance="2.4" data-type="percent">
+                <div class="deal-card-visual">
+                    <img src="https://images.unsplash.com/photo-1540555700478-4be289fbecef?auto=format&fit=crop&q=80&w=600" alt="Spa & Facial Package">
+                    <div class="badge-discount-tag">FLAT 50% OFF</div>
+                    <button class="btn-card-wishlist" title="Save deal"><i data-lucide="heart" size="18"></i></button>
+                </div>
+                <div class="deal-card-body">
+                    <div class="deal-category-tag">Beauty & Wellness</div>
+                    <h3 class="deal-card-title">Aromatherapy Spa & Hair Treatment</h3>
+                    <div class="deal-card-store">
+                        <i data-lucide="store" size="14"></i>
+                        <span>Bloom & Glow Wellness Studio</span>
+                    </div>
+                    <div class="deal-card-meta">
+                        <span class="meta-rating"><i data-lucide="star" size="13" fill="#F59E0B" color="#F59E0B"></i> 4.9 (410)</span>
+                        <span class="meta-distance"><i data-lucide="map-pin" size="13"></i> 2.4 km</span>
+                        <span class="meta-validity"><i data-lucide="clock" size="13"></i> Weekend Only</span>
+                    </div>
+                    <div class="deal-card-footer">
+                        <button class="btn-claim-deal" onclick="openVoucherModal('Aromatherapy Spa & Hair Treatment', 'Bloom & Glow Wellness Studio', 'FLAT 50% OFF', 'BLOOM50', 'Sector 9-D Main Boulevard, Chandigarh', 'https://images.unsplash.com/photo-1540555700478-4be289fbecef?auto=format&fit=crop&q=80&w=600')">
+                            <span>Claim Voucher</span>
+                            <i data-lucide="ticket" size="16"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Deal Card 6: Home Decor & Living -->
+            <div class="deal-item-card" data-category="home" data-discount="30" data-distance="3.1" data-type="percent">
+                <div class="deal-card-visual">
+                    <img src="https://images.unsplash.com/photo-1513694203232-719a280e022f?auto=format&fit=crop&q=80&w=600" alt="Handcrafted Lighting & Rugs">
+                    <div class="badge-discount-tag">30% OFF</div>
+                    <button class="btn-card-wishlist" title="Save deal"><i data-lucide="heart" size="18"></i></button>
+                </div>
+                <div class="deal-card-body">
+                    <div class="deal-category-tag">Home Decor & Living</div>
+                    <h3 class="deal-card-title">Aesthetic Lamps & Handwoven Rugs</h3>
+                    <div class="deal-card-store">
+                        <i data-lucide="store" size="14"></i>
+                        <span>Urban Haven Living Store</span>
+                    </div>
+                    <div class="deal-card-meta">
+                        <span class="meta-rating"><i data-lucide="star" size="13" fill="#F59E0B" color="#F59E0B"></i> 4.5 (190)</span>
+                        <span class="meta-distance"><i data-lucide="map-pin" size="13"></i> 3.1 km</span>
+                        <span class="meta-validity"><i data-lucide="clock" size="13"></i> 5 days left</span>
+                    </div>
+                    <div class="deal-card-footer">
+                        <button class="btn-claim-deal" onclick="openVoucherModal('Aesthetic Lamps & Handwoven Rugs', 'Urban Haven Living Store', '30% OFF', 'HAVEN30', 'Industrial Area Phase 1, Chandigarh', 'https://images.unsplash.com/photo-1513694203232-719a280e022f?auto=format&fit=crop&q=80&w=600')">
+                            <span>Claim Voucher</span>
+                            <i data-lucide="ticket" size="16"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Deal Card 7: Supermarket / Organic -->
+            <div class="deal-item-card" data-category="grocery" data-discount="20" data-distance="0.9" data-type="percent">
+                <div class="deal-card-visual">
+                    <img src="https://images.unsplash.com/photo-1542838132-92c53300491e?auto=format&fit=crop&q=80&w=600" alt="Organic Fresh Gourmet">
+                    <div class="badge-discount-tag">₹300 OFF ON ₹1500</div>
+                    <button class="btn-card-wishlist" title="Save deal"><i data-lucide="heart" size="18"></i></button>
+                </div>
+                <div class="deal-card-body">
+                    <div class="deal-category-tag">Supermarkets & Fresh</div>
+                    <h3 class="deal-card-title">Organic Farm Greens & Imported Cheese</h3>
+                    <div class="deal-card-store">
+                        <i data-lucide="store" size="14"></i>
+                        <span>Nature's Basket Gourmet • Sector 8</span>
+                    </div>
+                    <div class="deal-card-meta">
+                        <span class="meta-rating"><i data-lucide="star" size="13" fill="#F59E0B" color="#F59E0B"></i> 4.8 (370)</span>
+                        <span class="meta-distance"><i data-lucide="map-pin" size="13"></i> 0.9 km</span>
+                        <span class="meta-validity"><i data-lucide="clock" size="13"></i> Daily Deal</span>
+                    </div>
+                    <div class="deal-card-footer">
+                        <button class="btn-claim-deal" onclick="openVoucherModal('Organic Farm Greens & Imported Cheese', 'Nature\'s Basket Gourmet', '₹300 OFF ON ₹1500', 'NATURE300', 'Sector 8-C Market, Chandigarh', 'https://images.unsplash.com/photo-1542838132-92c53300491e?auto=format&fit=crop&q=80&w=600')">
+                            <span>Claim Voucher</span>
+                            <i data-lucide="ticket" size="16"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Deal Card 8: Fashion Denim -->
+            <div class="deal-item-card" data-category="fashion" data-discount="50" data-distance="1.4" data-type="percent">
+                <div class="deal-card-visual">
+                    <img src="https://images.unsplash.com/photo-1541099649105-f69ad21f3246?auto=format&fit=crop&q=80&w=600" alt="Denim Jackets & Jeans">
+                    <div class="badge-discount-tag">FLAT 50% OFF</div>
+                    <button class="btn-card-wishlist" title="Save deal"><i data-lucide="heart" size="18"></i></button>
+                </div>
+                <div class="deal-card-body">
+                    <div class="deal-category-tag">Fashion & Apparel</div>
+                    <h3 class="deal-card-title">Vintage Denim Jackets & Chinos</h3>
+                    <div class="deal-card-store">
+                        <i data-lucide="store" size="14"></i>
+                        <span>Denim Republic Studio • Elante Mall</span>
+                    </div>
+                    <div class="deal-card-meta">
+                        <span class="meta-rating"><i data-lucide="star" size="13" fill="#F59E0B" color="#F59E0B"></i> 4.7 (280)</span>
+                        <span class="meta-distance"><i data-lucide="map-pin" size="13"></i> 1.4 km</span>
+                        <span class="meta-validity"><i data-lucide="clock" size="13"></i> 2 days left</span>
+                    </div>
+                    <div class="deal-card-footer">
+                        <button class="btn-claim-deal" onclick="openVoucherModal('Vintage Denim Jackets & Chinos', 'Denim Republic Studio', 'FLAT 50% OFF', 'DENIM50', 'Elante Mall, First Floor, Chandigarh', 'https://images.unsplash.com/photo-1541099649105-f69ad21f3246?auto=format&fit=crop&q=80&w=600')">
+                            <span>Claim Voucher</span>
+                            <i data-lucide="ticket" size="16"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+        </section>
+
+        <!-- Trusted Local Stores Showcase -->
+        <section class="stores-showcase-section" id="trusted-stores">
+            <div class="section-headline-row">
+                <div>
+                    <h2>Verified Neighborhood Stores</h2>
+                    <p>Discover reputable brick-and-mortar merchants offering real in-store deals and authentic products.</p>
+                </div>
+                <div style="display:flex; gap:10px;">
+                    <button class="btn-post-offer" onclick="showToast('Loading stores in your neighborhood...', 'success')">
+                        <i data-lucide="filter" size="16"></i>
+                        <span>Filter Stores</span>
+                    </button>
+                </div>
+            </div>
+
+            <div class="stores-grid-layout">
+
+                <!-- Store 1 -->
+                <div class="store-profile-card">
+                    <img src="https://images.unsplash.com/photo-1441984904996-e0b6ba687e04?auto=format&fit=crop&q=80&w=240" alt="Gulati Textiles" class="store-avatar-img">
+                    <div class="store-details">
+                        <div class="store-name-row">
+                            <h4>Gulati Luxury Textiles</h4>
+                            <i data-lucide="badge-check" size="18" class="verified-check-icon" title="Verified Merchant"></i>
+                        </div>
+                        <div class="store-category-text">Designer Ethnic & Silks • Sector 17</div>
+                        <div class="store-info-pills">
+                            <span class="pill-active-deals">🔥 4 Active Deals</span>
+                            <span><i data-lucide="star" size="12" fill="#F59E0B" color="#F59E0B"></i> 4.8</span>
+                            <span>1.2 km</span>
+                        </div>
+                    </div>
+                    <button class="btn-visit-store" onclick="openStoreDetails('Gulati Luxury Textiles', 'Designer Ethnic & Silks', 'Sector 17 Plaza, Chandigarh', '4 Active Offers', 'https://images.unsplash.com/photo-1441984904996-e0b6ba687e04?auto=format&fit=crop&q=80&w=600')">
+                        View
+                    </button>
+                </div>
+
+                <!-- Store 2 -->
+                <div class="store-profile-card">
+                    <img src="https://images.unsplash.com/photo-1501339847302-ac426a4a7cbb?auto=format&fit=crop&q=80&w=240" alt="The Roastery" class="store-avatar-img">
+                    <div class="store-details">
+                        <div class="store-name-row">
+                            <h4>The Roastery Bakehouse</h4>
+                            <i data-lucide="badge-check" size="18" class="verified-check-icon" title="Verified Merchant"></i>
+                        </div>
+                        <div class="store-category-text">Artisan Coffee & Bakery • Sector 35</div>
+                        <div class="store-info-pills">
+                            <span class="pill-active-deals">🔥 2 Active Deals</span>
+                            <span><i data-lucide="star" size="12" fill="#F59E0B" color="#F59E0B"></i> 4.9</span>
+                            <span>0.8 km</span>
+                        </div>
+                    </div>
+                    <button class="btn-visit-store" onclick="openStoreDetails('The Roastery Bakehouse', 'Artisan Coffee & Bakery', 'Sector 35-C Inner Market, Chandigarh', '2 Active Offers', 'https://images.unsplash.com/photo-1501339847302-ac426a4a7cbb?auto=format&fit=crop&q=80&w=600')">
+                        View
+                    </button>
+                </div>
+
+                <!-- Store 3 -->
+                <div class="store-profile-card">
+                    <img src="https://images.unsplash.com/photo-1556066265-f485dbf2c161?auto=format&fit=crop&q=80&w=240" alt="Machi Footwear" class="store-avatar-img">
+                    <div class="store-details">
+                        <div class="store-name-row">
+                            <h4>Machi Footwear Studio</h4>
+                            <i data-lucide="badge-check" size="18" class="verified-check-icon" title="Verified Merchant"></i>
+                        </div>
+                        <div class="store-category-text">Sneakers, Leather & Casuals • Sector 22</div>
+                        <div class="store-info-pills">
+                            <span class="pill-active-deals">🔥 3 Active Deals</span>
+                            <span><i data-lucide="star" size="12" fill="#F59E0B" color="#F59E0B"></i> 4.6</span>
+                            <span>1.8 km</span>
+                        </div>
+                    </div>
+                    <button class="btn-visit-store" onclick="openStoreDetails('Machi Footwear Studio', 'Sneakers, Leather & Casuals', 'SCO 42, Sector 22-B, Chandigarh', '3 Active Offers', 'https://images.unsplash.com/photo-1556066265-f485dbf2c161?auto=format&fit=crop&q=80&w=600')">
+                        View
+                    </button>
+                </div>
+
+                <!-- Store 4 -->
+                <div class="store-profile-card">
+                    <img src="https://images.unsplash.com/photo-1550009158-9ebf69173e03?auto=format&fit=crop&q=80&w=240" alt="Horizon Tech" class="store-avatar-img">
+                    <div class="store-details">
+                        <div class="store-name-row">
+                            <h4>Horizon Digital Zone</h4>
+                            <i data-lucide="badge-check" size="18" class="verified-check-icon" title="Verified Merchant"></i>
+                        </div>
+                        <div class="store-category-text">Smart Gadgets & Audio • Sector 17</div>
+                        <div class="store-info-pills">
+                            <span class="pill-active-deals">🔥 5 Active Deals</span>
+                            <span><i data-lucide="star" size="12" fill="#F59E0B" color="#F59E0B"></i> 4.7</span>
+                            <span>1.5 km</span>
+                        </div>
+                    </div>
+                    <button class="btn-visit-store" onclick="openStoreDetails('Horizon Digital Zone', 'Smart Gadgets & Audio', 'Sector 17 Bridge Market, Chandigarh', '5 Active Offers', 'https://images.unsplash.com/photo-1550009158-9ebf69173e03?auto=format&fit=crop&q=80&w=600')">
+                        View
+                    </button>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- How Dealzy Works 3-Step Strip -->
+        <section class="how-it-works-strip">
+            <div class="how-header">
+                <h2>How Dealzy Works For Shoppers</h2>
+                <p>Never miss a nearby store sale again. Simple, free, and designed for local shoppers.</p>
+            </div>
+
+            <div class="steps-container">
+                <div class="step-item-card">
+                    <div class="step-icon-bubble">
+                        <span class="step-number-tag">1</span>
+                        <i data-lucide="map-pin" size="30"></i>
+                    </div>
+                    <h4>Discover Local Sales</h4>
+                    <p>Browse live sales, clearance offers, and flash promos from verified neighborhood shops around you.</p>
+                </div>
+
+                <div class="step-item-card">
+                    <div class="step-icon-bubble">
+                        <span class="step-number-tag">2</span>
+                        <i data-lucide="ticket" size="30"></i>
+                    </div>
+                    <h4>Claim Free Digital Voucher</h4>
+                    <p>Tap "Claim Voucher" to get your exclusive coupon code without paying any upfront fees.</p>
+                </div>
+
+                <div class="step-item-card">
+                    <div class="step-icon-bubble">
+                        <span class="step-number-tag">3</span>
+                        <i data-lucide="shopping-bag" size="30"></i>
+                    </div>
+                    <h4>Shop In-Store & Save</h4>
+                    <p>Visit the local merchant, show your Dealzy voucher at the billing checkout counter, and enjoy instant discounts!</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Merchant Callout Banner -->
+        <section class="merchant-join-banner">
+            <div class="merchant-banner-content">
+                <h3>Own a Local Retail Store or Cafe?</h3>
+                <p>Put your in-store sales in front of thousands of nearby shoppers searching for deals in your locality. Listing takes less than 3 minutes.</p>
+            </div>
+            <button class="btn-merchant-register" id="btn-merchant-cta">
+                <span>List Your Store Free</span>
+            </button>
+        </section>
+
+    </main>
+
+    <!-- Classy Site Footer -->
+    <footer class="site-footer">
+        <div class="container">
+            <div class="footer-cols-grid">
+                
+                <div>
+                    <div class="footer-brand-title">
+                        <div class="brand-logo-icon" style="width:30px; height:30px;">
+                            <i data-lucide="tag" size="16"></i>
+                        </div>
+                        <span>dealzy</span>
+                    </div>
+                    <p class="footer-brand-desc">
+                        The modern sale discovery and local retail platform. Connecting smart neighborhood shoppers with verified brick-and-mortar store promotions.
+                    </p>
+                    <div style="display:flex; gap:12px;">
+                        <button class="icon-circle-btn" style="background:#27272A; border-color:#3F3F46; color:#FFF;"><i data-lucide="instagram" size="16"></i></button>
+                        <button class="icon-circle-btn" style="background:#27272A; border-color:#3F3F46; color:#FFF;"><i data-lucide="twitter" size="16"></i></button>
+                        <button class="icon-circle-btn" style="background:#27272A; border-color:#3F3F46; color:#FFF;"><i data-lucide="facebook" size="16"></i></button>
+                    </div>
+                </div>
+
+                <div class="footer-col">
+                    <h5>Discover</h5>
+                    <div class="footer-links-list">
+                        <a href="#browse-deals">Today's Flash Deals</a>
+                        <a href="#browse-deals">Fashion & Apparel</a>
+                        <a href="#browse-deals">Cafes & Dining</a>
+                        <a href="#browse-deals">Sneakers & Footwear</a>
+                        <a href="#browse-deals">Smart Electronics</a>
+                    </div>
+                </div>
+
+                <div class="footer-col">
+                    <h5>For Merchants</h5>
+                    <div class="footer-links-list">
+                        <a href="javascript:void(0)" onclick="openMerchantModal()">List Your Local Store</a>
+                        <a href="javascript:void(0)" onclick="openMerchantModal()">Merchant Portal</a>
+                        <a href="javascript:void(0)" onclick="openMerchantModal()">Pricing & Plans</a>
+                        <a href="javascript:void(0)" onclick="showToast('Success stories coming soon!', 'success')">Case Studies</a>
+                    </div>
+                </div>
+
+                <div class="footer-col">
+                    <h5>Support & Company</h5>
+                    <div class="footer-links-list">
+                        <a href="javascript:void(0)" onclick="showToast('Help center: support@dealzy.com', 'success')">Help & FAQ</a>
+                        <a href="javascript:void(0)">About Dealzy</a>
+                        <a href="javascript:void(0)">Terms of Service</a>
+                        <a href="javascript:void(0)">Privacy Policy</a>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="footer-bottom-bar">
+                <div>&copy; 2026 DEALZY Technologies Inc. All rights reserved.</div>
+                <div>Designed for Local Commerce & Smart Neighborhood Shopping</div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Interactive Deal Voucher Claim Modal -->
+    <div class="deal-voucher-modal" id="deal-voucher-modal">
+        <div class="voucher-card-popup">
+            <div class="voucher-header-img">
+                <img id="popup-deal-img" src="" alt="Deal Voucher">
+                <button type="button" class="popup-close-icon" onclick="closeVoucherModal()">
+                    <i data-lucide="x" size="18"></i>
+                </button>
+            </div>
+            <div class="voucher-body">
+                <div class="voucher-discount-pill" id="popup-discount-pill">50% OFF</div>
+                <h3 class="voucher-title" id="popup-deal-title">Offer Title</h3>
+                <div class="voucher-store" id="popup-store-name">Store Name</div>
+
+                <!-- Code box -->
+                <div class="coupon-code-ticket">
+                    <div>
+                        <span style="font-size:0.75rem; color:#64748B; display:block;">VOUCHER CODE</span>
+                        <span class="ticket-code-val" id="popup-voucher-code">DEALZY50</span>
+                    </div>
+                    <button type="button" class="btn-copy-code" id="btn-copy-voucher">
+                        Copy Code
+                    </button>
+                </div>
+
+                <p class="voucher-instructions">
+                    Show this code on your phone at checkout. Valid in-store at <strong id="popup-store-address">Store Location</strong>.
+                </p>
+
+                <div class="voucher-actions-row">
+                    <a href="https://maps.google.com" target="_blank" class="btn-navigate-store" id="popup-map-link">
+                        <i data-lucide="navigation" size="16"></i>
+                        <span>Get Store Directions</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Location Selection Modal -->
+    <div class="location-select-modal" id="location-picker-modal">
+        <div class="location-modal-card">
+            <button type="button" class="popup-close-icon" style="background:#F1F5F9; color:#18181B;" onclick="closeLocationModal()">
+                <i data-lucide="x" size="16"></i>
+            </button>
+            <h3 style="font-size:1.3rem; font-weight:800; margin-bottom:6px;">Select Your Neighborhood</h3>
+            <p style="font-size:0.875rem; color:#6B7280;">Choose your area to discover live sales right in your vicinity.</p>
+
+            <div class="location-options-list">
+                <div class="location-option-item active" onclick="selectLocation('Sector 17, Chandigarh')">
+                    <span>📍 Sector 17 Plaza, Chandigarh</span>
+                    <i data-lucide="check" size="16"></i>
+                </div>
+                <div class="location-option-item" onclick="selectLocation('Sector 35-C Market, Chandigarh')">
+                    <span>📍 Sector 35-C Market, Chandigarh</span>
+                </div>
+                <div class="location-option-item" onclick="selectLocation('Sector 22 Market, Chandigarh')">
+                    <span>📍 Sector 22 Market, Chandigarh</span>
+                </div>
+                <div class="location-option-item" onclick="selectLocation('Elante Mall District, Chandigarh')">
+                    <span>📍 Elante Mall District, Chandigarh</span>
+                </div>
+                <div class="location-option-item" onclick="selectLocation('Sector 9-D Boulevard, Chandigarh')">
+                    <span>📍 Sector 9-D Boulevard, Chandigarh</span>
+                </div>
+                <div class="location-option-item" onclick="selectLocation('Panchkula Sector 9, Tricity')">
+                    <span>📍 Panchkula Sector 9, Tricity</span>
+                </div>
+                <div class="location-option-item" onclick="selectLocation('Mohali Phase 7, Tricity')">
+                    <span>📍 Mohali Phase 7, Tricity</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Merchant List Store Modal -->
+    <div class="location-select-modal" id="merchant-register-modal">
+        <div class="location-modal-card">
+            <button type="button" class="popup-close-icon" style="background:#F1F5F9; color:#18181B;" onclick="closeMerchantModal()">
+                <i data-lucide="x" size="16"></i>
+            </button>
+            <div style="text-align:center; margin-bottom:16px;">
+                <div style="width:48px; height:48px; background:#FFF1EE; color:var(--primary-orange); border-radius:14px; display:inline-flex; align-items:center; justify-content:center; margin-bottom:8px;">
+                    <i data-lucide="store" size="24"></i>
+                </div>
+                <h3 style="font-size:1.3rem; font-weight:800; margin-bottom:4px;">List Your Local Store</h3>
+                <p style="font-size:0.85rem; color:#6B7280;">Put your sales in front of nearby shoppers today.</p>
+            </div>
+
+            <form onsubmit="event.preventDefault(); handleMerchantSubmit();">
+                <div style="margin-bottom:12px;">
+                    <label style="font-size:0.8rem; font-weight:600; color:#374151; display:block; margin-bottom:4px;">Store Name</label>
+                    <input type="text" id="merchant-store-name" class="input-box-field" placeholder="e.g. Zara Boutique" required style="width:100%; height:44px; padding:0 14px; border:1px solid #D1D5DB; border-radius:10px;">
+                </div>
+                <div style="margin-bottom:12px;">
+                    <label style="font-size:0.8rem; font-weight:600; color:#374151; display:block; margin-bottom:4px;">Store Category</label>
+                    <select id="merchant-category" style="width:100%; height:44px; padding:0 14px; border:1px solid #D1D5DB; border-radius:10px; background:#FFF;">
+                        <option value="Fashion & Apparel">Fashion & Apparel</option>
+                        <option value="Cafes & Dining">Cafes & Dining</option>
+                        <option value="Footwear & Sneakers">Footwear & Sneakers</option>
+                        <option value="Electronics & Gadgets">Electronics & Gadgets</option>
+                        <option value="Beauty & Wellness">Beauty & Wellness</option>
+                        <option value="Home Decor & Living">Home Decor & Living</option>
+                        <option value="Supermarkets & Groceries">Supermarkets & Groceries</option>
+                    </select>
+                </div>
+                <div style="margin-bottom:16px;">
+                    <label style="font-size:0.8rem; font-weight:600; color:#374151; display:block; margin-bottom:4px;">Contact Phone or Email</label>
+                    <input type="text" id="merchant-contact" class="input-box-field" placeholder="+91 98765 00000" required style="width:100%; height:44px; padding:0 14px; border:1px solid #D1D5DB; border-radius:10px;">
+                </div>
+                <button type="submit" class="btn-auth-submit" style="width:100%; height:46px; background:var(--gradient-primary); color:#FFF; font-weight:700; border-radius:var(--radius-pill); border:none; cursor:pointer;">
+                    Submit Store For Verification
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Toast Notification -->
+    <div class="toast-notification" id="site-toast" style="position:fixed; bottom:30px; right:30px; display:flex; align-items:center; gap:10px; padding:12px 20px; background:#18181B; color:#FFF; border-radius:14px; box-shadow:0 12px 30px rgba(0,0,0,0.25); z-index:9999; transform:translateY(100px); opacity:0; transition:all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);">
+        <i data-lucide="check-circle" size="18" style="color:#10B981;" id="toast-icon-site"></i>
+        <span id="toast-text-site">Action completed!</span>
+    </div>
+
+    <!-- Scripts -->
+    <script src="js/app.js"></script>
+    <script>
+        // Global Toast Notification Helper
+        function showToast(message, type = 'success') {
+            const toast = document.getElementById('site-toast');
+            const textEl = document.getElementById('toast-text-site');
+            const iconEl = document.getElementById('toast-icon-site');
+            if (!toast || !textEl) return;
+
+            textEl.textContent = message;
+            toast.style.transform = 'translateY(0)';
+            toast.style.opacity = '1';
+
+            if (type === 'success') {
+                iconEl.setAttribute('data-lucide', 'check-circle');
+                iconEl.style.color = '#10B981';
+            } else {
+                iconEl.setAttribute('data-lucide', 'alert-circle');
+                iconEl.style.color = '#EF4444';
+            }
+            if (window.lucide) lucide.createIcons();
+
+            setTimeout(() => {
+                toast.style.transform = 'translateY(100px)';
+                toast.style.opacity = '0';
+            }, 3200);
+        }
+
+        // Voucher Modal Handlers
+        function openVoucherModal(title, store, discount, code, address, img) {
+            document.getElementById('popup-deal-title').textContent = title;
+            document.getElementById('popup-store-name').textContent = store;
+            document.getElementById('popup-discount-pill').textContent = discount;
+            document.getElementById('popup-voucher-code').textContent = code;
+            document.getElementById('popup-store-address').textContent = address;
+            document.getElementById('popup-deal-img').src = img;
+            document.getElementById('popup-map-link').href = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(store + ' ' + address)}`;
+
+            const modal = document.getElementById('deal-voucher-modal');
+            modal.classList.add('active');
+            if (window.lucide) lucide.createIcons();
+        }
+
+        function closeVoucherModal() {
+            const modal = document.getElementById('deal-voucher-modal');
+            if (modal) modal.classList.remove('active');
+        }
+
+        // Copy Voucher Code to Clipboard
+        document.getElementById('btn-copy-voucher')?.addEventListener('click', () => {
+            const code = document.getElementById('popup-voucher-code').textContent;
+            navigator.clipboard.writeText(code).then(() => {
+                const btn = document.getElementById('btn-copy-voucher');
+                btn.textContent = 'Copied! ✓';
+                btn.style.background = '#10B981';
+                showToast(`Code "${code}" copied to clipboard! Show it at checkout.`, 'success');
+                setTimeout(() => {
+                    btn.textContent = 'Copy Code';
+                    btn.style.background = 'var(--primary-orange)';
+                }, 2500);
+            }).catch(() => {
+                showToast(`Code is ${code}`, 'success');
+            });
+        });
+
+        // Location Modal Handlers
+        const btnOpenLoc = document.getElementById('btn-open-location');
+        const locModal = document.getElementById('location-picker-modal');
+
+        btnOpenLoc?.addEventListener('click', () => {
+            locModal.classList.add('active');
+        });
+
+        function closeLocationModal() {
+            locModal?.classList.remove('active');
+        }
+
+        function selectLocation(locName) {
+            const label = document.getElementById('current-location-label');
+            const filterLoc = document.getElementById('filter-locality-name');
+            if (label) label.textContent = locName;
+            if (filterLoc) filterLoc.textContent = locName;
+
+            document.querySelectorAll('.location-option-item').forEach(el => el.classList.remove('active'));
+            event.currentTarget.classList.add('active');
+
+            closeLocationModal();
+            showToast(`Location switched to ${locName}. Refreshed nearby sales!`, 'success');
+        }
+
+        // Notifications Popover Toggle
+        const notiBtn = document.getElementById('btn-header-notifications');
+        const notiDrawer = document.getElementById('notifications-popover');
+        notiBtn?.addEventListener('click', (e) => {
+            e.stopPropagation();
+            notiDrawer.classList.toggle('active');
+        });
+
+        document.addEventListener('click', (e) => {
+            if (notiDrawer && !notiDrawer.contains(e.target) && e.target !== notiBtn) {
+                notiDrawer.classList.remove('active');
+            }
+        });
+
+        // Wishlist Toggle functionality for all deal cards
+        let savedCount = 2;
+        const wishlistCounter = document.getElementById('wishlist-counter');
+        const heartButtons = document.querySelectorAll('.btn-card-wishlist');
+
+        heartButtons.forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                const card = btn.closest('.deal-item-card');
+                const title = card?.querySelector('.deal-card-title')?.textContent || 'Deal';
+
+                if (btn.classList.contains('active')) {
+                    btn.classList.remove('active');
+                    savedCount = Math.max(0, savedCount - 1);
+                    showToast(`Removed "${title}" from saved offers.`);
+                } else {
+                    btn.classList.add('active');
+                    savedCount++;
+                    showToast(`Saved "${title}"! View in your wishlist ❤️`);
+                }
+                if (wishlistCounter) wishlistCounter.textContent = savedCount;
+            });
+        });
+
+        // Wishlist Header Button Click
+        document.getElementById('btn-header-wishlist')?.addEventListener('click', () => {
+            showToast(`You have ${savedCount} saved neighborhood offers!`, 'success');
+        });
+
+        // Merchant Modal Handlers
+        const merchantModal = document.getElementById('merchant-register-modal');
+        function openMerchantModal() {
+            merchantModal?.classList.add('active');
+        }
+        function closeMerchantModal() {
+            merchantModal?.classList.remove('active');
+        }
+        document.getElementById('btn-list-store')?.addEventListener('click', openMerchantModal);
+        document.getElementById('btn-merchant-cta')?.addEventListener('click', openMerchantModal);
+
+        function handleMerchantSubmit() {
+            const name = document.getElementById('merchant-store-name').value;
+            closeMerchantModal();
+            showToast(`Thank you! "${name}" application received. Our team will verify and activate your store listing within 2 hours!`, 'success');
+        }
+
+        // Store Details Popup
+        function openStoreDetails(storeName, category, address, activeDeals, img) {
+            openVoucherModal(`${storeName} - All In-Store Offers`, storeName, activeDeals, 'DEALZYSTORE', address, img);
+        }
+
+        // Category Filtering
+        const categoryPills = document.querySelectorAll('.category-pill-btn');
+        const dealCards = document.querySelectorAll('.deal-item-card');
+        const activeCountEl = document.getElementById('active-deals-count');
+
+        categoryPills.forEach(pill => {
+            pill.addEventListener('click', () => {
+                categoryPills.forEach(p => p.classList.remove('active'));
+                pill.classList.add('active');
+
+                const cat = pill.getAttribute('data-category');
+                let visibleCount = 0;
+
+                dealCards.forEach(card => {
+                    const cardCat = card.getAttribute('data-category');
+                    if (cat === 'all' || cardCat === cat) {
+                        card.style.display = 'flex';
+                        visibleCount++;
+                    } else {
+                        card.style.display = 'none';
+                    }
+                });
+
+                if (activeCountEl) activeCountEl.textContent = visibleCount;
+            });
+        });
+
+        // Quick Filter Chips (< 2km, 40%+ Mega, BOGO)
+        const filterChips = document.querySelectorAll('.filter-chip-toggle');
+        filterChips.forEach(chip => {
+            chip.addEventListener('click', () => {
+                filterChips.forEach(c => c.classList.remove('active'));
+                chip.classList.add('active');
+
+                const filter = chip.getAttribute('data-filter');
+                let visibleCount = 0;
+
+                dealCards.forEach(card => {
+                    const dist = parseFloat(card.getAttribute('data-distance') || '0');
+                    const disc = parseFloat(card.getAttribute('data-discount') || '0');
+                    const type = card.getAttribute('data-type') || '';
+
+                    let matches = false;
+                    if (filter === 'all') matches = true;
+                    else if (filter === 'nearby' && dist <= 2.0) matches = true;
+                    else if (filter === 'mega' && disc >= 40) matches = true;
+                    else if (filter === 'bogo' && type === 'bogo') matches = true;
+
+                    if (matches) {
+                        card.style.display = 'flex';
+                        visibleCount++;
+                    } else {
+                        card.style.display = 'none';
+                    }
+                });
+
+                if (activeCountEl) activeCountEl.textContent = visibleCount;
+            });
+        });
+
+        // Search Input Filtering
+        const searchInput = document.getElementById('search-input');
+        const clearSearchBtn = document.getElementById('btn-clear-search');
+
+        searchInput?.addEventListener('input', (e) => {
+            const query = e.target.value.toLowerCase().trim();
+            if (clearSearchBtn) {
+                clearSearchBtn.style.display = query.length > 0 ? 'block' : 'none';
+            }
+
+            let matchCount = 0;
+            dealCards.forEach(card => {
+                const text = card.textContent.toLowerCase();
+                if (text.includes(query)) {
+                    card.style.display = 'flex';
+                    matchCount++;
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+
+            if (activeCountEl) activeCountEl.textContent = matchCount;
+        });
+
+        clearSearchBtn?.addEventListener('click', () => {
+            if (searchInput) searchInput.value = '';
+            clearSearchBtn.style.display = 'none';
+            dealCards.forEach(card => card.style.display = 'flex');
+            if (activeCountEl) activeCountEl.textContent = dealCards.length;
+        });
+
+        // Modal backdrop click handlers
+        [document.getElementById('deal-voucher-modal'), locModal, merchantModal].forEach(modal => {
+            modal?.addEventListener('click', (e) => {
+                if (e.target === modal) modal.classList.remove('active');
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,99 @@
+/* Responsive specific overrides */
+
+/* Base Container Widths */
+@media (max-width: 1200px) {
+  .container {
+    padding: 0 var(--spacing-md);
+  }
+}
+
+/* Tablet (768px - 1024px) */
+@media (max-width: 1024px) {
+  h1 { font-size: 2.5rem; }
+  h2 { font-size: 1.75rem; }
+  
+  .hero-section {
+    flex-direction: column;
+  }
+}
+
+/* Mobile (< 768px) */
+@media (max-width: 768px) {
+  :root {
+    --spacing-lg: 16px;
+    --spacing-xl: 24px;
+    --spacing-2xl: 40px;
+  }
+
+  h1 { font-size: 2rem; }
+  h2 { font-size: 1.5rem; }
+  h3 { font-size: 1.25rem; }
+
+  /* Login Page Responsive */
+  .auth-main {
+    flex-direction: column;
+    padding: 12px 20px 36px;
+    gap: 28px;
+  }
+  
+  .auth-showcase {
+    text-align: center;
+    align-items: center;
+    padding-right: 0;
+    padding-bottom: 10px;
+  }
+  
+  .auth-card-section {
+    width: 100%;
+  }
+
+  /* Home Page Layouts */
+  .header-content {
+    flex-wrap: wrap;
+  }
+  
+  .header-search {
+    order: 3;
+    width: 100%;
+    margin-top: var(--spacing-sm);
+  }
+  
+  /* Horizontal Scrolling for mobile categories/cards */
+  .horizontal-scroll-mobile {
+    display: flex;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    padding-bottom: var(--spacing-sm);
+    -webkit-overflow-scrolling: touch;
+    margin: 0 calc(var(--spacing-md) * -1);
+    padding: 0 var(--spacing-md) var(--spacing-md) var(--spacing-md);
+  }
+  
+  .horizontal-scroll-mobile > * {
+    scroll-snap-align: start;
+    flex: 0 0 85%; /* Cards take up 85% of screen to show next card */
+  }
+
+  /* Categories grid on mobile */
+  .category-grid {
+    display: grid !important;
+    grid-template-columns: repeat(4, 1fr) !important;
+    gap: var(--spacing-sm) !important;
+  }
+}
+
+/* Small Mobile */
+@media (max-width: 480px) {
+  .horizontal-scroll-mobile > * {
+    flex: 0 0 90%;
+  }
+}
+
+/* Utility to hide scrollbar but allow scroll */
+.hide-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.hide-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}

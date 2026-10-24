@@ -1,0 +1,1301 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DEALZY | Sign In or Create Account</title>
+    <meta name="description" content="Sign in to Dealzy to discover exclusive local discounts, verified neighborhood stores, and instant shopping deals.">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/responsive.css">
+    <link rel="stylesheet" href="css/animations.css">
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <style>
+        :root {
+            --bg-auth-base: #FDFAF2;
+            --primary-orange: #FF5D00;
+            --primary-pink: #FF1053;
+            --primary-yellow: #FFB300;
+            --font-display: 'Plus Jakarta Sans', var(--font-main);
+        }
+
+        /* Full page container with the uploaded background image */
+        body.auth-page {
+            background-color: var(--bg-auth-base);
+            background-image: url('assets/images/login-bg.png');
+            background-repeat: no-repeat;
+            background-position: center bottom;
+            background-size: cover;
+            background-attachment: fixed;
+            min-height: 100vh;
+            color: var(--text-main);
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            font-family: var(--font-display);
+            overflow-x: hidden;
+        }
+
+        /* Subtle ambient glow overlay that highlights the pastel palette */
+        .auth-page::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at 10% 20%, rgba(255, 126, 41, 0.04), transparent 40%),
+                        radial-gradient(circle at 90% 80%, rgba(255, 16, 83, 0.03), transparent 45%);
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        /* Top Brand Header */
+        .auth-top-header {
+            position: relative;
+            z-index: 10;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 24px 48px;
+            max-width: 1440px;
+            width: 100%;
+            margin: 0 auto;
+        }
+
+        .auth-logo {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+            color: var(--text-main);
+            transition: transform 0.2s ease;
+        }
+
+        .auth-logo:hover {
+            transform: scale(1.02);
+        }
+
+        .auth-logo-icon {
+            width: 44px;
+            height: 44px;
+            background: var(--gradient-primary);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            box-shadow: 0 8px 20px rgba(255, 93, 0, 0.25);
+            transform: rotate(-8deg);
+            transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+
+        .auth-logo:hover .auth-logo-icon {
+            transform: rotate(0deg) scale(1.05);
+        }
+
+        .auth-logo-text {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .auth-logo-name {
+            font-size: 1.65rem;
+            font-weight: 800;
+            letter-spacing: -0.04em;
+            line-height: 1;
+            color: #1A1A1A;
+        }
+
+        .auth-logo-tagline {
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: var(--primary-orange);
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            margin-top: 3px;
+        }
+
+        .auth-header-actions {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .btn-guest-ghost {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 18px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: #4A4A4F;
+            background: rgba(255, 255, 255, 0.7);
+            border: 1px solid rgba(0, 0, 0, 0.08);
+            border-radius: var(--radius-pill);
+            backdrop-filter: blur(10px);
+            transition: all 0.2s ease;
+        }
+
+        .btn-guest-ghost:hover {
+            background: #FFFFFF;
+            color: var(--primary-orange);
+            border-color: rgba(255, 93, 0, 0.3);
+            box-shadow: var(--shadow-sm);
+            transform: translateY(-1px);
+        }
+
+        /* Main Split Layout */
+        .auth-main {
+            position: relative;
+            z-index: 5;
+            flex: 1;
+            display: flex;
+            align-items: center;
+            max-width: 1400px;
+            width: 100%;
+            margin: 0 auto;
+            padding: 10px 48px 48px;
+            gap: 40px;
+        }
+
+        /* Left Showcase Section */
+        .auth-showcase {
+            flex: 1.1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding-right: 32px;
+            /* Leave bottom breathing room so the background shop illustration is clearly visible */
+            padding-bottom: 90px;
+        }
+
+        .badge-pill-live {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 8px 18px;
+            background: rgba(255, 255, 255, 0.85);
+            border: 1px solid rgba(255, 93, 0, 0.18);
+            border-radius: var(--radius-pill);
+            font-size: 0.85rem;
+            font-weight: 700;
+            color: #D94600;
+            width: fit-content;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 14px rgba(255, 93, 0, 0.08);
+            backdrop-filter: blur(8px);
+        }
+
+        .pulse-dot-green {
+            width: 8px;
+            height: 8px;
+            background-color: #10B981;
+            border-radius: 50%;
+            box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7);
+            animation: pulse-green 1.8s infinite;
+        }
+
+        @keyframes pulse-green {
+            0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7); }
+            70% { transform: scale(1); box-shadow: 0 0 0 8px rgba(16, 185, 129, 0); }
+            100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(16, 185, 129, 0); }
+        }
+
+        .auth-showcase h1 {
+            font-family: var(--font-display);
+            font-size: 3.25rem;
+            font-weight: 800;
+            line-height: 1.15;
+            letter-spacing: -0.035em;
+            color: #1A1A1E;
+            margin-bottom: 18px;
+        }
+
+        .auth-showcase p.lead-desc {
+            font-size: 1.15rem;
+            line-height: 1.6;
+            color: #55555C;
+            max-width: 520px;
+            margin-bottom: 32px;
+        }
+
+        /* Feature Cards Grid */
+        .showcase-features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 16px;
+            max-width: 580px;
+            margin-bottom: 32px;
+        }
+
+        .feature-item-glass {
+            display: flex;
+            align-items: flex-start;
+            gap: 14px;
+            padding: 16px 18px;
+            background: rgba(255, 255, 255, 0.75);
+            border: 1px solid rgba(255, 255, 255, 0.95);
+            border-radius: 16px;
+            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.03);
+            backdrop-filter: blur(12px);
+            transition: all 0.25s ease;
+        }
+
+        .feature-item-glass:hover {
+            transform: translateY(-2px);
+            background: rgba(255, 255, 255, 0.92);
+            box-shadow: 0 10px 24px rgba(255, 93, 0, 0.08);
+            border-color: rgba(255, 93, 0, 0.25);
+        }
+
+        .feature-icon-circle {
+            width: 40px;
+            height: 40px;
+            border-radius: 12px;
+            background: linear-gradient(135deg, rgba(255, 93, 0, 0.12), rgba(255, 16, 83, 0.12));
+            color: var(--primary-orange);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .feature-info h4 {
+            font-size: 0.95rem;
+            font-weight: 700;
+            color: #1A1A1E;
+            margin-bottom: 3px;
+        }
+
+        .feature-info p {
+            font-size: 0.8rem;
+            color: #6C6C75;
+            line-height: 1.4;
+        }
+
+        /* Social Proof Bar */
+        .social-proof-strip {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            padding: 10px 18px;
+            background: rgba(255, 255, 255, 0.65);
+            border-radius: var(--radius-pill);
+            border: 1px solid rgba(255, 255, 255, 0.8);
+            width: fit-content;
+            backdrop-filter: blur(8px);
+        }
+
+        .avatar-group {
+            display: flex;
+            align-items: center;
+        }
+
+        .avatar-group img {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            border: 2px solid #FFFFFF;
+            margin-left: -8px;
+            object-fit: cover;
+        }
+
+        .avatar-group img:first-child {
+            margin-left: 0;
+        }
+
+        .social-proof-text {
+            font-size: 0.825rem;
+            color: #4A4A52;
+            font-weight: 500;
+        }
+
+        .social-proof-text strong {
+            color: #1A1A1E;
+            font-weight: 700;
+        }
+
+        .stars-row {
+            color: #F59E0B;
+            font-size: 0.75rem;
+            display: inline-flex;
+            gap: 2px;
+            margin-left: 4px;
+        }
+
+        /* Right Auth Card Section */
+        .auth-card-section {
+            flex: 0.9;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 10;
+        }
+
+        .auth-card-premium {
+            width: 100%;
+            max-width: 450px;
+            background: rgba(255, 255, 255, 0.9);
+            border: 1px solid rgba(255, 255, 255, 0.95);
+            border-radius: 28px;
+            padding: 36px 36px 32px;
+            box-shadow: 0 24px 60px rgba(255, 93, 0, 0.09),
+                        0 8px 24px rgba(0, 0, 0, 0.04),
+                        inset 0 1px 1px rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(20px);
+            position: relative;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .auth-card-header {
+            margin-bottom: 24px;
+        }
+
+        .auth-card-header h2 {
+            font-size: 1.65rem;
+            font-weight: 800;
+            color: #1A1A1E;
+            letter-spacing: -0.025em;
+            margin-bottom: 6px;
+        }
+
+        .auth-card-header p {
+            color: #6C6C75;
+            font-size: 0.9rem;
+        }
+
+        /* Segmented Sliding Tabs */
+        .auth-segmented-control {
+            display: flex;
+            position: relative;
+            background: #F1ECE4;
+            padding: 4px;
+            border-radius: var(--radius-pill);
+            margin-bottom: 26px;
+            user-select: none;
+        }
+
+        .auth-segmented-pill {
+            position: absolute;
+            top: 4px;
+            bottom: 4px;
+            left: 4px;
+            width: calc(50% - 4px);
+            background: #FFFFFF;
+            border-radius: var(--radius-pill);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+            transition: transform 0.28s cubic-bezier(0.4, 0, 0.2, 1);
+            z-index: 1;
+        }
+
+        .auth-segmented-tab {
+            flex: 1;
+            position: relative;
+            z-index: 2;
+            text-align: center;
+            padding: 10px 0;
+            font-size: 0.925rem;
+            font-weight: 700;
+            color: #6E6E78;
+            cursor: pointer;
+            border-radius: var(--radius-pill);
+            transition: color 0.2s ease;
+        }
+
+        .auth-segmented-tab.active {
+            color: var(--primary-orange);
+        }
+
+        /* Form Inputs */
+        .form-floating-group {
+            margin-bottom: 18px;
+            position: relative;
+        }
+
+        .form-floating-group label {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.825rem;
+            font-weight: 600;
+            color: #374151;
+            margin-bottom: 7px;
+        }
+
+        .input-icon-box {
+            position: relative;
+            display: flex;
+            align-items: center;
+        }
+
+        .input-lead-icon {
+            position: absolute;
+            left: 16px;
+            color: #9CA3AF;
+            pointer-events: none;
+            transition: color 0.2s;
+        }
+
+        .input-box-field {
+            width: 100%;
+            height: 50px;
+            padding: 0 46px 0 46px;
+            border-radius: 14px;
+            border: 1.5px solid #E5E7EB;
+            background: #FAFAFC;
+            font-size: 0.95rem;
+            color: #111827;
+            font-family: inherit;
+            outline: none;
+            transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .input-box-field:focus {
+            background: #FFFFFF;
+            border-color: var(--primary-orange);
+            box-shadow: 0 0 0 4px rgba(255, 93, 0, 0.12);
+        }
+
+        .input-box-field:focus + .input-lead-icon,
+        .input-box-field:focus ~ .input-lead-icon {
+            color: var(--primary-orange);
+        }
+
+        .input-box-field::placeholder {
+            color: #9CA3AF;
+            font-size: 0.9rem;
+        }
+
+        .toggle-password-btn {
+            position: absolute;
+            right: 14px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: none;
+            border: none;
+            color: #9CA3AF;
+            cursor: pointer;
+            padding: 6px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 6px;
+            transition: color 0.2s, background-color 0.2s;
+        }
+
+        .toggle-password-btn:hover {
+            color: #374151;
+            background: rgba(0, 0, 0, 0.04);
+        }
+
+        /* Password Strength Bar */
+        .password-strength-container {
+            margin-top: 8px;
+            margin-bottom: 12px;
+            display: none;
+        }
+
+        .password-strength-track {
+            height: 4px;
+            background: #E5E7EB;
+            border-radius: 4px;
+            overflow: hidden;
+            display: flex;
+            gap: 4px;
+        }
+
+        .strength-segment {
+            flex: 1;
+            height: 100%;
+            background: #E5E7EB;
+            border-radius: 2px;
+            transition: background-color 0.3s;
+        }
+
+        .strength-label {
+            font-size: 0.75rem;
+            color: #6B7280;
+            margin-top: 4px;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        /* Remember & Forgot Row */
+        .auth-actions-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.85rem;
+            margin-bottom: 22px;
+        }
+
+        .custom-checkbox-label {
+            display: inline-flex;
+            align-items: center;
+            gap: 9px;
+            color: #4B5563;
+            cursor: pointer;
+            font-weight: 500;
+            user-select: none;
+        }
+
+        .custom-checkbox-label input[type="checkbox"] {
+            appearance: none;
+            -webkit-appearance: none;
+            width: 18px;
+            height: 18px;
+            border: 1.5px solid #D1D5DB;
+            border-radius: 5px;
+            background: #FFFFFF;
+            cursor: pointer;
+            display: grid;
+            place-content: center;
+            transition: all 0.2s;
+        }
+
+        .custom-checkbox-label input[type="checkbox"]:checked {
+            background: var(--primary-orange);
+            border-color: var(--primary-orange);
+        }
+
+        .custom-checkbox-label input[type="checkbox"]:checked::before {
+            content: '';
+            width: 9px;
+            height: 5px;
+            border-left: 2px solid white;
+            border-bottom: 2px solid white;
+            transform: rotate(-45deg) translate(1px, -1px);
+        }
+
+        .link-forgot {
+            color: var(--primary-orange);
+            font-weight: 600;
+            text-decoration: none;
+            transition: color 0.2s, text-decoration 0.2s;
+        }
+
+        .link-forgot:hover {
+            color: #D94600;
+            text-decoration: underline;
+        }
+
+        /* Action Buttons */
+        .btn-auth-submit {
+            width: 100%;
+            height: 50px;
+            background: var(--gradient-primary);
+            color: #FFFFFF;
+            border: none;
+            border-radius: var(--radius-pill);
+            font-size: 1rem;
+            font-weight: 700;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            box-shadow: 0 10px 24px rgba(255, 93, 0, 0.28);
+            transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .btn-auth-submit:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 14px 28px rgba(255, 93, 0, 0.35);
+        }
+
+        .btn-auth-submit:active {
+            transform: translateY(0);
+        }
+
+        /* Demo Fill Chip */
+        .demo-fill-pill {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 6px 12px;
+            font-size: 0.775rem;
+            font-weight: 600;
+            color: #D94600;
+            background: rgba(255, 93, 0, 0.08);
+            border-radius: var(--radius-pill);
+            border: 1px dashed rgba(255, 93, 0, 0.35);
+            cursor: pointer;
+            margin-bottom: 16px;
+            transition: all 0.2s;
+            width: 100%;
+            justify-content: center;
+        }
+
+        .demo-fill-pill:hover {
+            background: rgba(255, 93, 0, 0.14);
+            border-color: var(--primary-orange);
+        }
+
+        /* Divider */
+        .auth-or-divider {
+            display: flex;
+            align-items: center;
+            margin: 22px 0;
+            color: #9CA3AF;
+            font-size: 0.8rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .auth-or-divider::before,
+        .auth-or-divider::after {
+            content: '';
+            flex: 1;
+            height: 1px;
+            background: #E5E7EB;
+        }
+
+        .auth-or-divider span {
+            padding: 0 14px;
+        }
+
+        /* Social Auth */
+        .social-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+            margin-bottom: 22px;
+        }
+
+        .btn-social-auth {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            height: 46px;
+            background: #FFFFFF;
+            border: 1.5px solid #E5E7EB;
+            border-radius: 12px;
+            font-size: 0.875rem;
+            font-weight: 600;
+            color: #1F2937;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .btn-social-auth:hover {
+            background: #F9FAFB;
+            border-color: #D1D5DB;
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04);
+        }
+
+        .btn-social-auth svg,
+        .btn-social-auth img {
+            width: 18px;
+            height: 18px;
+            flex-shrink: 0;
+        }
+
+        /* Footer Guest & Terms */
+        .auth-card-footer {
+            text-align: center;
+            padding-top: 6px;
+        }
+
+        .guest-cta-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            color: #4B5563;
+            font-size: 0.9rem;
+            font-weight: 600;
+            text-decoration: none;
+            padding: 8px 16px;
+            border-radius: var(--radius-pill);
+            transition: all 0.2s;
+        }
+
+        .guest-cta-link:hover {
+            color: var(--primary-orange);
+            background: rgba(255, 93, 0, 0.06);
+        }
+
+        .guest-cta-link i {
+            transition: transform 0.2s;
+        }
+
+        .guest-cta-link:hover i {
+            transform: translateX(4px);
+        }
+
+        .terms-text {
+            font-size: 0.75rem;
+            color: #9CA3AF;
+            margin-top: 14px;
+            line-height: 1.4;
+        }
+
+        .terms-text a {
+            color: #6B7280;
+            text-decoration: underline;
+        }
+
+        /* Toast feedback */
+        .toast-notification {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 14px 22px;
+            background: #111827;
+            color: #FFFFFF;
+            border-radius: 14px;
+            box-shadow: 0 16px 36px rgba(0, 0, 0, 0.2);
+            font-size: 0.9rem;
+            font-weight: 500;
+            z-index: 9999;
+            transform: translateY(100px);
+            opacity: 0;
+            transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+            pointer-events: none;
+        }
+
+        .toast-notification.show {
+            transform: translateY(0);
+            opacity: 1;
+        }
+
+        .toast-notification.success {
+            border-left: 4px solid #10B981;
+        }
+
+        .toast-notification.error {
+            border-left: 4px solid #EF4444;
+        }
+
+        /* Modal for Forgot Password */
+        .modal-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(15, 23, 42, 0.55);
+            backdrop-filter: blur(8px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.25s ease;
+            padding: 20px;
+        }
+
+        .modal-overlay.active {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .modal-card {
+            background: #FFFFFF;
+            border-radius: 24px;
+            padding: 32px;
+            width: 100%;
+            max-width: 420px;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+            transform: scale(0.92);
+            transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+            position: relative;
+        }
+
+        .modal-overlay.active .modal-card {
+            transform: scale(1);
+        }
+
+        .modal-close-btn {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: #F3F4F6;
+            border: none;
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #6B7280;
+            cursor: pointer;
+            transition: background 0.2s, color 0.2s;
+        }
+
+        .modal-close-btn:hover {
+            background: #E5E7EB;
+            color: #111827;
+        }
+
+        /* Form transition animations */
+        .form-pane {
+            animation: fadeInTab 0.3s ease forwards;
+        }
+
+        @keyframes fadeInTab {
+            from { opacity: 0; transform: translateY(6px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Responsive overrides */
+        @media (max-width: 1024px) {
+            .auth-main {
+                flex-direction: column;
+                padding: 10px 24px 40px;
+                gap: 32px;
+            }
+
+            .auth-showcase {
+                padding-right: 0;
+                padding-bottom: 20px;
+                text-align: center;
+                align-items: center;
+            }
+
+            .auth-showcase h1 {
+                font-size: 2.5rem;
+            }
+
+            .showcase-features {
+                margin: 0 auto 24px;
+            }
+
+            .social-proof-strip {
+                margin: 0 auto;
+            }
+
+            .auth-top-header {
+                padding: 20px 24px;
+            }
+        }
+
+        @media (max-width: 640px) {
+            body.auth-page {
+                background-position: center bottom;
+                background-size: cover;
+            }
+
+            .auth-top-header {
+                padding: 16px 20px;
+            }
+
+            .auth-main {
+                padding: 8px 16px 32px;
+            }
+
+            .auth-showcase h1 {
+                font-size: 1.95rem;
+            }
+
+            .auth-showcase p.lead-desc {
+                font-size: 0.95rem;
+                margin-bottom: 20px;
+            }
+
+            .showcase-features {
+                display: none; /* Hide heavy feature tiles on small screens so background shines and card is prominent */
+            }
+
+            .auth-card-premium {
+                padding: 26px 20px 24px;
+                border-radius: 22px;
+            }
+
+            .social-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body class="auth-page">
+
+    <!-- Top Navigation Header -->
+    <header class="auth-top-header">
+        <a href="home.html" class="auth-logo" title="DEALZY - Home">
+            <div class="auth-logo-icon">
+                <i data-lucide="shopping-bag" size="24" stroke-width="2.5"></i>
+            </div>
+            <div class="auth-logo-text">
+                <span class="auth-logo-name">dealzy</span>
+                <span class="auth-logo-tagline">Local • Deals • Stores</span>
+            </div>
+        </a>
+
+        <div class="auth-header-actions">
+            <a href="home.html" class="btn-guest-ghost">
+                <span>Explore Stores</span>
+                <i data-lucide="arrow-right" size="16"></i>
+            </a>
+        </div>
+    </header>
+
+    <!-- Main Content Area -->
+    <main class="auth-main">
+
+        <!-- Left Showcase / Branding Section (Crafted to let bottom-left store illustrations shine!) -->
+        <section class="auth-showcase animate-slide-up">
+            <div class="badge-pill-live">
+                <span class="pulse-dot-green"></span>
+                <span>2,500+ Local Stores & Live Deals</span>
+            </div>
+
+            <h1>
+                Discover Nearby Deals.<br>
+                <span class="text-gradient">Shop Smart & Save Big.</span>
+            </h1>
+
+            <p class="lead-desc">
+                Your neighborhood marketplace for exclusive daily discounts, trusted local merchants, and instant digital vouchers.
+            </p>
+
+            <!-- Value Proposition Features -->
+            <div class="showcase-features">
+                <div class="feature-item-glass">
+                    <div class="feature-icon-circle">
+                        <i data-lucide="tag" size="20"></i>
+                    </div>
+                    <div class="feature-info">
+                        <h4>Exclusive Local Discounts</h4>
+                        <p>Save up to 50% on top neighborhood shops, dining & home essentials.</p>
+                    </div>
+                </div>
+
+                <div class="feature-item-glass">
+                    <div class="feature-icon-circle">
+                        <i data-lucide="map-pin" size="20"></i>
+                    </div>
+                    <div class="feature-info">
+                        <h4>Verified Local Merchants</h4>
+                        <p>Discover real neighborhood stores with verified reviews & live catalog.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Social Proof Stack -->
+            <div class="social-proof-strip">
+                <div class="avatar-group">
+                    <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&q=80&w=120" alt="Shopper 1">
+                    <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&q=80&w=120" alt="Shopper 2">
+                    <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&q=80&w=120" alt="Shopper 3">
+                </div>
+                <div class="social-proof-text">
+                    <strong>12,400+ Shoppers</strong> joined this week
+                    <span class="stars-row">★★★★★</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- Right Authentication Card -->
+        <section class="auth-card-section animate-scale-up">
+            <div class="auth-card-premium">
+                
+                <div class="auth-card-header">
+                    <h2 id="form-heading">Welcome Back</h2>
+                    <p id="form-subheading">Sign in to access your local deals, vouchers & stores</p>
+                </div>
+
+                <!-- Segmented Tab Switcher (Sign In vs Sign Up) -->
+                <div class="auth-segmented-control" role="tablist">
+                    <div class="auth-segmented-pill" id="segmented-pill"></div>
+                    <div class="auth-segmented-tab active" id="tab-login" role="tab" aria-selected="true">
+                        Sign In
+                    </div>
+                    <div class="auth-segmented-tab" id="tab-signup" role="tab" aria-selected="false">
+                        Sign Up
+                    </div>
+                </div>
+
+                <!-- One-click Demo Account filler for easy testing -->
+                <button type="button" class="demo-fill-pill" id="btn-fill-demo">
+                    <i data-lucide="sparkles" size="14"></i>
+                    <span>Quick Demo: Click to auto-fill credentials</span>
+                </button>
+
+                <!-- LOGIN FORM -->
+                <form id="login-form" class="form-pane" onsubmit="event.preventDefault(); handleLoginSubmit();">
+                    <div class="form-floating-group">
+                        <label for="login-identifier">Mobile Number or Email</label>
+                        <div class="input-icon-box">
+                            <i data-lucide="mail" size="18" class="input-lead-icon"></i>
+                            <input 
+                                type="text" 
+                                id="login-identifier" 
+                                class="input-box-field" 
+                                placeholder="name@example.com or mobile"
+                                required
+                                autocomplete="username"
+                            >
+                        </div>
+                    </div>
+
+                    <div class="form-floating-group">
+                        <label for="login-password">
+                            <span>Password</span>
+                        </label>
+                        <div class="input-icon-box">
+                            <i data-lucide="lock" size="18" class="input-lead-icon"></i>
+                            <input 
+                                type="password" 
+                                id="login-password" 
+                                class="input-box-field" 
+                                placeholder="Enter your password"
+                                required
+                                autocomplete="current-password"
+                            >
+                            <button type="button" class="toggle-password-btn" aria-label="Toggle password visibility">
+                                <i data-lucide="eye" size="18"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="auth-actions-row">
+                        <label class="custom-checkbox-label">
+                            <input type="checkbox" id="remember-me" checked>
+                            <span>Remember me</span>
+                        </label>
+                        <a href="javascript:void(0)" class="link-forgot" id="trigger-forgot-password">Forgot password?</a>
+                    </div>
+
+                    <button type="submit" class="btn-auth-submit" id="btn-login-submit">
+                        <span>Sign In to Dealzy</span>
+                        <i data-lucide="arrow-right" size="18"></i>
+                    </button>
+                </form>
+
+                <!-- SIGN UP FORM (Hidden by default) -->
+                <form id="signup-form" class="form-pane" style="display: none;" onsubmit="event.preventDefault(); handleSignupSubmit();">
+                    <div class="form-floating-group">
+                        <label for="signup-name">Full Name</label>
+                        <div class="input-icon-box">
+                            <i data-lucide="user" size="18" class="input-lead-icon"></i>
+                            <input 
+                                type="text" 
+                                id="signup-name" 
+                                class="input-box-field" 
+                                placeholder="e.g. John Doe"
+                                required
+                            >
+                        </div>
+                    </div>
+
+                    <div class="form-floating-group">
+                        <label for="signup-email">Email Address</label>
+                        <div class="input-icon-box">
+                            <i data-lucide="mail" size="18" class="input-lead-icon"></i>
+                            <input 
+                                type="email" 
+                                id="signup-email" 
+                                class="input-box-field" 
+                                placeholder="name@example.com"
+                                required
+                            >
+                        </div>
+                    </div>
+
+                    <div class="form-floating-group">
+                        <label for="signup-phone">Mobile Number</label>
+                        <div class="input-icon-box">
+                            <i data-lucide="phone" size="18" class="input-lead-icon"></i>
+                            <input 
+                                type="tel" 
+                                id="signup-phone" 
+                                class="input-box-field" 
+                                placeholder="+91 98765 43210"
+                                required
+                            >
+                        </div>
+                    </div>
+
+                    <div class="form-floating-group">
+                        <label for="signup-password">Create Password</label>
+                        <div class="input-icon-box">
+                            <i data-lucide="lock" size="18" class="input-lead-icon"></i>
+                            <input 
+                                type="password" 
+                                id="signup-password" 
+                                class="input-box-field" 
+                                placeholder="Min. 8 characters"
+                                required
+                            >
+                            <button type="button" class="toggle-password-btn" aria-label="Toggle password visibility">
+                                <i data-lucide="eye" size="18"></i>
+                            </button>
+                        </div>
+
+                        <!-- Password strength meter -->
+                        <div class="password-strength-container" id="password-strength-box">
+                            <div class="password-strength-track">
+                                <div class="strength-segment" id="strength-seg-1"></div>
+                                <div class="strength-segment" id="strength-seg-2"></div>
+                                <div class="strength-segment" id="strength-seg-3"></div>
+                                <div class="strength-segment" id="strength-seg-4"></div>
+                            </div>
+                            <div class="strength-label">
+                                <span>Password Strength</span>
+                                <span id="strength-text" style="font-weight: 600;">Weak</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="auth-actions-row" style="margin-bottom: 18px;">
+                        <label class="custom-checkbox-label">
+                            <input type="checkbox" id="signup-terms" required>
+                            <span>I agree to Dealzy's <a href="#" style="color:var(--primary-orange);">Terms</a> & <a href="#" style="color:var(--primary-orange);">Privacy</a></span>
+                        </label>
+                    </div>
+
+                    <button type="submit" class="btn-auth-submit" id="btn-signup-submit">
+                        <span>Create Free Account</span>
+                        <i data-lucide="user-plus" size="18"></i>
+                    </button>
+                </form>
+
+                <!-- Alternative Social Logins -->
+                <div class="auth-or-divider">
+                    <span>Or continue with</span>
+                </div>
+
+                <div class="social-grid">
+                    <button type="button" class="btn-social-auth" onclick="handleSocialAuth('Google')">
+                        <svg viewBox="0 0 24 24">
+                            <path fill="#4285F4" d="M23.745 12.27c0-.7-.06-1.4-.19-2.07H12v4.51h6.6c-.29 1.52-1.14 2.82-2.4 3.68v3.05h3.88c2.27-2.09 3.66-5.17 3.66-9.17z"/>
+                            <path fill="#34A853" d="M12 24c3.24 0 5.95-1.08 7.93-2.91l-3.88-3.05c-1.08.72-2.45 1.16-4.05 1.16-3.12 0-5.77-2.1-6.72-4.93H1.25v3.15C3.26 21.36 7.33 24 12 24z"/>
+                            <path fill="#FBBC05" d="M5.28 14.27c-.25-.72-.38-1.49-.38-2.27s.13-1.55.38-2.27V6.58H1.25C.45 8.18 0 9.97 0 12s.45 3.82 1.25 5.42l4.03-3.15z"/>
+                            <path fill="#EA4335" d="M12 4.75c1.77 0 3.35.61 4.6 1.8l3.42-3.42C17.95 1.19 15.24 0 12 0 7.33 0 3.26 2.64 1.25 6.58l4.03 3.15c.95-2.83 3.6-4.98 6.72-4.98z"/>
+                        </svg>
+                        <span>Google</span>
+                    </button>
+
+                    <button type="button" class="btn-social-auth" onclick="handleSocialAuth('Apple')">
+                        <svg viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M15.97 6.37c.65-.79 1.1-1.9 0.98-3.01-.95.04-2.1.63-2.77 1.42-.59.69-1.11 1.81-.97 2.89 1.06.08 2.14-.54 2.76-1.3z"/>
+                        </svg>
+                        <span>Apple</span>
+                    </button>
+                </div>
+
+                <!-- Footer Guest Link -->
+                <div class="auth-card-footer">
+                    <a href="home.html" class="guest-cta-link">
+                        <span>Continue as Guest</span>
+                        <i data-lucide="arrow-right" size="16"></i>
+                    </a>
+                    <p class="terms-text">
+                        Protected by Dealzy Security • <a href="#">Terms</a> & <a href="#">Privacy</a>
+                    </p>
+                </div>
+
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Forgot Password Modal -->
+    <div class="modal-overlay" id="forgot-password-modal">
+        <div class="modal-card">
+            <button type="button" class="modal-close-btn" id="close-forgot-modal" aria-label="Close">
+                <i data-lucide="x" size="18"></i>
+            </button>
+            <div style="text-align: center; margin-bottom: 20px;">
+                <div style="width: 56px; height: 56px; background: rgba(255, 93, 0, 0.1); color: var(--primary-orange); border-radius: 16px; display: inline-flex; align-items: center; justify-content: center; margin-bottom: 12px;">
+                    <i data-lucide="key-round" size="28"></i>
+                </div>
+                <h3 style="font-size: 1.4rem; font-weight: 700; color: #111827; margin-bottom: 6px;">Reset Password</h3>
+                <p style="font-size: 0.875rem; color: #6B7280;">Enter your mobile number or email address and we'll send you an instant reset link or OTP.</p>
+            </div>
+
+            <form onsubmit="event.preventDefault(); handleForgotSubmit();">
+                <div class="form-floating-group">
+                    <label for="forgot-input">Registered Email / Mobile</label>
+                    <div class="input-icon-box">
+                        <i data-lucide="mail" size="18" class="input-lead-icon"></i>
+                        <input type="text" id="forgot-input" class="input-box-field" placeholder="Enter your email or phone" required>
+                    </div>
+                </div>
+
+                <button type="submit" class="btn-auth-submit" id="btn-forgot-submit" style="margin-top: 10px;">
+                    <span>Send Reset Instructions</span>
+                    <i data-lucide="send" size="18"></i>
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Toast Notification Element -->
+    <div class="toast-notification" id="app-toast">
+        <i data-lucide="check-circle" size="20" id="toast-icon" style="color: #10B981;"></i>
+        <span id="toast-message">Notification message here</span>
+    </div>
+
+    <!-- Scripts -->
+    <script src="js/app.js"></script>
+    <script>
+        // Inline helper for social auth & quick feedback
+        function showToast(message, type = 'success') {
+            const toast = document.getElementById('app-toast');
+            const msgEl = document.getElementById('toast-message');
+            const iconEl = document.getElementById('toast-icon');
+
+            msgEl.textContent = message;
+            toast.className = `toast-notification show ${type}`;
+
+            if (type === 'success') {
+                iconEl.setAttribute('data-lucide', 'check-circle');
+                iconEl.style.color = '#10B981';
+            } else {
+                iconEl.setAttribute('data-lucide', 'alert-circle');
+                iconEl.style.color = '#EF4444';
+            }
+            if (window.lucide) lucide.createIcons();
+
+            setTimeout(() => {
+                toast.classList.remove('show');
+            }, 3500);
+        }
+
+        function handleSocialAuth(provider) {
+            showToast(`Connecting with ${provider}... Redirecting to Dealzy Home!`, 'success');
+            setTimeout(() => {
+                window.location.href = 'home.html';
+            }, 1200);
+        }
+
+        function handleLoginSubmit() {
+            const btn = document.getElementById('btn-login-submit');
+            btn.innerHTML = '<span>Signing In...</span> <i data-lucide="loader" class="animate-spin" size="18"></i>';
+            if (window.lucide) lucide.createIcons();
+
+            showToast('Welcome back! Logging into Dealzy...', 'success');
+            setTimeout(() => {
+                window.location.href = 'home.html';
+            }, 1000);
+        }
+
+        function handleSignupSubmit() {
+            const btn = document.getElementById('btn-signup-submit');
+            btn.innerHTML = '<span>Creating Account...</span> <i data-lucide="loader" class="animate-spin" size="18"></i>';
+            if (window.lucide) lucide.createIcons();
+
+            showToast('Account created successfully! Welcome to Dealzy!', 'success');
+            setTimeout(() => {
+                window.location.href = 'home.html';
+            }, 1200);
+        }
+
+        function handleForgotSubmit() {
+            const modal = document.getElementById('forgot-password-modal');
+            modal.classList.remove('active');
+            showToast('Password reset link sent! Check your inbox/SMS.', 'success');
+        }
+    </script>
+</body>
+</html>

@@ -62,63 +62,35 @@
             display: flex;
             align-items: center;
             justify-content: space-between;
-            padding: 24px 48px;
-            max-width: 1440px;
+            padding: 16px 36px 16px 28px;
             width: 100%;
-            margin: 0 auto;
+            box-sizing: border-box;
         }
 
         .auth-logo {
             display: inline-flex;
             align-items: center;
-            gap: 12px;
             text-decoration: none;
-            color: var(--text-main);
-            transition: transform 0.2s ease;
+            margin-left: 0;
+            transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
         }
 
         .auth-logo:hover {
-            transform: scale(1.02);
+            transform: scale(1.04);
         }
 
-        .auth-logo-icon {
-            width: 44px;
-            height: 44px;
-            background: var(--gradient-primary);
-            border-radius: 12px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            box-shadow: 0 8px 20px rgba(255, 93, 0, 0.25);
-            transform: rotate(-8deg);
-            transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+        .auth-logo-img {
+            height: 96px;
+            width: auto;
+            max-width: 360px;
+            object-fit: contain;
+            display: block;
+            filter: drop-shadow(0 4px 14px rgba(255, 93, 0, 0.14));
+            transition: filter 0.25s ease, transform 0.25s ease;
         }
 
-        .auth-logo:hover .auth-logo-icon {
-            transform: rotate(0deg) scale(1.05);
-        }
-
-        .auth-logo-text {
-            display: flex;
-            flex-direction: column;
-        }
-
-        .auth-logo-name {
-            font-size: 1.65rem;
-            font-weight: 800;
-            letter-spacing: -0.04em;
-            line-height: 1;
-            color: #1A1A1A;
-        }
-
-        .auth-logo-tagline {
-            font-size: 0.75rem;
-            font-weight: 600;
-            color: var(--primary-orange);
-            letter-spacing: 0.08em;
-            text-transform: uppercase;
-            margin-top: 3px;
+        .auth-logo:hover .auth-logo-img {
+            filter: drop-shadow(0 6px 18px rgba(255, 93, 0, 0.24));
         }
 
         .auth-header-actions {
@@ -885,7 +857,11 @@
             }
 
             .auth-top-header {
-                padding: 16px 20px;
+                padding: 10px 18px;
+            }
+
+            .auth-logo-img {
+                height: 64px;
             }
 
             .auth-main {
@@ -920,14 +896,13 @@
 
     <!-- Top Navigation Header -->
     <header class="auth-top-header">
-        <a href="home.html" class="auth-logo" title="DEALZY - Home">
-            <div class="auth-logo-icon">
-                <i data-lucide="shopping-bag" size="24" stroke-width="2.5"></i>
-            </div>
-            <div class="auth-logo-text">
-                <span class="auth-logo-name">dealzy</span>
-                <span class="auth-logo-tagline">Local • Deals • Stores</span>
-            </div>
+        <a href="home.html" class="auth-logo" aria-label="Dealzy Homepage">
+            <img 
+                src="assets/images/dealzy-logo.png" 
+                srcset="assets/images/dealzy-logo.png 1x, assets/images/dealzy-logo@2x.png 2x" 
+                alt="Dealzy" 
+                class="auth-logo-img"
+            >
         </a>
 
         <div class="auth-header-actions">
@@ -1286,6 +1261,7 @@
             if (window.lucide) lucide.createIcons();
 
             showToast('Account created successfully! Welcome to Dealzy!', 'success');
+            localStorage.setItem('dealzy_new_signup', '1');
             setTimeout(() => {
                 window.location.href = 'home.html';
             }, 1200);

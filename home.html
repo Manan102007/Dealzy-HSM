@@ -90,21 +90,43 @@
             transition: all 0.25s ease;
         }
 
+        .site-header .container.nav-inner {
+            max-width: 100%;
+            padding-left: 28px;
+            padding-right: 28px;
+            height: 92px;
+        }
+
         .nav-inner {
             display: flex;
             align-items: center;
-            justify-content: space-between;
-            height: 76px;
-            gap: 20px;
+            height: 92px;
+            gap: 16px;
         }
 
         .brand-logo {
             display: flex;
             align-items: center;
-            gap: 10px;
             text-decoration: none;
             color: var(--text-dark);
             flex-shrink: 0;
+            margin-left: 0;
+            transition: transform 0.2s ease;
+        }
+
+        .brand-logo-img {
+            height: 76px;
+            width: auto;
+            max-width: 300px;
+            object-fit: contain;
+            display: block;
+            filter: drop-shadow(0 4px 14px rgba(255, 93, 0, 0.12));
+            transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1), filter 0.2s ease;
+        }
+
+        .brand-logo:hover .brand-logo-img {
+            transform: scale(1.04);
+            filter: drop-shadow(0 6px 18px rgba(255, 93, 0, 0.24));
         }
 
         .brand-logo-icon {
@@ -136,47 +158,62 @@
         .location-selector {
             display: inline-flex;
             align-items: center;
-            gap: 6px;
-            padding: 8px 14px;
+            gap: 10px;
+            padding: 0 22px;
+            height: 64px;
             background: #F7F3EB;
-            border: 1px solid #EAE3D5;
+            border: 1.5px solid #EAE3D5;
             border-radius: var(--radius-pill);
-            font-size: 0.85rem;
-            font-weight: 600;
-            color: #3F3F46;
+            font-size: 1.12rem;
+            font-weight: 700;
+            color: #27272A;
             cursor: pointer;
-            transition: all 0.2s;
+            transition: all 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
             flex-shrink: 0;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
         }
 
         .location-selector:hover {
             background: #EFE9DC;
             border-color: #D6CEBE;
             color: var(--primary-orange);
+            transform: translateY(-1px);
+            box-shadow: 0 4px 14px rgba(255, 93, 0, 0.12);
         }
 
         .location-dot {
-            width: 8px;
-            height: 8px;
+            width: 14px;
+            height: 14px;
             background: var(--primary-orange);
             border-radius: 50%;
+            display: inline-block;
+            box-shadow: 0 0 0 3.5px rgba(255, 93, 0, 0.2);
+            flex-shrink: 0;
         }
 
         /* Search Bar */
         .header-search-bar {
-            flex: 1;
-            max-width: 520px;
+            margin-left: auto;
+            width: 360px;
+            max-width: 440px;
             position: relative;
+            flex-shrink: 0;
+        }
+
+        @media (min-width: 1440px) {
+            .header-search-bar {
+                width: 420px;
+            }
         }
 
         .search-input-field {
             width: 100%;
-            height: 46px;
-            padding: 0 40px 0 44px;
+            height: 52px;
+            padding: 0 40px 0 46px;
             border-radius: var(--radius-pill);
             border: 1.5px solid var(--border-subtle);
             background: #FAFAFC;
-            font-size: 0.9rem;
+            font-size: 0.95rem;
             color: var(--text-dark);
             outline: none;
             transition: all 0.2s;
@@ -213,7 +250,7 @@
         .header-nav-actions {
             display: flex;
             align-items: center;
-            gap: 12px;
+            gap: 16px;
             flex-shrink: 0;
         }
 
@@ -1408,6 +1445,7 @@
                 order: 3;
                 width: 100%;
                 max-width: 100%;
+                margin-left: 0;
                 margin-top: 8px;
             }
 
@@ -1452,18 +1490,20 @@
         <div class="container nav-inner">
             
             <!-- Logo -->
-            <a href="home.html" class="brand-logo" title="DEALZY">
-                <div class="brand-logo-icon">
-                    <i data-lucide="tag" size="20" stroke-width="2.5"></i>
-                </div>
-                <span class="brand-logo-text">dealzy</span>
+            <a href="home.html" class="brand-logo" aria-label="Dealzy Homepage">
+                <img 
+                    src="assets/images/dealzy-logo.png" 
+                    srcset="assets/images/dealzy-logo.png 1x, assets/images/dealzy-logo@2x.png 2x" 
+                    alt="Dealzy" 
+                    class="brand-logo-img"
+                >
             </a>
 
             <!-- Location Selector -->
             <button class="location-selector" id="btn-open-location" aria-label="Change current location">
                 <span class="location-dot"></span>
                 <span id="current-location-label">Sector 17, Chandigarh</span>
-                <i data-lucide="chevron-down" size="14"></i>
+                <i data-lucide="chevron-down" size="18" stroke-width="2.5"></i>
             </button>
 
             <!-- Search Bar -->
@@ -1639,231 +1679,695 @@
         <!-- Dynamic Deals Listing Grid -->
         <section class="deals-grid-layout" id="deals-grid-container">
 
-            <!-- Deal Card 1: Fashion -->
+            <!-- ── FASHION & APPAREL ─────────────────────────────── -->
+
+            <!-- Fashion 1: Gulati Luxury Textiles -->
             <div class="deal-item-card" data-category="fashion" data-discount="40" data-distance="1.2" data-type="percent">
                 <div class="deal-card-visual">
-                    <img src="https://images.unsplash.com/photo-1490481651871-ab68de25d43d?auto=format&fit=crop&q=80&w=600" alt="Autumn Festive Kurtis & Silks">
-                    <div class="badge-discount-tag">40% OFF</div>
-                    <button class="btn-card-wishlist" title="Save deal"><i data-lucide="heart" size="18"></i></button>
+                    <img src="https://images.unsplash.com/photo-1490481651871-ab68de25d43d?auto=format&fit=crop&q=80&w=600" alt="Festive Silks" loading="lazy">
+                    <span class="deal-badge-chip">40% OFF</span>
+                    <button class="btn-wishlist-card" aria-label="Wishlist"><i data-lucide="heart" size="16"></i></button>
                 </div>
                 <div class="deal-card-body">
-                    <div class="deal-category-tag">Fashion & Apparel</div>
-                    <h3 class="deal-card-title">Festive Silks & Designer Kurtis</h3>
-                    <div class="deal-card-store">
-                        <i data-lucide="store" size="14"></i>
-                        <span>Gulati Luxury Textiles • Sector 17</span>
-                    </div>
+                    <span class="deal-cat-label">FASHION &amp; APPAREL</span>
+                    <h3 class="deal-card-title">Festive Silks &amp; Designer Kurtis</h3>
+                    <div class="deal-card-store"><i data-lucide="store" size="13"></i> Gulati Luxury Textiles &bull; Sector 17</div>
                     <div class="deal-card-meta">
-                        <span class="meta-rating"><i data-lucide="star" size="13" fill="#F59E0B" color="#F59E0B"></i> 4.8 (320)</span>
-                        <span class="meta-distance"><i data-lucide="map-pin" size="13"></i> 1.2 km</span>
-                        <span class="meta-validity"><i data-lucide="clock" size="13"></i> 3 days left</span>
+                        <span><i data-lucide="star" size="13" class="star-icon"></i> 4.7 (198)</span>
+                        <span><i data-lucide="map-pin" size="13"></i> 1.2 km</span>
+                        <span><i data-lucide="clock" size="13" class="urgency-icon"></i> 6 days left</span>
                     </div>
                     <div class="deal-card-footer">
-                        <button class="btn-claim-deal" onclick="openVoucherModal('Festive Silks & Designer Kurtis', 'Gulati Luxury Textiles', '40% OFF', 'GULATI40', 'Sector 17 Plaza, Chandigarh', 'https://images.unsplash.com/photo-1490481651871-ab68de25d43d?auto=format&fit=crop&q=80&w=600')">
-                            <span>Claim Voucher</span>
-                            <i data-lucide="ticket" size="16"></i>
+                        <button class="btn-claim-deal" onclick="openVoucherModal('Festive Silks &amp; Designer Kurtis', 'Gulati Luxury Textiles', '40% OFF', 'GULATI40', 'SCO 170, Sector 17 Plaza, Chandigarh', 'https://images.unsplash.com/photo-1490481651871-ab68de25d43d?auto=format&fit=crop&q=80&w=600')">
+                            <span>Claim Voucher</span><i data-lucide="ticket" size="16"></i>
                         </button>
                     </div>
                 </div>
             </div>
 
-            <!-- Deal Card 2: Footwear -->
-            <div class="deal-item-card" data-category="footwear" data-discount="50" data-distance="1.8" data-type="bogo">
+            <!-- Fashion 2: Biba Chandigarh -->
+            <div class="deal-item-card" data-category="fashion" data-discount="35" data-distance="0.9" data-type="percent">
                 <div class="deal-card-visual">
-                    <img src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?auto=format&fit=crop&q=80&w=600" alt="Sneakers & Running Shoes">
-                    <div class="badge-discount-tag">BUY 1 GET 1 FREE</div>
-                    <button class="btn-card-wishlist" title="Save deal"><i data-lucide="heart" size="18"></i></button>
+                    <img src="https://images.unsplash.com/photo-1617137968427-85924c800a22?auto=format&fit=crop&q=80&w=600" alt="Salwar Suits" loading="lazy">
+                    <span class="deal-badge-chip">35% OFF</span>
+                    <button class="btn-wishlist-card" aria-label="Wishlist"><i data-lucide="heart" size="16"></i></button>
                 </div>
                 <div class="deal-card-body">
-                    <div class="deal-category-tag">Footwear & Sneakers</div>
-                    <h3 class="deal-card-title">Pro Running & Casual Sneakers</h3>
-                    <div class="deal-card-store">
-                        <i data-lucide="store" size="14"></i>
-                        <span>Machi Footwear • Sector 22</span>
-                    </div>
+                    <span class="deal-cat-label">FASHION &amp; APPAREL</span>
+                    <h3 class="deal-card-title">Ethnic Salwar Suits &amp; Dupattas</h3>
+                    <div class="deal-card-store"><i data-lucide="store" size="13"></i> Biba &bull; Sector 17-D</div>
                     <div class="deal-card-meta">
-                        <span class="meta-rating"><i data-lucide="star" size="13" fill="#F59E0B" color="#F59E0B"></i> 4.6 (180)</span>
-                        <span class="meta-distance"><i data-lucide="map-pin" size="13"></i> 1.8 km</span>
-                        <span class="meta-validity"><i data-lucide="clock" size="13"></i> Ends Today!</span>
+                        <span><i data-lucide="star" size="13" class="star-icon"></i> 4.5 (312)</span>
+                        <span><i data-lucide="map-pin" size="13"></i> 0.9 km</span>
+                        <span><i data-lucide="clock" size="13" class="urgency-icon"></i> 4 days left</span>
                     </div>
                     <div class="deal-card-footer">
-                        <button class="btn-claim-deal" onclick="openVoucherModal('Pro Running & Casual Sneakers', 'Machi Footwear', 'BUY 1 GET 1 FREE', 'MACHIBOGO', 'SCO 42, Sector 22-B, Chandigarh', 'https://images.unsplash.com/photo-1542291026-7eec264c27ff?auto=format&fit=crop&q=80&w=600')">
-                            <span>Claim Voucher</span>
-                            <i data-lucide="ticket" size="16"></i>
+                        <button class="btn-claim-deal" onclick="openVoucherModal('Ethnic Salwar Suits &amp; Dupattas', 'Biba', '35% OFF', 'BIBA35', 'SCO 52, Sector 17-D, Chandigarh', 'https://images.unsplash.com/photo-1617137968427-85924c800a22?auto=format&fit=crop&q=80&w=600')">
+                            <span>Claim Voucher</span><i data-lucide="ticket" size="16"></i>
                         </button>
                     </div>
                 </div>
             </div>
 
-            <!-- Deal Card 3: Dining / Cafe -->
+            <!-- Fashion 3: Westside Elante -->
+            <div class="deal-item-card" data-category="fashion" data-discount="50" data-distance="3.5" data-type="percent">
+                <div class="deal-card-visual">
+                    <img src="https://images.unsplash.com/photo-1523381210434-271e8be1f52b?auto=format&fit=crop&q=80&w=600" alt="Western Wear" loading="lazy">
+                    <span class="deal-badge-chip">50% OFF</span>
+                    <button class="btn-wishlist-card" aria-label="Wishlist"><i data-lucide="heart" size="16"></i></button>
+                </div>
+                <div class="deal-card-body">
+                    <span class="deal-cat-label">FASHION &amp; APPAREL</span>
+                    <h3 class="deal-card-title">Western Wear &amp; Casual Co-ords</h3>
+                    <div class="deal-card-store"><i data-lucide="store" size="13"></i> Westside &bull; Elante Mall, Industrial Area</div>
+                    <div class="deal-card-meta">
+                        <span><i data-lucide="star" size="13" class="star-icon"></i> 4.4 (486)</span>
+                        <span><i data-lucide="map-pin" size="13"></i> 3.5 km</span>
+                        <span><i data-lucide="clock" size="13" class="urgency-icon"></i> 8 days left</span>
+                    </div>
+                    <div class="deal-card-footer">
+                        <button class="btn-claim-deal" onclick="openVoucherModal('Western Wear &amp; Casual Co-ords', 'Westside', '50% OFF', 'WEST50', 'Elante Mall, Industrial Area Phase 1, Chandigarh', 'https://images.unsplash.com/photo-1523381210434-271e8be1f52b?auto=format&fit=crop&q=80&w=600')">
+                            <span>Claim Voucher</span><i data-lucide="ticket" size="16"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Fashion 4: Fabindia Sector 8 -->
+            <div class="deal-item-card" data-category="fashion" data-discount="30" data-distance="2.1" data-type="percent">
+                <div class="deal-card-visual">
+                    <img src="https://images.unsplash.com/photo-1583391733956-3750e0ff4e8b?auto=format&fit=crop&q=80&w=600" alt="Handloom Cotton" loading="lazy">
+                    <span class="deal-badge-chip">30% OFF</span>
+                    <button class="btn-wishlist-card" aria-label="Wishlist"><i data-lucide="heart" size="16"></i></button>
+                </div>
+                <div class="deal-card-body">
+                    <span class="deal-cat-label">FASHION &amp; APPAREL</span>
+                    <h3 class="deal-card-title">Handloom Cotton Kurtas &amp; Stoles</h3>
+                    <div class="deal-card-store"><i data-lucide="store" size="13"></i> Fabindia &bull; Sector 8-C</div>
+                    <div class="deal-card-meta">
+                        <span><i data-lucide="star" size="13" class="star-icon"></i> 4.6 (274)</span>
+                        <span><i data-lucide="map-pin" size="13"></i> 2.1 km</span>
+                        <span><i data-lucide="clock" size="13" class="urgency-icon"></i> 10 days left</span>
+                    </div>
+                    <div class="deal-card-footer">
+                        <button class="btn-claim-deal" onclick="openVoucherModal('Handloom Cotton Kurtas &amp; Stoles', 'Fabindia', '30% OFF', 'FABINDIA30', 'SCO 28, Sector 8-C, Chandigarh', 'https://images.unsplash.com/photo-1583391733956-3750e0ff4e8b?auto=format&fit=crop&q=80&w=600')">
+                            <span>Claim Voucher</span><i data-lucide="ticket" size="16"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ── CAFES & DINING ─────────────────────────────────── -->
+
+            <!-- Dining 1: The Brew Estate -->
             <div class="deal-item-card" data-category="dining" data-discount="25" data-distance="0.8" data-type="percent">
                 <div class="deal-card-visual">
-                    <img src="https://images.unsplash.com/photo-1554118811-1e0d58224f24?auto=format&fit=crop&q=80&w=600" alt="Artisan Cafe & Bakery">
-                    <div class="badge-discount-tag">FLAT 25% OFF</div>
-                    <button class="btn-card-wishlist" title="Save deal"><i data-lucide="heart" size="18"></i></button>
+                    <img src="https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?auto=format&fit=crop&q=80&w=600" alt="Artisan Coffee" loading="lazy">
+                    <span class="deal-badge-chip">25% OFF</span>
+                    <button class="btn-wishlist-card" aria-label="Wishlist"><i data-lucide="heart" size="16"></i></button>
                 </div>
                 <div class="deal-card-body">
-                    <div class="deal-category-tag">Cafes & Dining</div>
-                    <h3 class="deal-card-title">Artisan Coffee & Gourmet Brunch</h3>
-                    <div class="deal-card-store">
-                        <i data-lucide="store" size="14"></i>
-                        <span>The Roastery & Bakehouse • Sector 35</span>
-                    </div>
+                    <span class="deal-cat-label">CAFES &amp; DINING</span>
+                    <h3 class="deal-card-title">Artisan Coffee &amp; Gourmet Brunch</h3>
+                    <div class="deal-card-store"><i data-lucide="store" size="13"></i> The Brew Estate &bull; Sector 7</div>
                     <div class="deal-card-meta">
-                        <span class="meta-rating"><i data-lucide="star" size="13" fill="#F59E0B" color="#F59E0B"></i> 4.9 (512)</span>
-                        <span class="meta-distance"><i data-lucide="map-pin" size="13"></i> 0.8 km</span>
-                        <span class="meta-validity"><i data-lucide="clock" size="13"></i> Valid this week</span>
+                        <span><i data-lucide="star" size="13" class="star-icon"></i> 4.8 (542)</span>
+                        <span><i data-lucide="map-pin" size="13"></i> 0.8 km</span>
+                        <span><i data-lucide="clock" size="13" class="urgency-icon"></i> 3 days left</span>
                     </div>
                     <div class="deal-card-footer">
-                        <button class="btn-claim-deal" onclick="openVoucherModal('Artisan Coffee & Gourmet Brunch', 'The Roastery & Bakehouse', 'FLAT 25% OFF', 'ROAST25', 'Sector 35-C Inner Market, Chandigarh', 'https://images.unsplash.com/photo-1554118811-1e0d58224f24?auto=format&fit=crop&q=80&w=600')">
-                            <span>Claim Voucher</span>
-                            <i data-lucide="ticket" size="16"></i>
+                        <button class="btn-claim-deal" onclick="openVoucherModal('Artisan Coffee &amp; Gourmet Brunch', 'The Brew Estate', '25% OFF', 'BREW25', 'SCO 189-190, Sector 7-C, Chandigarh', 'https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?auto=format&fit=crop&q=80&w=600')">
+                            <span>Claim Voucher</span><i data-lucide="ticket" size="16"></i>
                         </button>
                     </div>
                 </div>
             </div>
 
-            <!-- Deal Card 4: Electronics -->
-            <div class="deal-item-card" data-category="electronics" data-discount="35" data-distance="1.5" data-type="percent">
+            <!-- Dining 2: Pal Dhaba Sector 28 -->
+            <div class="deal-item-card" data-category="dining" data-discount="20" data-distance="1.4" data-type="percent">
                 <div class="deal-card-visual">
-                    <img src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format&fit=crop&q=80&w=600" alt="Wireless Audio & Headphones">
-                    <div class="badge-discount-tag">35% OFF</div>
-                    <button class="btn-card-wishlist" title="Save deal"><i data-lucide="heart" size="18"></i></button>
+                    <img src="https://images.unsplash.com/photo-1585937421612-70a008356fbe?auto=format&fit=crop&q=80&w=600" alt="Punjabi Thali" loading="lazy">
+                    <span class="deal-badge-chip">20% OFF</span>
+                    <button class="btn-wishlist-card" aria-label="Wishlist"><i data-lucide="heart" size="16"></i></button>
                 </div>
                 <div class="deal-card-body">
-                    <div class="deal-category-tag">Electronics & Gadgets</div>
-                    <h3 class="deal-card-title">Premium Noise-Cancelling Headphones</h3>
-                    <div class="deal-card-store">
-                        <i data-lucide="store" size="14"></i>
-                        <span>Horizon Digital Zone • Sector 17</span>
-                    </div>
+                    <span class="deal-cat-label">CAFES &amp; DINING</span>
+                    <h3 class="deal-card-title">Authentic Punjabi Thali &amp; Lassi</h3>
+                    <div class="deal-card-store"><i data-lucide="store" size="13"></i> Pal Dhaba &bull; Sector 28</div>
                     <div class="deal-card-meta">
-                        <span class="meta-rating"><i data-lucide="star" size="13" fill="#F59E0B" color="#F59E0B"></i> 4.7 (240)</span>
-                        <span class="meta-distance"><i data-lucide="map-pin" size="13"></i> 1.5 km</span>
-                        <span class="meta-validity"><i data-lucide="clock" size="13"></i> 4 days left</span>
+                        <span><i data-lucide="star" size="13" class="star-icon"></i> 4.6 (780)</span>
+                        <span><i data-lucide="map-pin" size="13"></i> 1.4 km</span>
+                        <span><i data-lucide="clock" size="13" class="urgency-icon"></i> 7 days left</span>
                     </div>
                     <div class="deal-card-footer">
-                        <button class="btn-claim-deal" onclick="openVoucherModal('Premium Noise-Cancelling Headphones', 'Horizon Digital Zone', '35% OFF', 'HORIZON35', 'Sector 17 Bridge Market, Chandigarh', 'https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format&fit=crop&q=80&w=600')">
-                            <span>Claim Voucher</span>
-                            <i data-lucide="ticket" size="16"></i>
+                        <button class="btn-claim-deal" onclick="openVoucherModal('Authentic Punjabi Thali &amp; Lassi', 'Pal Dhaba', '20% OFF', 'PALDHABA20', 'SCF 9, Sector 28-B, Chandigarh', 'https://images.unsplash.com/photo-1585937421612-70a008356fbe?auto=format&fit=crop&q=80&w=600')">
+                            <span>Claim Voucher</span><i data-lucide="ticket" size="16"></i>
                         </button>
                     </div>
                 </div>
             </div>
 
-            <!-- Deal Card 5: Beauty & Wellness -->
-            <div class="deal-item-card" data-category="beauty" data-discount="50" data-distance="2.4" data-type="percent">
+            <!-- Dining 3: Mocha Sector 9 -->
+            <div class="deal-item-card" data-category="dining" data-discount="30" data-distance="2.2" data-type="percent">
                 <div class="deal-card-visual">
-                    <img src="https://images.unsplash.com/photo-1540555700478-4be289fbecef?auto=format&fit=crop&q=80&w=600" alt="Spa & Facial Package">
-                    <div class="badge-discount-tag">FLAT 50% OFF</div>
-                    <button class="btn-card-wishlist" title="Save deal"><i data-lucide="heart" size="18"></i></button>
+                    <img src="https://images.unsplash.com/photo-1559305616-3f99cd43e353?auto=format&fit=crop&q=80&w=600" alt="Cafe Mocha" loading="lazy">
+                    <span class="deal-badge-chip">30% OFF</span>
+                    <button class="btn-wishlist-card" aria-label="Wishlist"><i data-lucide="heart" size="16"></i></button>
                 </div>
                 <div class="deal-card-body">
-                    <div class="deal-category-tag">Beauty & Wellness</div>
-                    <h3 class="deal-card-title">Aromatherapy Spa & Hair Treatment</h3>
-                    <div class="deal-card-store">
-                        <i data-lucide="store" size="14"></i>
-                        <span>Bloom & Glow Wellness Studio</span>
-                    </div>
+                    <span class="deal-cat-label">CAFES &amp; DINING</span>
+                    <h3 class="deal-card-title">Cold Brews, Waffles &amp; Sandwiches</h3>
+                    <div class="deal-card-store"><i data-lucide="store" size="13"></i> Mocha Coffee Roasters &bull; Sector 9</div>
                     <div class="deal-card-meta">
-                        <span class="meta-rating"><i data-lucide="star" size="13" fill="#F59E0B" color="#F59E0B"></i> 4.9 (410)</span>
-                        <span class="meta-distance"><i data-lucide="map-pin" size="13"></i> 2.4 km</span>
-                        <span class="meta-validity"><i data-lucide="clock" size="13"></i> Weekend Only</span>
+                        <span><i data-lucide="star" size="13" class="star-icon"></i> 4.5 (396)</span>
+                        <span><i data-lucide="map-pin" size="13"></i> 2.2 km</span>
+                        <span><i data-lucide="clock" size="13" class="urgency-icon"></i> 5 days left</span>
                     </div>
                     <div class="deal-card-footer">
-                        <button class="btn-claim-deal" onclick="openVoucherModal('Aromatherapy Spa & Hair Treatment', 'Bloom & Glow Wellness Studio', 'FLAT 50% OFF', 'BLOOM50', 'Sector 9-D Main Boulevard, Chandigarh', 'https://images.unsplash.com/photo-1540555700478-4be289fbecef?auto=format&fit=crop&q=80&w=600')">
-                            <span>Claim Voucher</span>
-                            <i data-lucide="ticket" size="16"></i>
+                        <button class="btn-claim-deal" onclick="openVoucherModal('Cold Brews, Waffles &amp; Sandwiches', 'Mocha Coffee Roasters', '30% OFF', 'MOCHA30', 'SCO 56, Sector 9-D, Chandigarh', 'https://images.unsplash.com/photo-1559305616-3f99cd43e353?auto=format&fit=crop&q=80&w=600')">
+                            <span>Claim Voucher</span><i data-lucide="ticket" size="16"></i>
                         </button>
                     </div>
                 </div>
             </div>
 
-            <!-- Deal Card 6: Home Decor & Living -->
+            <!-- Dining 4: Barbeque Nation Sector 26 -->
+            <div class="deal-item-card" data-category="dining" data-discount="40" data-distance="2.8" data-type="percent">
+                <div class="deal-card-visual">
+                    <img src="https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&q=80&w=600" alt="BBQ" loading="lazy">
+                    <span class="deal-badge-chip">40% OFF</span>
+                    <button class="btn-wishlist-card" aria-label="Wishlist"><i data-lucide="heart" size="16"></i></button>
+                </div>
+                <div class="deal-card-body">
+                    <span class="deal-cat-label">CAFES &amp; DINING</span>
+                    <h3 class="deal-card-title">Live Barbeque Unlimited Buffet</h3>
+                    <div class="deal-card-store"><i data-lucide="store" size="13"></i> Barbeque Nation &bull; Sector 26</div>
+                    <div class="deal-card-meta">
+                        <span><i data-lucide="star" size="13" class="star-icon"></i> 4.3 (1.2k)</span>
+                        <span><i data-lucide="map-pin" size="13"></i> 2.8 km</span>
+                        <span><i data-lucide="clock" size="13" class="urgency-icon"></i> 2 days left</span>
+                    </div>
+                    <div class="deal-card-footer">
+                        <button class="btn-claim-deal" onclick="openVoucherModal('Live Barbeque Unlimited Buffet', 'Barbeque Nation', '40% OFF', 'BBQ40', 'SCO 14, Madhya Marg, Sector 26, Chandigarh', 'https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&q=80&w=600')">
+                            <span>Claim Voucher</span><i data-lucide="ticket" size="16"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ── FOOTWEAR & SNEAKERS ─────────────────────────────── -->
+
+            <!-- Footwear 1: Machi Footwear -->
+            <div class="deal-item-card" data-category="footwear" data-discount="50" data-distance="1.8" data-type="bogo">
+                <div class="deal-card-visual">
+                    <img src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?auto=format&fit=crop&q=80&w=600" alt="Sneakers" loading="lazy">
+                    <span class="deal-badge-chip">BUY 1 GET 1</span>
+                    <button class="btn-wishlist-card" aria-label="Wishlist"><i data-lucide="heart" size="16"></i></button>
+                </div>
+                <div class="deal-card-body">
+                    <span class="deal-cat-label">FOOTWEAR &amp; SNEAKERS</span>
+                    <h3 class="deal-card-title">Pro Running &amp; Casual Sneakers</h3>
+                    <div class="deal-card-store"><i data-lucide="store" size="13"></i> Machi Footwear &bull; Sector 22-B</div>
+                    <div class="deal-card-meta">
+                        <span><i data-lucide="star" size="13" class="star-icon"></i> 4.5 (327)</span>
+                        <span><i data-lucide="map-pin" size="13"></i> 1.8 km</span>
+                        <span><i data-lucide="clock" size="13" class="urgency-icon"></i> 5 days left</span>
+                    </div>
+                    <div class="deal-card-footer">
+                        <button class="btn-claim-deal" onclick="openVoucherModal('Pro Running &amp; Casual Sneakers', 'Machi Footwear', 'BUY 1 GET 1 FREE', 'MACHIBOGO', 'SCO 42, Sector 22-B, Chandigarh', 'https://images.unsplash.com/photo-1542291026-7eec264c27ff?auto=format&fit=crop&q=80&w=600')">
+                            <span>Claim Voucher</span><i data-lucide="ticket" size="16"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Footwear 2: Bata Sector 17 -->
+            <div class="deal-item-card" data-category="footwear" data-discount="40" data-distance="1.1" data-type="percent">
+                <div class="deal-card-visual">
+                    <img src="https://images.unsplash.com/photo-1600185365926-3a2ce3cdb9eb?auto=format&fit=crop&q=80&w=600" alt="Formal Shoes" loading="lazy">
+                    <span class="deal-badge-chip">40% OFF</span>
+                    <button class="btn-wishlist-card" aria-label="Wishlist"><i data-lucide="heart" size="16"></i></button>
+                </div>
+                <div class="deal-card-body">
+                    <span class="deal-cat-label">FOOTWEAR &amp; SNEAKERS</span>
+                    <h3 class="deal-card-title">Formal Leather Shoes &amp; Sandals</h3>
+                    <div class="deal-card-store"><i data-lucide="store" size="13"></i> Bata &bull; Sector 17-E</div>
+                    <div class="deal-card-meta">
+                        <span><i data-lucide="star" size="13" class="star-icon"></i> 4.3 (614)</span>
+                        <span><i data-lucide="map-pin" size="13"></i> 1.1 km</span>
+                        <span><i data-lucide="clock" size="13" class="urgency-icon"></i> 9 days left</span>
+                    </div>
+                    <div class="deal-card-footer">
+                        <button class="btn-claim-deal" onclick="openVoucherModal('Formal Leather Shoes &amp; Sandals', 'Bata', '40% OFF', 'BATA40', 'SCO 47, Sector 17-E, Chandigarh', 'https://images.unsplash.com/photo-1600185365926-3a2ce3cdb9eb?auto=format&fit=crop&q=80&w=600')">
+                            <span>Claim Voucher</span><i data-lucide="ticket" size="16"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Footwear 3: Metro Shoes Elante -->
+            <div class="deal-item-card" data-category="footwear" data-discount="35" data-distance="3.5" data-type="percent">
+                <div class="deal-card-visual">
+                    <img src="https://images.unsplash.com/photo-1515347619252-60a4bf4fff4f?auto=format&fit=crop&q=80&w=600" alt="Heels" loading="lazy">
+                    <span class="deal-badge-chip">35% OFF</span>
+                    <button class="btn-wishlist-card" aria-label="Wishlist"><i data-lucide="heart" size="16"></i></button>
+                </div>
+                <div class="deal-card-body">
+                    <span class="deal-cat-label">FOOTWEAR &amp; SNEAKERS</span>
+                    <h3 class="deal-card-title">Women Heels, Flats &amp; Block Sandals</h3>
+                    <div class="deal-card-store"><i data-lucide="store" size="13"></i> Metro Shoes &bull; Elante Mall</div>
+                    <div class="deal-card-meta">
+                        <span><i data-lucide="star" size="13" class="star-icon"></i> 4.4 (289)</span>
+                        <span><i data-lucide="map-pin" size="13"></i> 3.5 km</span>
+                        <span><i data-lucide="clock" size="13" class="urgency-icon"></i> 6 days left</span>
+                    </div>
+                    <div class="deal-card-footer">
+                        <button class="btn-claim-deal" onclick="openVoucherModal('Women Heels, Flats &amp; Block Sandals', 'Metro Shoes', '35% OFF', 'METRO35', 'Elante Mall, Industrial Area Phase 1, Chandigarh', 'https://images.unsplash.com/photo-1515347619252-60a4bf4fff4f?auto=format&fit=crop&q=80&w=600')">
+                            <span>Claim Voucher</span><i data-lucide="ticket" size="16"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Footwear 4: Liberty Shoes Sector 22 -->
+            <div class="deal-item-card" data-category="footwear" data-discount="45" data-distance="2.0" data-type="percent">
+                <div class="deal-card-visual">
+                    <img src="https://images.unsplash.com/photo-1465453869711-7e174808ace9?auto=format&fit=crop&q=80&w=600" alt="Sports Shoes" loading="lazy">
+                    <span class="deal-badge-chip">45% OFF</span>
+                    <button class="btn-wishlist-card" aria-label="Wishlist"><i data-lucide="heart" size="16"></i></button>
+                </div>
+                <div class="deal-card-body">
+                    <span class="deal-cat-label">FOOTWEAR &amp; SNEAKERS</span>
+                    <h3 class="deal-card-title">Sports Shoes &amp; Kids Footwear</h3>
+                    <div class="deal-card-store"><i data-lucide="store" size="13"></i> Liberty Shoes &bull; Sector 22-C</div>
+                    <div class="deal-card-meta">
+                        <span><i data-lucide="star" size="13" class="star-icon"></i> 4.2 (451)</span>
+                        <span><i data-lucide="map-pin" size="13"></i> 2.0 km</span>
+                        <span><i data-lucide="clock" size="13" class="urgency-icon"></i> 4 days left</span>
+                    </div>
+                    <div class="deal-card-footer">
+                        <button class="btn-claim-deal" onclick="openVoucherModal('Sports Shoes &amp; Kids Footwear', 'Liberty Shoes', '45% OFF', 'LIBERTY45', 'SCO 117, Sector 22-C, Chandigarh', 'https://images.unsplash.com/photo-1465453869711-7e174808ace9?auto=format&fit=crop&q=80&w=600')">
+                            <span>Claim Voucher</span><i data-lucide="ticket" size="16"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ── ELECTRONICS & GADGETS ──────────────────────────── -->
+
+            <!-- Electronics 1: Apex Gaming Hub -->
+            <div class="deal-item-card" data-category="electronics" data-discount="30" data-distance="1.9" data-type="percent">
+                <div class="deal-card-visual">
+                    <img src="https://images.unsplash.com/photo-1593305841991-05c297ba4575?auto=format&fit=crop&q=80&w=600" alt="Gaming Peripherals" loading="lazy">
+                    <span class="deal-badge-chip">30% OFF</span>
+                    <button class="btn-wishlist-card" aria-label="Wishlist"><i data-lucide="heart" size="16"></i></button>
+                </div>
+                <div class="deal-card-body">
+                    <span class="deal-cat-label">ELECTRONICS &amp; GADGETS</span>
+                    <h3 class="deal-card-title">RGB Mechanical Keyboards &amp; Gaming Mice</h3>
+                    <div class="deal-card-store"><i data-lucide="store" size="13"></i> Apex Gaming Hub &bull; Sector 20-C</div>
+                    <div class="deal-card-meta">
+                        <span><i data-lucide="star" size="13" class="star-icon"></i> 4.6 (183)</span>
+                        <span><i data-lucide="map-pin" size="13"></i> 1.9 km</span>
+                        <span><i data-lucide="clock" size="13" class="urgency-icon"></i> 5 days left</span>
+                    </div>
+                    <div class="deal-card-footer">
+                        <button class="btn-claim-deal" onclick="openVoucherModal('RGB Mechanical Keyboards &amp; Gaming Mice', 'Apex Gaming Hub', '30% OFF', 'APEX30', 'Booth 35, Sector 20-C, Chandigarh', 'https://images.unsplash.com/photo-1593305841991-05c297ba4575?auto=format&fit=crop&q=80&w=600')">
+                            <span>Claim Voucher</span><i data-lucide="ticket" size="16"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Electronics 2: Croma Sector 35 -->
+            <div class="deal-item-card" data-category="electronics" data-discount="15" data-distance="2.7" data-type="percent">
+                <div class="deal-card-visual">
+                    <img src="https://images.unsplash.com/photo-1588872657578-7efd1f1555ed?auto=format&fit=crop&q=80&w=600" alt="Laptops" loading="lazy">
+                    <span class="deal-badge-chip">15% OFF</span>
+                    <button class="btn-wishlist-card" aria-label="Wishlist"><i data-lucide="heart" size="16"></i></button>
+                </div>
+                <div class="deal-card-body">
+                    <span class="deal-cat-label">ELECTRONICS &amp; GADGETS</span>
+                    <h3 class="deal-card-title">Laptops, Tablets &amp; Smart Watches</h3>
+                    <div class="deal-card-store"><i data-lucide="store" size="13"></i> Croma &bull; Sector 35-B</div>
+                    <div class="deal-card-meta">
+                        <span><i data-lucide="star" size="13" class="star-icon"></i> 4.4 (729)</span>
+                        <span><i data-lucide="map-pin" size="13"></i> 2.7 km</span>
+                        <span><i data-lucide="clock" size="13" class="urgency-icon"></i> 12 days left</span>
+                    </div>
+                    <div class="deal-card-footer">
+                        <button class="btn-claim-deal" onclick="openVoucherModal('Laptops, Tablets &amp; Smart Watches', 'Croma', '15% OFF', 'CROMA15', 'SCO 65, Sector 35-B, Chandigarh', 'https://images.unsplash.com/photo-1588872657578-7efd1f1555ed?auto=format&fit=crop&q=80&w=600')">
+                            <span>Claim Voucher</span><i data-lucide="ticket" size="16"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Electronics 3: Reliance Digital Elante -->
+            <div class="deal-item-card" data-category="electronics" data-discount="20" data-distance="3.5" data-type="percent">
+                <div class="deal-card-visual">
+                    <img src="https://images.unsplash.com/photo-1546054454-aa26e2b734c7?auto=format&fit=crop&q=80&w=600" alt="Mobile Phones" loading="lazy">
+                    <span class="deal-badge-chip">20% OFF</span>
+                    <button class="btn-wishlist-card" aria-label="Wishlist"><i data-lucide="heart" size="16"></i></button>
+                </div>
+                <div class="deal-card-body">
+                    <span class="deal-cat-label">ELECTRONICS &amp; GADGETS</span>
+                    <h3 class="deal-card-title">Smartphones &amp; Wireless Earbuds</h3>
+                    <div class="deal-card-store"><i data-lucide="store" size="13"></i> Reliance Digital &bull; Elante Mall</div>
+                    <div class="deal-card-meta">
+                        <span><i data-lucide="star" size="13" class="star-icon"></i> 4.3 (1.1k)</span>
+                        <span><i data-lucide="map-pin" size="13"></i> 3.5 km</span>
+                        <span><i data-lucide="clock" size="13" class="urgency-icon"></i> 7 days left</span>
+                    </div>
+                    <div class="deal-card-footer">
+                        <button class="btn-claim-deal" onclick="openVoucherModal('Smartphones &amp; Wireless Earbuds', 'Reliance Digital', '20% OFF', 'RDIGITAL20', 'Elante Mall, Industrial Area Phase 1, Chandigarh', 'https://images.unsplash.com/photo-1546054454-aa26e2b734c7?auto=format&fit=crop&q=80&w=600')">
+                            <span>Claim Voucher</span><i data-lucide="ticket" size="16"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Electronics 4: MD Computers Sector 22 -->
+            <div class="deal-item-card" data-category="electronics" data-discount="25" data-distance="2.1" data-type="percent">
+                <div class="deal-card-visual">
+                    <img src="https://images.unsplash.com/photo-1587202372775-e229f172b9d7?auto=format&fit=crop&q=80&w=600" alt="PC Build" loading="lazy">
+                    <span class="deal-badge-chip">25% OFF</span>
+                    <button class="btn-wishlist-card" aria-label="Wishlist"><i data-lucide="heart" size="16"></i></button>
+                </div>
+                <div class="deal-card-body">
+                    <span class="deal-cat-label">ELECTRONICS &amp; GADGETS</span>
+                    <h3 class="deal-card-title">Custom PC Build Parts &amp; Monitors</h3>
+                    <div class="deal-card-store"><i data-lucide="store" size="13"></i> MD Computers &bull; Sector 22-B</div>
+                    <div class="deal-card-meta">
+                        <span><i data-lucide="star" size="13" class="star-icon"></i> 4.7 (213)</span>
+                        <span><i data-lucide="map-pin" size="13"></i> 2.1 km</span>
+                        <span><i data-lucide="clock" size="13" class="urgency-icon"></i> 8 days left</span>
+                    </div>
+                    <div class="deal-card-footer">
+                        <button class="btn-claim-deal" onclick="openVoucherModal('Custom PC Build Parts &amp; Monitors', 'MD Computers', '25% OFF', 'MDCOMP25', 'Booth 12, Sector 22-B Market, Chandigarh', 'https://images.unsplash.com/photo-1587202372775-e229f172b9d7?auto=format&fit=crop&q=80&w=600')">
+                            <span>Claim Voucher</span><i data-lucide="ticket" size="16"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ── BEAUTY & WELLNESS ──────────────────────────────── -->
+
+            <!-- Beauty 1: Aura Organic Spa -->
+            <div class="deal-item-card" data-category="beauty" data-discount="45" data-distance="2.4" data-type="percent">
+                <div class="deal-card-visual">
+                    <img src="https://images.unsplash.com/photo-1540555700478-4be289fbecef?auto=format&fit=crop&q=80&w=600" alt="Spa" loading="lazy">
+                    <span class="deal-badge-chip">45% OFF</span>
+                    <button class="btn-wishlist-card" aria-label="Wishlist"><i data-lucide="heart" size="16"></i></button>
+                </div>
+                <div class="deal-card-body">
+                    <span class="deal-cat-label">BEAUTY &amp; WELLNESS</span>
+                    <h3 class="deal-card-title">Swedish Massage &amp; Deep Cleansing Facial</h3>
+                    <div class="deal-card-store"><i data-lucide="store" size="13"></i> Aura Organic Spa &bull; Sector 8-B</div>
+                    <div class="deal-card-meta">
+                        <span><i data-lucide="star" size="13" class="star-icon"></i> 4.8 (156)</span>
+                        <span><i data-lucide="map-pin" size="13"></i> 2.4 km</span>
+                        <span><i data-lucide="clock" size="13" class="urgency-icon"></i> 5 days left</span>
+                    </div>
+                    <div class="deal-card-footer">
+                        <button class="btn-claim-deal" onclick="openVoucherModal('Swedish Massage &amp; Deep Cleansing Facial', 'Aura Organic Spa', '45% OFF', 'AURA45', 'Inner Market, Sector 8-B, Chandigarh', 'https://images.unsplash.com/photo-1540555700478-4be289fbecef?auto=format&fit=crop&q=80&w=600')">
+                            <span>Claim Voucher</span><i data-lucide="ticket" size="16"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Beauty 2: Looks Salon Sector 9 -->
+            <div class="deal-item-card" data-category="beauty" data-discount="40" data-distance="1.6" data-type="percent">
+                <div class="deal-card-visual">
+                    <img src="https://images.unsplash.com/photo-1560066984-138daaa0d044?auto=format&fit=crop&q=80&w=600" alt="Hair Treatment" loading="lazy">
+                    <span class="deal-badge-chip">40% OFF</span>
+                    <button class="btn-wishlist-card" aria-label="Wishlist"><i data-lucide="heart" size="16"></i></button>
+                </div>
+                <div class="deal-card-body">
+                    <span class="deal-cat-label">BEAUTY &amp; WELLNESS</span>
+                    <h3 class="deal-card-title">Keratin Hair Treatment &amp; Blow Dry</h3>
+                    <div class="deal-card-store"><i data-lucide="store" size="13"></i> Looks Salon &bull; Sector 9-D</div>
+                    <div class="deal-card-meta">
+                        <span><i data-lucide="star" size="13" class="star-icon"></i> 4.6 (340)</span>
+                        <span><i data-lucide="map-pin" size="13"></i> 1.6 km</span>
+                        <span><i data-lucide="clock" size="13" class="urgency-icon"></i> 6 days left</span>
+                    </div>
+                    <div class="deal-card-footer">
+                        <button class="btn-claim-deal" onclick="openVoucherModal('Keratin Hair Treatment &amp; Blow Dry', 'Looks Salon', '40% OFF', 'LOOKS40', 'SCO 113, Sector 9-D, Chandigarh', 'https://images.unsplash.com/photo-1560066984-138daaa0d044?auto=format&fit=crop&q=80&w=600')">
+                            <span>Claim Voucher</span><i data-lucide="ticket" size="16"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Beauty 3: Naturals Salon Sector 35 -->
+            <div class="deal-item-card" data-category="beauty" data-discount="30" data-distance="2.9" data-type="percent">
+                <div class="deal-card-visual">
+                    <img src="https://images.unsplash.com/photo-1607008829749-c0f284a49fc4?auto=format&fit=crop&q=80&w=600" alt="Facial" loading="lazy">
+                    <span class="deal-badge-chip">30% OFF</span>
+                    <button class="btn-wishlist-card" aria-label="Wishlist"><i data-lucide="heart" size="16"></i></button>
+                </div>
+                <div class="deal-card-body">
+                    <span class="deal-cat-label">BEAUTY &amp; WELLNESS</span>
+                    <h3 class="deal-card-title">Hydra Facial &amp; Mani-Pedi Combo</h3>
+                    <div class="deal-card-store"><i data-lucide="store" size="13"></i> Naturals Salon &bull; Sector 35-C</div>
+                    <div class="deal-card-meta">
+                        <span><i data-lucide="star" size="13" class="star-icon"></i> 4.5 (267)</span>
+                        <span><i data-lucide="map-pin" size="13"></i> 2.9 km</span>
+                        <span><i data-lucide="clock" size="13" class="urgency-icon"></i> 9 days left</span>
+                    </div>
+                    <div class="deal-card-footer">
+                        <button class="btn-claim-deal" onclick="openVoucherModal('Hydra Facial &amp; Mani-Pedi Combo', 'Naturals Salon', '30% OFF', 'NATURALS30', 'SCO 22, Sector 35-C, Chandigarh', 'https://images.unsplash.com/photo-1607008829749-c0f284a49fc4?auto=format&fit=crop&q=80&w=600')">
+                            <span>Claim Voucher</span><i data-lucide="ticket" size="16"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Beauty 4: VLCC Sector 11 -->
+            <div class="deal-item-card" data-category="beauty" data-discount="35" data-distance="1.3" data-type="percent">
+                <div class="deal-card-visual">
+                    <img src="https://images.unsplash.com/photo-1519823551278-64ac92734fb1?auto=format&fit=crop&q=80&w=600" alt="Wellness" loading="lazy">
+                    <span class="deal-badge-chip">35% OFF</span>
+                    <button class="btn-wishlist-card" aria-label="Wishlist"><i data-lucide="heart" size="16"></i></button>
+                </div>
+                <div class="deal-card-body">
+                    <span class="deal-cat-label">BEAUTY &amp; WELLNESS</span>
+                    <h3 class="deal-card-title">Slimming Package &amp; Body Polishing</h3>
+                    <div class="deal-card-store"><i data-lucide="store" size="13"></i> VLCC Wellness &bull; Sector 11</div>
+                    <div class="deal-card-meta">
+                        <span><i data-lucide="star" size="13" class="star-icon"></i> 4.4 (192)</span>
+                        <span><i data-lucide="map-pin" size="13"></i> 1.3 km</span>
+                        <span><i data-lucide="clock" size="13" class="urgency-icon"></i> 4 days left</span>
+                    </div>
+                    <div class="deal-card-footer">
+                        <button class="btn-claim-deal" onclick="openVoucherModal('Slimming Package &amp; Body Polishing', 'VLCC Wellness', '35% OFF', 'VLCC35', 'SCO 78, Sector 11-C, Chandigarh', 'https://images.unsplash.com/photo-1519823551278-64ac92734fb1?auto=format&fit=crop&q=80&w=600')">
+                            <span>Claim Voucher</span><i data-lucide="ticket" size="16"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ── HOME & KITCHENWARE ──────────────────────────────── -->
+
+            <!-- Home 1: Sharma Kitchen -->
+            <div class="deal-item-card" data-category="home" data-discount="35" data-distance="1.1" data-type="percent">
+                <div class="deal-card-visual">
+                    <img src="https://images.unsplash.com/photo-1556911220-e15b29be8c8f?auto=format&fit=crop&q=80&w=600" alt="Cookware" loading="lazy">
+                    <span class="deal-badge-chip">35% OFF</span>
+                    <button class="btn-wishlist-card" aria-label="Wishlist"><i data-lucide="heart" size="16"></i></button>
+                </div>
+                <div class="deal-card-body">
+                    <span class="deal-cat-label">HOME &amp; KITCHENWARE</span>
+                    <h3 class="deal-card-title">Tri-Ply Steel Cookware &amp; Kadhai Set</h3>
+                    <div class="deal-card-store"><i data-lucide="store" size="13"></i> Sharma Kitchen &amp; Metalware &bull; Sector 22-C</div>
+                    <div class="deal-card-meta">
+                        <span><i data-lucide="star" size="13" class="star-icon"></i> 4.8 (215)</span>
+                        <span><i data-lucide="map-pin" size="13"></i> 1.1 km</span>
+                        <span><i data-lucide="clock" size="13" class="urgency-icon"></i> 5 days left</span>
+                    </div>
+                    <div class="deal-card-footer">
+                        <button class="btn-claim-deal" onclick="openVoucherModal('Tri-Ply Steel Cookware &amp; Kadhai Set', 'Sharma Kitchen &amp; Metalware', '35% OFF', 'SHARMA35', 'SCO 88, Sector 22-C, Chandigarh', 'https://images.unsplash.com/photo-1556911220-e15b29be8c8f?auto=format&fit=crop&q=80&w=600')">
+                            <span>Claim Voucher</span><i data-lucide="ticket" size="16"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Home 2: Casa Bella Living -->
             <div class="deal-item-card" data-category="home" data-discount="30" data-distance="3.1" data-type="percent">
                 <div class="deal-card-visual">
-                    <img src="https://images.unsplash.com/photo-1513694203232-719a280e022f?auto=format&fit=crop&q=80&w=600" alt="Handcrafted Lighting & Rugs">
-                    <div class="badge-discount-tag">30% OFF</div>
-                    <button class="btn-card-wishlist" title="Save deal"><i data-lucide="heart" size="18"></i></button>
+                    <img src="https://images.unsplash.com/photo-1540518614846-7eded433c457?auto=format&fit=crop&q=80&w=600" alt="Lamps and Rugs" loading="lazy">
+                    <span class="deal-badge-chip">30% OFF</span>
+                    <button class="btn-wishlist-card" aria-label="Wishlist"><i data-lucide="heart" size="16"></i></button>
                 </div>
                 <div class="deal-card-body">
-                    <div class="deal-category-tag">Home Decor & Living</div>
-                    <h3 class="deal-card-title">Aesthetic Lamps & Handwoven Rugs</h3>
-                    <div class="deal-card-store">
-                        <i data-lucide="store" size="14"></i>
-                        <span>Urban Haven Living Store</span>
-                    </div>
+                    <span class="deal-cat-label">HOME &amp; KITCHENWARE</span>
+                    <h3 class="deal-card-title">Aesthetic Lamps &amp; Handwoven Rugs</h3>
+                    <div class="deal-card-store"><i data-lucide="store" size="13"></i> Casa Bella Living Studio &bull; Sector 35-D</div>
                     <div class="deal-card-meta">
-                        <span class="meta-rating"><i data-lucide="star" size="13" fill="#F59E0B" color="#F59E0B"></i> 4.5 (190)</span>
-                        <span class="meta-distance"><i data-lucide="map-pin" size="13"></i> 3.1 km</span>
-                        <span class="meta-validity"><i data-lucide="clock" size="13"></i> 5 days left</span>
+                        <span><i data-lucide="star" size="13" class="star-icon"></i> 4.6 (134)</span>
+                        <span><i data-lucide="map-pin" size="13"></i> 3.1 km</span>
+                        <span><i data-lucide="clock" size="13" class="urgency-icon"></i> 8 days left</span>
                     </div>
                     <div class="deal-card-footer">
-                        <button class="btn-claim-deal" onclick="openVoucherModal('Aesthetic Lamps & Handwoven Rugs', 'Urban Haven Living Store', '30% OFF', 'HAVEN30', 'Industrial Area Phase 1, Chandigarh', 'https://images.unsplash.com/photo-1513694203232-719a280e022f?auto=format&fit=crop&q=80&w=600')">
-                            <span>Claim Voucher</span>
-                            <i data-lucide="ticket" size="16"></i>
+                        <button class="btn-claim-deal" onclick="openVoucherModal('Aesthetic Lamps &amp; Handwoven Rugs', 'Casa Bella Living Studio', '30% OFF', 'CASA30', 'SCO 14, Sector 35-D, Chandigarh', 'https://images.unsplash.com/photo-1540518614846-7eded433c457?auto=format&fit=crop&q=80&w=600')">
+                            <span>Claim Voucher</span><i data-lucide="ticket" size="16"></i>
                         </button>
                     </div>
                 </div>
             </div>
 
-            <!-- Deal Card 7: Supermarket / Organic -->
-            <div class="deal-item-card" data-category="grocery" data-discount="20" data-distance="0.9" data-type="percent">
+            <!-- Home 3: Urban Home Sector 17 -->
+            <div class="deal-item-card" data-category="home" data-discount="25" data-distance="1.5" data-type="percent">
                 <div class="deal-card-visual">
-                    <img src="https://images.unsplash.com/photo-1542838132-92c53300491e?auto=format&fit=crop&q=80&w=600" alt="Organic Fresh Gourmet">
-                    <div class="badge-discount-tag">₹300 OFF ON ₹1500</div>
-                    <button class="btn-card-wishlist" title="Save deal"><i data-lucide="heart" size="18"></i></button>
+                    <img src="https://images.unsplash.com/photo-1555041469-a586c61ea9bc?auto=format&fit=crop&q=80&w=600" alt="Sofa" loading="lazy">
+                    <span class="deal-badge-chip">25% OFF</span>
+                    <button class="btn-wishlist-card" aria-label="Wishlist"><i data-lucide="heart" size="16"></i></button>
                 </div>
                 <div class="deal-card-body">
-                    <div class="deal-category-tag">Supermarkets & Fresh</div>
-                    <h3 class="deal-card-title">Organic Farm Greens & Imported Cheese</h3>
-                    <div class="deal-card-store">
-                        <i data-lucide="store" size="14"></i>
-                        <span>Nature's Basket Gourmet • Sector 8</span>
-                    </div>
+                    <span class="deal-cat-label">HOME &amp; KITCHENWARE</span>
+                    <h3 class="deal-card-title">Sofas, Cushion Covers &amp; Curtains</h3>
+                    <div class="deal-card-store"><i data-lucide="store" size="13"></i> Urban Home Furnishings &bull; Sector 17</div>
                     <div class="deal-card-meta">
-                        <span class="meta-rating"><i data-lucide="star" size="13" fill="#F59E0B" color="#F59E0B"></i> 4.8 (370)</span>
-                        <span class="meta-distance"><i data-lucide="map-pin" size="13"></i> 0.9 km</span>
-                        <span class="meta-validity"><i data-lucide="clock" size="13"></i> Daily Deal</span>
+                        <span><i data-lucide="star" size="13" class="star-icon"></i> 4.5 (178)</span>
+                        <span><i data-lucide="map-pin" size="13"></i> 1.5 km</span>
+                        <span><i data-lucide="clock" size="13" class="urgency-icon"></i> 11 days left</span>
                     </div>
                     <div class="deal-card-footer">
-                        <button class="btn-claim-deal" onclick="openVoucherModal('Organic Farm Greens & Imported Cheese', 'Nature\'s Basket Gourmet', '₹300 OFF ON ₹1500', 'NATURE300', 'Sector 8-C Market, Chandigarh', 'https://images.unsplash.com/photo-1542838132-92c53300491e?auto=format&fit=crop&q=80&w=600')">
-                            <span>Claim Voucher</span>
-                            <i data-lucide="ticket" size="16"></i>
+                        <button class="btn-claim-deal" onclick="openVoucherModal('Sofas, Cushion Covers &amp; Curtains', 'Urban Home Furnishings', '25% OFF', 'URBAN25', 'SCO 205, Sector 17-C, Chandigarh', 'https://images.unsplash.com/photo-1555041469-a586c61ea9bc?auto=format&fit=crop&q=80&w=600')">
+                            <span>Claim Voucher</span><i data-lucide="ticket" size="16"></i>
                         </button>
                     </div>
                 </div>
             </div>
 
-            <!-- Deal Card 8: Fashion Denim -->
-            <div class="deal-item-card" data-category="fashion" data-discount="50" data-distance="1.4" data-type="percent">
+            <!-- Home 4: Pepperfry Studio Sector 34 -->
+            <div class="deal-item-card" data-category="home" data-discount="20" data-distance="2.6" data-type="percent">
                 <div class="deal-card-visual">
-                    <img src="https://images.unsplash.com/photo-1541099649105-f69ad21f3246?auto=format&fit=crop&q=80&w=600" alt="Denim Jackets & Jeans">
-                    <div class="badge-discount-tag">FLAT 50% OFF</div>
-                    <button class="btn-card-wishlist" title="Save deal"><i data-lucide="heart" size="18"></i></button>
+                    <img src="https://images.unsplash.com/photo-1493663284031-b7e3aefcae8e?auto=format&fit=crop&q=80&w=600" alt="Furniture" loading="lazy">
+                    <span class="deal-badge-chip">20% OFF</span>
+                    <button class="btn-wishlist-card" aria-label="Wishlist"><i data-lucide="heart" size="16"></i></button>
                 </div>
                 <div class="deal-card-body">
-                    <div class="deal-category-tag">Fashion & Apparel</div>
-                    <h3 class="deal-card-title">Vintage Denim Jackets & Chinos</h3>
-                    <div class="deal-card-store">
-                        <i data-lucide="store" size="14"></i>
-                        <span>Denim Republic Studio • Elante Mall</span>
-                    </div>
+                    <span class="deal-cat-label">HOME &amp; KITCHENWARE</span>
+                    <h3 class="deal-card-title">Designer Furniture &amp; Decor Accents</h3>
+                    <div class="deal-card-store"><i data-lucide="store" size="13"></i> Pepperfry Studio &bull; Sector 34-A</div>
                     <div class="deal-card-meta">
-                        <span class="meta-rating"><i data-lucide="star" size="13" fill="#F59E0B" color="#F59E0B"></i> 4.7 (280)</span>
-                        <span class="meta-distance"><i data-lucide="map-pin" size="13"></i> 1.4 km</span>
-                        <span class="meta-validity"><i data-lucide="clock" size="13"></i> 2 days left</span>
+                        <span><i data-lucide="star" size="13" class="star-icon"></i> 4.4 (241)</span>
+                        <span><i data-lucide="map-pin" size="13"></i> 2.6 km</span>
+                        <span><i data-lucide="clock" size="13" class="urgency-icon"></i> 7 days left</span>
                     </div>
                     <div class="deal-card-footer">
-                        <button class="btn-claim-deal" onclick="openVoucherModal('Vintage Denim Jackets & Chinos', 'Denim Republic Studio', 'FLAT 50% OFF', 'DENIM50', 'Elante Mall, First Floor, Chandigarh', 'https://images.unsplash.com/photo-1541099649105-f69ad21f3246?auto=format&fit=crop&q=80&w=600')">
-                            <span>Claim Voucher</span>
-                            <i data-lucide="ticket" size="16"></i>
+                        <button class="btn-claim-deal" onclick="openVoucherModal('Designer Furniture &amp; Decor Accents', 'Pepperfry Studio', '20% OFF', 'PEPPER20', 'SCO 34, Sector 34-A, Chandigarh', 'https://images.unsplash.com/photo-1493663284031-b7e3aefcae8e?auto=format&fit=crop&q=80&w=600')">
+                            <span>Claim Voucher</span><i data-lucide="ticket" size="16"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ── GROCERY & SUPERMARKET ──────────────────────────── -->
+
+            <!-- Grocery 1: FreshBasket -->
+            <div class="deal-item-card" data-category="grocery" data-discount="25" data-distance="2.2" data-type="percent">
+                <div class="deal-card-visual">
+                    <img src="https://images.unsplash.com/photo-1578916171728-46686eac8d58?auto=format&fit=crop&q=80&w=600" alt="Gourmet Grocery" loading="lazy">
+                    <span class="deal-badge-chip">25% OFF</span>
+                    <button class="btn-wishlist-card" aria-label="Wishlist"><i data-lucide="heart" size="16"></i></button>
+                </div>
+                <div class="deal-card-body">
+                    <span class="deal-cat-label">GROCERY &amp; SUPERMARKET</span>
+                    <h3 class="deal-card-title">Cold-Pressed Oils, Imported Cheese &amp; Honey</h3>
+                    <div class="deal-card-store"><i data-lucide="store" size="13"></i> FreshBasket Gourmet &bull; Sector 26</div>
+                    <div class="deal-card-meta">
+                        <span><i data-lucide="star" size="13" class="star-icon"></i> 4.7 (302)</span>
+                        <span><i data-lucide="map-pin" size="13"></i> 2.2 km</span>
+                        <span><i data-lucide="clock" size="13" class="urgency-icon"></i> 3 days left</span>
+                    </div>
+                    <div class="deal-card-footer">
+                        <button class="btn-claim-deal" onclick="openVoucherModal('Cold-Pressed Oils, Imported Cheese &amp; Honey', 'FreshBasket Gourmet', '25% OFF', 'BASKET25', 'SCF 14, Sector 26, Chandigarh', 'https://images.unsplash.com/photo-1578916171728-46686eac8d58?auto=format&fit=crop&q=80&w=600')">
+                            <span>Claim Voucher</span><i data-lucide="ticket" size="16"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Grocery 2: Chandigarh Organic Store Sector 36 -->
+            <div class="deal-item-card" data-category="grocery" data-discount="20" data-distance="3.0" data-type="percent">
+                <div class="deal-card-visual">
+                    <img src="https://images.unsplash.com/photo-1542838132-92c53300491e?auto=format&fit=crop&q=80&w=600" alt="Organic Veggies" loading="lazy">
+                    <span class="deal-badge-chip">20% OFF</span>
+                    <button class="btn-wishlist-card" aria-label="Wishlist"><i data-lucide="heart" size="16"></i></button>
+                </div>
+                <div class="deal-card-body">
+                    <span class="deal-cat-label">GROCERY &amp; SUPERMARKET</span>
+                    <h3 class="deal-card-title">Organic Farm Greens &amp; Seasonal Fruits</h3>
+                    <div class="deal-card-store"><i data-lucide="store" size="13"></i> Chandigarh Organic Store &bull; Sector 36-B</div>
+                    <div class="deal-card-meta">
+                        <span><i data-lucide="star" size="13" class="star-icon"></i> 4.8 (189)</span>
+                        <span><i data-lucide="map-pin" size="13"></i> 3.0 km</span>
+                        <span><i data-lucide="clock" size="13" class="urgency-icon"></i> 5 days left</span>
+                    </div>
+                    <div class="deal-card-footer">
+                        <button class="btn-claim-deal" onclick="openVoucherModal('Organic Farm Greens &amp; Seasonal Fruits', 'Chandigarh Organic Store', '20% OFF', 'ORGANIC20', 'SCO 9, Sector 36-B, Chandigarh', 'https://images.unsplash.com/photo-1542838132-92c53300491e?auto=format&fit=crop&q=80&w=600')">
+                            <span>Claim Voucher</span><i data-lucide="ticket" size="16"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Grocery 3: BigBazaar Sector 34 -->
+            <div class="deal-item-card" data-category="grocery" data-discount="15" data-distance="2.5" data-type="percent">
+                <div class="deal-card-visual">
+                    <img src="https://images.unsplash.com/photo-1534723452862-4c874018d66d?auto=format&fit=crop&q=80&w=600" alt="Supermarket" loading="lazy">
+                    <span class="deal-badge-chip">15% OFF</span>
+                    <button class="btn-wishlist-card" aria-label="Wishlist"><i data-lucide="heart" size="16"></i></button>
+                </div>
+                <div class="deal-card-body">
+                    <span class="deal-cat-label">GROCERY &amp; SUPERMARKET</span>
+                    <h3 class="deal-card-title">Monthly Staples &amp; Household Bundle</h3>
+                    <div class="deal-card-store"><i data-lucide="store" size="13"></i> Big Bazaar &bull; Sector 34-A</div>
+                    <div class="deal-card-meta">
+                        <span><i data-lucide="star" size="13" class="star-icon"></i> 4.1 (923)</span>
+                        <span><i data-lucide="map-pin" size="13"></i> 2.5 km</span>
+                        <span><i data-lucide="clock" size="13" class="urgency-icon"></i> 10 days left</span>
+                    </div>
+                    <div class="deal-card-footer">
+                        <button class="btn-claim-deal" onclick="openVoucherModal('Monthly Staples &amp; Household Bundle', 'Big Bazaar', '15% OFF', 'BIGBAZ15', 'SCO 99, Sector 34-A, Chandigarh', 'https://images.unsplash.com/photo-1534723452862-4c874018d66d?auto=format&fit=crop&q=80&w=600')">
+                            <span>Claim Voucher</span><i data-lucide="ticket" size="16"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Grocery 4: Natures Basket Sector 9 -->
+            <div class="deal-item-card" data-category="grocery" data-discount="30" data-distance="1.7" data-type="percent">
+                <div class="deal-card-visual">
+                    <img src="https://images.unsplash.com/photo-1608686207856-001b95cf60ca?auto=format&fit=crop&q=80&w=600" alt="Dry Fruits" loading="lazy">
+                    <span class="deal-badge-chip">30% OFF</span>
+                    <button class="btn-wishlist-card" aria-label="Wishlist"><i data-lucide="heart" size="16"></i></button>
+                </div>
+                <div class="deal-card-body">
+                    <span class="deal-cat-label">GROCERY &amp; SUPERMARKET</span>
+                    <h3 class="deal-card-title">Premium Dry Fruits &amp; Specialty Nuts</h3>
+                    <div class="deal-card-store"><i data-lucide="store" size="13"></i> Nature's Basket &bull; Sector 9-C</div>
+                    <div class="deal-card-meta">
+                        <span><i data-lucide="star" size="13" class="star-icon"></i> 4.6 (147)</span>
+                        <span><i data-lucide="map-pin" size="13"></i> 1.7 km</span>
+                        <span><i data-lucide="clock" size="13" class="urgency-icon"></i> 6 days left</span>
+                    </div>
+                    <div class="deal-card-footer">
+                        <button class="btn-claim-deal" onclick="openVoucherModal('Premium Dry Fruits &amp; Specialty Nuts', 'Nature's Basket', '30% OFF', 'NATBASK30', 'SCO 33, Sector 9-C, Chandigarh', 'https://images.unsplash.com/photo-1608686207856-001b95cf60ca?auto=format&fit=crop&q=80&w=600')">
+                            <span>Claim Voucher</span><i data-lucide="ticket" size="16"></i>
                         </button>
                     </div>
                 </div>
             </div>
 
         </section>
+
+        <!-- Trusted Local Stores Showcase -->
 
         <!-- Trusted Local Stores Showcase -->
         <section class="stores-showcase-section" id="trusted-stores">
@@ -1962,6 +2466,166 @@
                     </button>
                 </div>
 
+                <!-- Store 5: Home & Kitchen -->
+                <div class="store-profile-card">
+                    <img src="https://images.unsplash.com/photo-1556911220-e15b29be8c8f?auto=format&fit=crop&q=80&w=240" alt="Sharma Kitchen & Metalware" class="store-avatar-img">
+                    <div class="store-details">
+                        <div class="store-name-row">
+                            <h4>Sharma Kitchen & Metalware</h4>
+                            <i data-lucide="badge-check" size="18" class="verified-check-icon" title="Verified Merchant"></i>
+                        </div>
+                        <div class="store-category-text">Utensils, Cookware & Brassware • Sector 22</div>
+                        <div class="store-info-pills">
+                            <span class="pill-active-deals">🔥 4 Active Deals</span>
+                            <span><i data-lucide="star" size="12" fill="#F59E0B" color="#F59E0B"></i> 4.8</span>
+                            <span>1.1 km</span>
+                        </div>
+                    </div>
+                    <button class="btn-visit-store" onclick="openStoreDetails('Sharma Kitchen & Metalware', 'Utensils, Cookware & Brassware', 'SCO 88, Sector 22-C Inner Market, Chandigarh', '4 Active Offers', 'https://images.unsplash.com/photo-1556911220-e15b29be8c8f?auto=format&fit=crop&q=80&w=600')">
+                        View
+                    </button>
+                </div>
+
+                <!-- Store 6: Beauty & Wellness -->
+                <div class="store-profile-card">
+                    <img src="https://images.unsplash.com/photo-1540555700478-4be289fbecef?auto=format&fit=crop&q=80&w=240" alt="Aura Organic Spa & Wellness" class="store-avatar-img">
+                    <div class="store-details">
+                        <div class="store-name-row">
+                            <h4>Aura Organic Spa & Wellness</h4>
+                            <i data-lucide="badge-check" size="18" class="verified-check-icon" title="Verified Merchant"></i>
+                        </div>
+                        <div class="store-category-text">Aromatherapy, Hair & Skin • Sector 8</div>
+                        <div class="store-info-pills">
+                            <span class="pill-active-deals">🔥 3 Active Deals</span>
+                            <span><i data-lucide="star" size="12" fill="#F59E0B" color="#F59E0B"></i> 4.9</span>
+                            <span>2.4 km</span>
+                        </div>
+                    </div>
+                    <button class="btn-visit-store" onclick="openStoreDetails('Aura Organic Spa & Wellness', 'Aromatherapy, Hair & Skin Care', 'Inner Market, Sector 8-B, Chandigarh', '3 Active Offers', 'https://images.unsplash.com/photo-1540555700478-4be289fbecef?auto=format&fit=crop&q=80&w=600')">
+                        View
+                    </button>
+                </div>
+
+                <!-- Store 7: Grocery & Supermarket -->
+                <div class="store-profile-card">
+                    <img src="https://images.unsplash.com/photo-1578916171728-46686eac8d58?auto=format&fit=crop&q=80&w=240" alt="FreshBasket Gourmet Supermarket" class="store-avatar-img">
+                    <div class="store-details">
+                        <div class="store-name-row">
+                            <h4>FreshBasket Supermarket</h4>
+                            <i data-lucide="badge-check" size="18" class="verified-check-icon" title="Verified Merchant"></i>
+                        </div>
+                        <div class="store-category-text">Organic Greens, Imported Food • Sector 26</div>
+                        <div class="store-info-pills">
+                            <span class="pill-active-deals">🔥 5 Active Deals</span>
+                            <span><i data-lucide="star" size="12" fill="#F59E0B" color="#F59E0B"></i> 4.7</span>
+                            <span>2.2 km</span>
+                        </div>
+                    </div>
+                    <button class="btn-visit-store" onclick="openStoreDetails('FreshBasket Supermarket', 'Organic Greens & Imported Groceries', 'SCF 14, Grain Market, Sector 26, Chandigarh', '5 Active Offers', 'https://images.unsplash.com/photo-1578916171728-46686eac8d58?auto=format&fit=crop&q=80&w=600')">
+                        View
+                    </button>
+                </div>
+
+                <!-- Store 8: Home Decor & Living -->
+                <div class="store-profile-card">
+                    <img src="https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?auto=format&fit=crop&q=80&w=240" alt="Casa Bella Studio" class="store-avatar-img">
+                    <div class="store-details">
+                        <div class="store-name-row">
+                            <h4>Casa Bella Living Studio</h4>
+                            <i data-lucide="badge-check" size="18" class="verified-check-icon" title="Verified Merchant"></i>
+                        </div>
+                        <div class="store-category-text">Lighting, Modern Rugs & Decor • Sector 35</div>
+                        <div class="store-info-pills">
+                            <span class="pill-active-deals">🔥 3 Active Deals</span>
+                            <span><i data-lucide="star" size="12" fill="#F59E0B" color="#F59E0B"></i> 4.9</span>
+                            <span>1.6 km</span>
+                        </div>
+                    </div>
+                    <button class="btn-visit-store" onclick="openStoreDetails('Casa Bella Living Studio', 'Lighting, Modern Rugs & Decor', 'SCO 210, Sector 35-D, Chandigarh', '3 Active Offers', 'https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?auto=format&fit=crop&q=80&w=600')">
+                        View
+                    </button>
+                </div>
+
+                <!-- Store 9: Electronics & Gaming -->
+                <div class="store-profile-card">
+                    <img src="https://images.unsplash.com/photo-1593305841991-05c297ba4575?auto=format&fit=crop&q=80&w=240" alt="Apex Gaming & Tech" class="store-avatar-img">
+                    <div class="store-details">
+                        <div class="store-name-row">
+                            <h4>Apex Gaming & Tech Hub</h4>
+                            <i data-lucide="badge-check" size="18" class="verified-check-icon" title="Verified Merchant"></i>
+                        </div>
+                        <div class="store-category-text">Custom PCs, Laptops & Audio • Sector 20</div>
+                        <div class="store-info-pills">
+                            <span class="pill-active-deals">🔥 4 Active Deals</span>
+                            <span><i data-lucide="star" size="12" fill="#F59E0B" color="#F59E0B"></i> 4.7</span>
+                            <span>1.9 km</span>
+                        </div>
+                    </div>
+                    <button class="btn-visit-store" onclick="openStoreDetails('Apex Gaming & Tech Hub', 'Custom PCs, Laptops & Audio Gear', 'Booth 35, Sector 20-C, Chandigarh', '4 Active Offers', 'https://images.unsplash.com/photo-1593305841991-05c297ba4575?auto=format&fit=crop&q=80&w=600')">
+                        View
+                    </button>
+                </div>
+
+                <!-- Store 10: Fashion & Denim -->
+                <div class="store-profile-card">
+                    <img src="https://images.unsplash.com/photo-1489987707025-afc232f7ea0f?auto=format&fit=crop&q=80&w=240" alt="Vintage Club Denim" class="store-avatar-img">
+                    <div class="store-details">
+                        <div class="store-name-row">
+                            <h4>Vintage Club Denim & Co.</h4>
+                            <i data-lucide="badge-check" size="18" class="verified-check-icon" title="Verified Merchant"></i>
+                        </div>
+                        <div class="store-category-text">Raw Denim, Jackets & Chinos • Sector 17</div>
+                        <div class="store-info-pills">
+                            <span class="pill-active-deals">🔥 3 Active Deals</span>
+                            <span><i data-lucide="star" size="12" fill="#F59E0B" color="#F59E0B"></i> 4.6</span>
+                            <span>0.7 km</span>
+                        </div>
+                    </div>
+                    <button class="btn-visit-store" onclick="openStoreDetails('Vintage Club Denim & Co.', 'Raw Denim, Jackets & Chinos', 'Bank Square, Sector 17-B, Chandigarh', '3 Active Offers', 'https://images.unsplash.com/photo-1489987707025-afc232f7ea0f?auto=format&fit=crop&q=80&w=600')">
+                        View
+                    </button>
+                </div>
+
+                <!-- Store 11: French Bakery & Cafe -->
+                <div class="store-profile-card">
+                    <img src="https://images.unsplash.com/photo-1509440159596-0249088772ff?auto=format&fit=crop&q=80&w=240" alt="Bakers Crust Patisserie" class="store-avatar-img">
+                    <div class="store-details">
+                        <div class="store-name-row">
+                            <h4>Bakers & Crust Patisserie</h4>
+                            <i data-lucide="badge-check" size="18" class="verified-check-icon" title="Verified Merchant"></i>
+                        </div>
+                        <div class="store-category-text">Pastries, Sourdough & Dessert • Sector 9</div>
+                        <div class="store-info-pills">
+                            <span class="pill-active-deals">🔥 2 Active Deals</span>
+                            <span><i data-lucide="star" size="12" fill="#F59E0B" color="#F59E0B"></i> 4.9</span>
+                            <span>2.0 km</span>
+                        </div>
+                    </div>
+                    <button class="btn-visit-store" onclick="openStoreDetails('Bakers & Crust Patisserie', 'French Pastries, Sourdough & Gourmet Desserts', 'Madhya Marg, Sector 9-D, Chandigarh', '2 Active Offers', 'https://images.unsplash.com/photo-1509440159596-0249088772ff?auto=format&fit=crop&q=80&w=600')">
+                        View
+                    </button>
+                </div>
+
+                <!-- Store 12: Athletics & Footwear -->
+                <div class="store-profile-card">
+                    <img src="https://images.unsplash.com/photo-1515955656352-a1fa3ffcd111?auto=format&fit=crop&q=80&w=240" alt="StepUp Athletics" class="store-avatar-img">
+                    <div class="store-details">
+                        <div class="store-name-row">
+                            <h4>StepUp Athletic Studio</h4>
+                            <i data-lucide="badge-check" size="18" class="verified-check-icon" title="Verified Merchant"></i>
+                        </div>
+                        <div class="store-category-text">Marathon Shoes & Activewear • Sector 35</div>
+                        <div class="store-info-pills">
+                            <span class="pill-active-deals">🔥 4 Active Deals</span>
+                            <span><i data-lucide="star" size="12" fill="#F59E0B" color="#F59E0B"></i> 4.8</span>
+                            <span>1.3 km</span>
+                        </div>
+                    </div>
+                    <button class="btn-visit-store" onclick="openStoreDetails('StepUp Athletic Studio', 'Marathon Footwear & Sportswear', 'SCO 312, Sector 35-B, Chandigarh', '4 Active Offers', 'https://images.unsplash.com/photo-1515955656352-a1fa3ffcd111?auto=format&fit=crop&q=80&w=600')">
+                        View
+                    </button>
+                </div>
+
             </div>
         </section>
 
@@ -2022,10 +2686,12 @@
                 
                 <div>
                     <div class="footer-brand-title">
-                        <div class="brand-logo-icon" style="width:30px; height:30px;">
-                            <i data-lucide="tag" size="16"></i>
-                        </div>
-                        <span>dealzy</span>
+                        <img 
+                            src="assets/images/dealzy-logo.png" 
+                            srcset="assets/images/dealzy-logo.png 1x, assets/images/dealzy-logo@2x.png 2x" 
+                            alt="Dealzy" 
+                            style="height: 34px; width: auto; object-fit: contain; filter: brightness(1.15);"
+                        >
                     </div>
                     <p class="footer-brand-desc">
                         The modern sale discovery and local retail platform. Connecting smart neighborhood shoppers with verified brick-and-mortar store promotions.
@@ -2453,6 +3119,66 @@
                 if (e.target === modal) modal.classList.remove('active');
             });
         });
+
+        // ── Location Permission on New Sign-Up ──────────────────────────────
+        (function initLocationPermission() {
+            const locPermModal = document.getElementById('location-permission-modal');
+            if (!locPermModal) return;
+
+            // Only show when redirected from a fresh sign-up
+            if (localStorage.getItem('dealzy_new_signup') === '1') {
+                localStorage.removeItem('dealzy_new_signup');
+                // Small delay so the page finishes rendering first
+                setTimeout(() => locPermModal.classList.add('active'), 600);
+            }
+
+            function closeLocPermModal() {
+                locPermModal.classList.remove('active');
+            }
+
+            document.getElementById('btn-allow-location')?.addEventListener('click', () => {
+                if (!navigator.geolocation) {
+                    showToast('Geolocation is not supported by your browser.', 'info');
+                    closeLocPermModal();
+                    return;
+                }
+                navigator.geolocation.getCurrentPosition(
+                    (pos) => {
+                        showToast('📍 Location enabled! Showing deals near you.', 'success');
+                        closeLocPermModal();
+                    },
+                    () => {
+                        showToast('Location access denied. You can enable it from browser settings.', 'info');
+                        closeLocPermModal();
+                    }
+                );
+            });
+
+            document.getElementById('btn-skip-location')?.addEventListener('click', closeLocPermModal);
+            locPermModal.addEventListener('click', (e) => {
+                if (e.target === locPermModal) closeLocPermModal();
+            });
+        })();
     </script>
+
+    <!-- ── Location Permission Modal ──────────────────────────────────── -->
+    <div class="location-select-modal" id="location-permission-modal" role="dialog" aria-modal="true" aria-labelledby="loc-perm-heading">
+        <div class="location-modal-card" style="max-width:440px; text-align:center; padding:40px 32px 32px;">
+            <div style="font-size:3.2rem; line-height:1; margin-bottom:16px;">📍</div>
+            <h3 id="loc-perm-heading" style="font-size:1.35rem; font-weight:700; color:#1a1a1a; margin:0 0 10px;">Allow Location Access</h3>
+            <p style="font-size:0.97rem; color:#555; line-height:1.6; margin:0 0 28px;">
+                Dealzy uses your location to show nearby store deals,<br>
+                offers, and vouchers right in your neighbourhood.
+            </p>
+            <button id="btn-allow-location"
+                style="width:100%; padding:14px; background:linear-gradient(135deg,#FF6B35,#FF8C42); color:#fff; font-size:1rem; font-weight:700; border:none; border-radius:50px; cursor:pointer; margin-bottom:12px; display:flex; align-items:center; justify-content:center; gap:8px;">
+                <span>📍</span> Allow Location
+            </button>
+            <button id="btn-skip-location"
+                style="width:100%; padding:12px; background:transparent; color:#888; font-size:0.92rem; font-weight:500; border:2px solid #E5E7EB; border-radius:50px; cursor:pointer;">
+                Maybe Later
+            </button>
+        </div>
+    </div>
 </body>
 </html>

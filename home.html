@@ -18,6 +18,7 @@
     
     <!-- Lucide Icons -->
     <script src="https://unpkg.com/lucide@latest"></script>
+    <script src="js/stores-data.js"></script>
 
     <style>
         :root {
@@ -847,6 +848,8 @@
             align-items: center;
             box-shadow: 0 4px 14px rgba(0, 0, 0, 0.03);
             transition: all 0.25s ease;
+            cursor: pointer;
+            position: relative;
         }
 
         .store-profile-card:hover {
@@ -2387,7 +2390,7 @@
             <div class="stores-grid-layout">
 
                 <!-- Store 1 -->
-                <div class="store-profile-card">
+                <div class="store-profile-card" onclick="window.location.href='store.html?id=gulati-luxury-textiles'">
                     <img src="https://images.unsplash.com/photo-1441984904996-e0b6ba687e04?auto=format&fit=crop&q=80&w=240" alt="Gulati Textiles" class="store-avatar-img">
                     <div class="store-details">
                         <div class="store-name-row">
@@ -2401,13 +2404,11 @@
                             <span>1.2 km</span>
                         </div>
                     </div>
-                    <button class="btn-visit-store" onclick="openStoreDetails('Gulati Luxury Textiles', 'Designer Ethnic & Silks', 'Sector 17 Plaza, Chandigarh', '4 Active Offers', 'https://images.unsplash.com/photo-1441984904996-e0b6ba687e04?auto=format&fit=crop&q=80&w=600')">
-                        View
-                    </button>
+                    <button class="btn-visit-store" onclick="event.stopPropagation(); window.location.href='store.html?id=gulati-luxury-textiles';">Explore Store →</button>
                 </div>
 
                 <!-- Store 2 -->
-                <div class="store-profile-card">
+                <div class="store-profile-card" onclick="window.location.href='store.html?id=the-roastery-bakehouse'">
                     <img src="https://images.unsplash.com/photo-1501339847302-ac426a4a7cbb?auto=format&fit=crop&q=80&w=240" alt="The Roastery" class="store-avatar-img">
                     <div class="store-details">
                         <div class="store-name-row">
@@ -2421,13 +2422,11 @@
                             <span>0.8 km</span>
                         </div>
                     </div>
-                    <button class="btn-visit-store" onclick="openStoreDetails('The Roastery Bakehouse', 'Artisan Coffee & Bakery', 'Sector 35-C Inner Market, Chandigarh', '2 Active Offers', 'https://images.unsplash.com/photo-1501339847302-ac426a4a7cbb?auto=format&fit=crop&q=80&w=600')">
-                        View
-                    </button>
+                    <button class="btn-visit-store" onclick="event.stopPropagation(); window.location.href='store.html?id=the-roastery-bakehouse';">Explore Store →</button>
                 </div>
 
                 <!-- Store 3 -->
-                <div class="store-profile-card">
+                <div class="store-profile-card" onclick="window.location.href='store.html?id=machi-footwear-studio'">
                     <img src="https://images.unsplash.com/photo-1556066265-f485dbf2c161?auto=format&fit=crop&q=80&w=240" alt="Machi Footwear" class="store-avatar-img">
                     <div class="store-details">
                         <div class="store-name-row">
@@ -2441,13 +2440,11 @@
                             <span>1.8 km</span>
                         </div>
                     </div>
-                    <button class="btn-visit-store" onclick="openStoreDetails('Machi Footwear Studio', 'Sneakers, Leather & Casuals', 'SCO 42, Sector 22-B, Chandigarh', '3 Active Offers', 'https://images.unsplash.com/photo-1556066265-f485dbf2c161?auto=format&fit=crop&q=80&w=600')">
-                        View
-                    </button>
+                    <button class="btn-visit-store" onclick="event.stopPropagation(); window.location.href='store.html?id=machi-footwear-studio';">Explore Store →</button>
                 </div>
 
                 <!-- Store 4 -->
-                <div class="store-profile-card">
+                <div class="store-profile-card" onclick="window.location.href='store.html?id=horizon-digital-zone'">
                     <img src="https://images.unsplash.com/photo-1550009158-9ebf69173e03?auto=format&fit=crop&q=80&w=240" alt="Horizon Tech" class="store-avatar-img">
                     <div class="store-details">
                         <div class="store-name-row">
@@ -2461,13 +2458,11 @@
                             <span>1.5 km</span>
                         </div>
                     </div>
-                    <button class="btn-visit-store" onclick="openStoreDetails('Horizon Digital Zone', 'Smart Gadgets & Audio', 'Sector 17 Bridge Market, Chandigarh', '5 Active Offers', 'https://images.unsplash.com/photo-1550009158-9ebf69173e03?auto=format&fit=crop&q=80&w=600')">
-                        View
-                    </button>
+                    <button class="btn-visit-store" onclick="event.stopPropagation(); window.location.href='store.html?id=horizon-digital-zone';">Explore Store →</button>
                 </div>
 
                 <!-- Store 5: Home & Kitchen -->
-                <div class="store-profile-card">
+                <div class="store-profile-card" onclick="window.location.href='store.html?id=sharma-kitchen-metalware'">
                     <img src="https://images.unsplash.com/photo-1556911220-e15b29be8c8f?auto=format&fit=crop&q=80&w=240" alt="Sharma Kitchen & Metalware" class="store-avatar-img">
                     <div class="store-details">
                         <div class="store-name-row">
@@ -2481,13 +2476,11 @@
                             <span>1.1 km</span>
                         </div>
                     </div>
-                    <button class="btn-visit-store" onclick="openStoreDetails('Sharma Kitchen & Metalware', 'Utensils, Cookware & Brassware', 'SCO 88, Sector 22-C Inner Market, Chandigarh', '4 Active Offers', 'https://images.unsplash.com/photo-1556911220-e15b29be8c8f?auto=format&fit=crop&q=80&w=600')">
-                        View
-                    </button>
+                    <button class="btn-visit-store" onclick="event.stopPropagation(); window.location.href='store.html?id=sharma-kitchen-metalware';">Explore Store →</button>
                 </div>
 
                 <!-- Store 6: Beauty & Wellness -->
-                <div class="store-profile-card">
+                <div class="store-profile-card" onclick="window.location.href='store.html?id=aura-organic-spa'">
                     <img src="https://images.unsplash.com/photo-1540555700478-4be289fbecef?auto=format&fit=crop&q=80&w=240" alt="Aura Organic Spa & Wellness" class="store-avatar-img">
                     <div class="store-details">
                         <div class="store-name-row">
@@ -2501,13 +2494,11 @@
                             <span>2.4 km</span>
                         </div>
                     </div>
-                    <button class="btn-visit-store" onclick="openStoreDetails('Aura Organic Spa & Wellness', 'Aromatherapy, Hair & Skin Care', 'Inner Market, Sector 8-B, Chandigarh', '3 Active Offers', 'https://images.unsplash.com/photo-1540555700478-4be289fbecef?auto=format&fit=crop&q=80&w=600')">
-                        View
-                    </button>
+                    <button class="btn-visit-store" onclick="event.stopPropagation(); window.location.href='store.html?id=aura-organic-spa';">Explore Store →</button>
                 </div>
 
                 <!-- Store 7: Grocery & Supermarket -->
-                <div class="store-profile-card">
+                <div class="store-profile-card" onclick="window.location.href='store.html?id=freshbasket-supermarket'">
                     <img src="https://images.unsplash.com/photo-1578916171728-46686eac8d58?auto=format&fit=crop&q=80&w=240" alt="FreshBasket Gourmet Supermarket" class="store-avatar-img">
                     <div class="store-details">
                         <div class="store-name-row">
@@ -2521,13 +2512,11 @@
                             <span>2.2 km</span>
                         </div>
                     </div>
-                    <button class="btn-visit-store" onclick="openStoreDetails('FreshBasket Supermarket', 'Organic Greens & Imported Groceries', 'SCF 14, Grain Market, Sector 26, Chandigarh', '5 Active Offers', 'https://images.unsplash.com/photo-1578916171728-46686eac8d58?auto=format&fit=crop&q=80&w=600')">
-                        View
-                    </button>
+                    <button class="btn-visit-store" onclick="event.stopPropagation(); window.location.href='store.html?id=freshbasket-supermarket';">Explore Store →</button>
                 </div>
 
                 <!-- Store 8: Home Decor & Living -->
-                <div class="store-profile-card">
+                <div class="store-profile-card" onclick="window.location.href='store.html?id=casa-bella-living'">
                     <img src="https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?auto=format&fit=crop&q=80&w=240" alt="Casa Bella Studio" class="store-avatar-img">
                     <div class="store-details">
                         <div class="store-name-row">
@@ -2541,13 +2530,11 @@
                             <span>1.6 km</span>
                         </div>
                     </div>
-                    <button class="btn-visit-store" onclick="openStoreDetails('Casa Bella Living Studio', 'Lighting, Modern Rugs & Decor', 'SCO 210, Sector 35-D, Chandigarh', '3 Active Offers', 'https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?auto=format&fit=crop&q=80&w=600')">
-                        View
-                    </button>
+                    <button class="btn-visit-store" onclick="event.stopPropagation(); window.location.href='store.html?id=casa-bella-living';">Explore Store →</button>
                 </div>
 
                 <!-- Store 9: Electronics & Gaming -->
-                <div class="store-profile-card">
+                <div class="store-profile-card" onclick="window.location.href='store.html?id=apex-gaming-hub'">
                     <img src="https://images.unsplash.com/photo-1593305841991-05c297ba4575?auto=format&fit=crop&q=80&w=240" alt="Apex Gaming & Tech" class="store-avatar-img">
                     <div class="store-details">
                         <div class="store-name-row">
@@ -2561,13 +2548,11 @@
                             <span>1.9 km</span>
                         </div>
                     </div>
-                    <button class="btn-visit-store" onclick="openStoreDetails('Apex Gaming & Tech Hub', 'Custom PCs, Laptops & Audio Gear', 'Booth 35, Sector 20-C, Chandigarh', '4 Active Offers', 'https://images.unsplash.com/photo-1593305841991-05c297ba4575?auto=format&fit=crop&q=80&w=600')">
-                        View
-                    </button>
+                    <button class="btn-visit-store" onclick="event.stopPropagation(); window.location.href='store.html?id=apex-gaming-hub';">Explore Store →</button>
                 </div>
 
                 <!-- Store 10: Fashion & Denim -->
-                <div class="store-profile-card">
+                <div class="store-profile-card" onclick="window.location.href='store.html?id=vintage-club-denim'">
                     <img src="https://images.unsplash.com/photo-1489987707025-afc232f7ea0f?auto=format&fit=crop&q=80&w=240" alt="Vintage Club Denim" class="store-avatar-img">
                     <div class="store-details">
                         <div class="store-name-row">
@@ -2581,13 +2566,11 @@
                             <span>0.7 km</span>
                         </div>
                     </div>
-                    <button class="btn-visit-store" onclick="openStoreDetails('Vintage Club Denim & Co.', 'Raw Denim, Jackets & Chinos', 'Bank Square, Sector 17-B, Chandigarh', '3 Active Offers', 'https://images.unsplash.com/photo-1489987707025-afc232f7ea0f?auto=format&fit=crop&q=80&w=600')">
-                        View
-                    </button>
+                    <button class="btn-visit-store" onclick="event.stopPropagation(); window.location.href='store.html?id=vintage-club-denim';">Explore Store →</button>
                 </div>
 
                 <!-- Store 11: French Bakery & Cafe -->
-                <div class="store-profile-card">
+                <div class="store-profile-card" onclick="window.location.href='store.html?id=bakers-crust-patisserie'">
                     <img src="https://images.unsplash.com/photo-1509440159596-0249088772ff?auto=format&fit=crop&q=80&w=240" alt="Bakers Crust Patisserie" class="store-avatar-img">
                     <div class="store-details">
                         <div class="store-name-row">
@@ -2601,13 +2584,11 @@
                             <span>2.0 km</span>
                         </div>
                     </div>
-                    <button class="btn-visit-store" onclick="openStoreDetails('Bakers & Crust Patisserie', 'French Pastries, Sourdough & Gourmet Desserts', 'Madhya Marg, Sector 9-D, Chandigarh', '2 Active Offers', 'https://images.unsplash.com/photo-1509440159596-0249088772ff?auto=format&fit=crop&q=80&w=600')">
-                        View
-                    </button>
+                    <button class="btn-visit-store" onclick="event.stopPropagation(); window.location.href='store.html?id=bakers-crust-patisserie';">Explore Store →</button>
                 </div>
 
                 <!-- Store 12: Athletics & Footwear -->
-                <div class="store-profile-card">
+                <div class="store-profile-card" onclick="window.location.href='store.html?id=stepup-athletic-studio'">
                     <img src="https://images.unsplash.com/photo-1515955656352-a1fa3ffcd111?auto=format&fit=crop&q=80&w=240" alt="StepUp Athletics" class="store-avatar-img">
                     <div class="store-details">
                         <div class="store-name-row">
@@ -2621,9 +2602,7 @@
                             <span>1.3 km</span>
                         </div>
                     </div>
-                    <button class="btn-visit-store" onclick="openStoreDetails('StepUp Athletic Studio', 'Marathon Footwear & Sportswear', 'SCO 312, Sector 35-B, Chandigarh', '4 Active Offers', 'https://images.unsplash.com/photo-1515955656352-a1fa3ffcd111?auto=format&fit=crop&q=80&w=600')">
-                        View
-                    </button>
+                    <button class="btn-visit-store" onclick="event.stopPropagation(); window.location.href='store.html?id=stepup-athletic-studio';">Explore Store →</button>
                 </div>
 
             </div>
@@ -3017,9 +2996,21 @@
             showToast(`Thank you! "${name}" application received. Our team will verify and activate your store listing within 2 hours!`, 'success');
         }
 
-        // Store Details Popup
-        function openStoreDetails(storeName, category, address, activeDeals, img) {
-            openVoucherModal(`${storeName} - All In-Store Offers`, storeName, activeDeals, 'DEALZYSTORE', address, img);
+        // Store Details Navigation
+        function openStoreDetails(storeIdOrName) {
+            if (storeIdOrName && window.getStoreById && window.getStoreById(storeIdOrName)) {
+                window.location.href = `store.html?id=${storeIdOrName}`;
+                return;
+            }
+            // Fallback: match by name
+            if (window.DEALZY_STORES && storeIdOrName) {
+                const found = window.DEALZY_STORES.find(s => s.name.toLowerCase().includes(storeIdOrName.toLowerCase()));
+                if (found) {
+                    window.location.href = `store.html?id=${found.id}`;
+                    return;
+                }
+            }
+            window.location.href = `store.html?id=gulati-luxury-textiles`;
         }
 
         // Category Filtering

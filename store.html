@@ -23,6 +23,62 @@
     <script src="js/stores-data.js"></script>
 
     <style>
+        
+        /* Extra Off on MRP Styling */
+        .voucher-extra-tag {
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            background: #FEF3C7;
+            border: 1px solid #FDE68A;
+            color: #92400E;
+            font-size: 0.74rem;
+            font-weight: 700;
+            padding: 3px 8px;
+            border-radius: 999px;
+            margin-bottom: 8px;
+        }
+
+        .modal-price-breakdown-card {
+            background: #FFF7ED;
+            border: 1px solid #FFEDD5;
+            border-radius: 18px;
+            padding: 16px;
+            margin-bottom: 20px;
+        }
+
+        .price-breakdown-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            font-size: 0.88rem;
+            color: #52525B;
+            padding: 4px 0;
+        }
+
+        .price-breakdown-row.highlight-row {
+            color: #EA580C;
+            font-weight: 700;
+            border-top: 1px dashed #FDBA74;
+            border-bottom: 1px dashed #FDBA74;
+            margin: 6px 0;
+            padding: 8px 0;
+            font-size: 0.92rem;
+        }
+
+        .price-breakdown-row.final-pay-row {
+            font-size: 1.05rem;
+            font-weight: 800;
+            color: #18181B;
+            padding-top: 6px;
+        }
+
+        .final-pay-price {
+            font-size: 1.45rem;
+            font-weight: 900;
+            color: #EA580C;
+        }
+
         /* ── Store Details Custom Styles ────────────────────────────────── */
         :root {
             --primary-orange: #FF5D00;
@@ -1394,9 +1450,9 @@
             </button>
 
             <div class="voucher-header-badge-row">
-                <span class="modal-discount-pill" id="modal-p-discount">40% OFF</span>
+                <span class="modal-discount-pill" id="modal-p-discount">EXTRA 5% OFF ON MRP</span>
                 <span style="font-size:0.8rem; font-weight:700; color:#10B981;" id="modal-p-verified">
-                    <i data-lucide="shield-check" size="14" style="vertical-align:middle;"></i> Verified In-Store Offer
+                    <i data-lucide="shield-check" size="14" style="vertical-align:middle;"></i> In-Store Extra Discount
                 </span>
             </div>
 
@@ -1408,25 +1464,49 @@
                 <span id="modal-p-store-name">Store Name</span>
             </div>
 
-            <div class="modal-price-breakdown">
-                <span class="modal-price-now" id="modal-p-price-now">₹1,499</span>
-                <span class="modal-price-was" id="modal-p-price-was">₹2,499</span>
-                <span class="modal-price-saved" id="modal-p-savings">Save ₹1,000</span>
+            <!-- Detailed Price Breakdown with Extra Off on MRP -->
+            <div class="modal-price-breakdown-card">
+                <div class="price-breakdown-row">
+                    <span>Product MRP:</span>
+                    <strong id="modal-p-price-mrp" style="text-decoration:line-through; color:#A1A1AA;">₹2,499</strong>
+                </div>
+                <div class="price-breakdown-row" id="modal-p-store-price-row">
+                    <span>Store Base Price:</span>
+                    <strong id="modal-p-price-store">₹1,499</strong>
+                </div>
+                <div class="price-breakdown-row highlight-row">
+                    <span>⚡ Dealzy Extra Voucher (<span id="modal-p-extra-percent">5%</span> OFF on MRP):</span>
+                    <strong id="modal-p-extra-savings" style="color:#10B981;">-₹125 EXTRA OFF</strong>
+                </div>
+                <div class="price-breakdown-row final-pay-row">
+                    <span>You Pay at Checkout:</span>
+                    <span class="final-pay-price" id="modal-p-final-pay">₹1,374</span>
+                </div>
             </div>
 
-            <!-- Unique Voucher Coupon Code -->
+            <!-- Coupon Code to Give to Shop Owner -->
             <div class="coupon-code-container">
-                <div class="coupon-box-label">Your Unique In-Store Voucher Code</div>
-                <div class="coupon-code-value" id="modal-p-code">KURTI40</div>
+                <div class="coupon-box-label">GIVE THIS COUPON CODE TO SHOP OWNER FOR EXTRA OFF</div>
+                <div class="coupon-code-value" id="modal-p-code">EXTRA5-GULATI1</div>
+                <div style="font-size:0.82rem; color:#EA580C; font-weight:700; margin-bottom:12px;">
+                    Shop owner will apply an extra <span id="modal-p-coupon-percent">5%</span> off on MRP to your bill!
+                </div>
                 <button class="btn-copy-code" id="btn-copy-voucher">
                     <i data-lucide="copy" size="16"></i>
-                    <span id="btn-copy-label">Copy Voucher Code</span>
+                    <span id="btn-copy-label">Copy Coupon Code</span>
                 </button>
             </div>
 
             <div class="redemption-instructions">
-                <strong>How to Redeem:</strong>
-                Show this voucher code on your phone to the store executive during billing. Discount is applied instantly on your in-store invoice.
+                <strong style="color:#18181B; display:flex; align-items:center; gap:6px; margin-bottom:6px;">
+                    <i data-lucide="sparkles" size="16" color="#FF5D00"></i> How to Get Your Extra Discount:
+                </strong>
+                <ol style="margin-left:18px; line-height:1.6; font-size:0.86rem; color:#3F3F46;">
+                    <li>Click <strong>Copy Coupon Code</strong> above.</li>
+                    <li>Visit <strong><span id="modal-p-inst-store">Store Name</span></strong>.</li>
+                    <li>Give or show this coupon code to the shop owner at checkout.</li>
+                    <li>The shop owner deducts the extra <span id="modal-p-inst-pct">5%</span> off directly on your final bill!</li>
+                </ol>
             </div>
 
             <div class="modal-store-address-box">
@@ -1856,19 +1936,18 @@
             emptyState.style.display = 'none';
 
             grid.innerHTML = products.map(product => {
-                const savings = product.originalPrice - product.discountedPrice;
-                const savingsFormatted = savings > 0 ? `Save ₹${savings.toLocaleString('en-IN')}` : '';
+                const mrp = product.originalPrice;
+                const storePrice = product.discountedPrice;
+                const extraPct = product.extraDiscountPercent || 5;
+                const extraSavings = product.extraSavings || Math.round((mrp * extraPct) / 100);
+                const finalPrice = product.finalVoucherPrice || (storePrice - extraSavings);
 
                 return `
                     <div class="product-card" data-id="${product.id}">
                         <div class="product-visual-wrap">
                             <img src="${product.image}" alt="${product.name}" class="product-visual-img" loading="lazy">
                             
-                            ${product.hasOffer ? `
-                                <span class="product-discount-badge">${product.discountPercentage}% OFF</span>
-                            ` : `
-                                <span class="product-regular-badge">In-Store Stock</span>
-                            `}
+                            <span class="product-discount-badge">Extra ${extraPct}% OFF Voucher</span>
 
                             <button class="btn-wishlist-product" onclick="toggleProductWishlist('${product.id}', this)" aria-label="Save to wishlist">
                                 <i data-lucide="heart" size="18"></i>
@@ -1880,30 +1959,31 @@
                             <h3 class="product-title" title="${product.name}">${product.name}</h3>
                             <div class="product-description-snippet">${product.description}</div>
 
+                            <div class="voucher-extra-tag">
+                                <i data-lucide="sparkles" size="12"></i>
+                                <span>Extra <strong>${extraPct}% OFF on MRP</strong> with Voucher</span>
+                            </div>
+
                             <div class="product-price-box">
-                                <span class="price-current">₹${product.discountedPrice.toLocaleString('en-IN')}</span>
-                                ${product.hasOffer ? `
-                                    <span class="price-original">₹${product.originalPrice.toLocaleString('en-IN')}</span>
-                                    <span class="price-savings">${savingsFormatted}</span>
+                                <div>
+                                    <div style="font-size:0.75rem; color:#71717A; font-weight:600;">MRP: ₹${mrp.toLocaleString('en-IN')}</div>
+                                    <span class="price-current">₹${finalPrice.toLocaleString('en-IN')}</span>
+                                    <span style="font-size:0.76rem; font-weight:700; color:#10B981; margin-left:4px;">with coupon</span>
+                                </div>
+                                ${storePrice !== mrp ? `
+                                    <span class="price-original" title="Store Base Price">₹${storePrice.toLocaleString('en-IN')}</span>
                                 ` : ''}
                             </div>
 
-                            <div class="product-offer-expiry ${product.hasOffer ? '' : 'no-offer'}">
-                                <i data-lucide="${product.hasOffer ? 'clock' : 'check'}" size="13"></i>
-                                <span>${product.offerExpiry || 'Available in store'}</span>
+                            <div class="product-offer-expiry">
+                                <i data-lucide="clock" size="13"></i>
+                                <span>${product.offerExpiry || 'Valid in-store'} • Extra ${extraPct}% Off Code</span>
                             </div>
 
-                            ${product.hasOffer ? `
-                                <button class="btn-claim-voucher" onclick="openProductVoucherModal('${product.id}')">
-                                    <i data-lucide="ticket" size="16"></i>
-                                    <span>Claim Voucher</span>
-                                </button>
-                            ` : `
-                                <button class="btn-view-product" onclick="openProductQuickView('${product.id}')">
-                                    <i data-lucide="eye" size="16"></i>
-                                    <span>View Product</span>
-                                </button>
-                            `}
+                            <button class="btn-claim-voucher" onclick="openProductVoucherModal('${product.id}')">
+                                <i data-lucide="ticket" size="16"></i>
+                                <span>Claim Extra ${extraPct}% Voucher</span>
+                            </button>
                         </div>
                     </div>
                 `;
@@ -1959,24 +2039,35 @@
         function openProductVoucherModal(productId) {
             if (!currentStore) return;
             const product = currentStore.products.find(p => p.id === productId);
-            if (!product || !product.hasOffer) return;
+            if (!product) return;
 
-            currentVoucherCode = product.voucherCode || 'DEALZY40';
+            const mrp = product.originalPrice;
+            const storePrice = product.discountedPrice;
+            const extraPct = product.extraDiscountPercent || 5;
+            const extraSavings = product.extraSavings || Math.round((mrp * extraPct) / 100);
+            const finalPrice = product.finalVoucherPrice || (storePrice - extraSavings);
 
-            document.getElementById('modal-p-discount').textContent = `${product.discountPercentage}% OFF`;
+            currentVoucherCode = product.voucherCode || `EXTRA${extraPct}-${currentStore.id.split('-')[0].toUpperCase()}`;
+
+            document.getElementById('modal-p-discount').textContent = `EXTRA ${extraPct}% OFF ON MRP`;
             document.getElementById('modal-p-img').src = product.image;
             document.getElementById('modal-p-img').alt = product.name;
             document.getElementById('modal-p-title').textContent = product.name;
             document.getElementById('modal-p-store-name').textContent = currentStore.name;
-            document.getElementById('modal-p-price-now').textContent = `₹${product.discountedPrice.toLocaleString('en-IN')}`;
-            document.getElementById('modal-p-price-was').textContent = `₹${product.originalPrice.toLocaleString('en-IN')}`;
             
-            const savings = product.originalPrice - product.discountedPrice;
-            document.getElementById('modal-p-savings').textContent = `Save ₹${savings.toLocaleString('en-IN')}!`;
-            
+            document.getElementById('modal-p-price-mrp').textContent = `₹${mrp.toLocaleString('en-IN')}`;
+            document.getElementById('modal-p-price-store').textContent = `₹${storePrice.toLocaleString('en-IN')}`;
+            document.getElementById('modal-p-extra-percent').textContent = `${extraPct}%`;
+            document.getElementById('modal-p-extra-savings').textContent = `-₹${extraSavings.toLocaleString('en-IN')} EXTRA OFF`;
+            document.getElementById('modal-p-final-pay').textContent = `₹${finalPrice.toLocaleString('en-IN')}`;
+
             document.getElementById('modal-p-code').textContent = currentVoucherCode;
+            document.getElementById('modal-p-coupon-percent').textContent = `${extraPct}%`;
+            document.getElementById('modal-p-inst-store').textContent = currentStore.name;
+            document.getElementById('modal-p-inst-pct').textContent = `${extraPct}%`;
+
             document.getElementById('modal-p-address').textContent = `${currentStore.address}`;
-            document.getElementById('modal-p-validity').textContent = `${product.offerExpiry} • Valid for in-store checkout only`;
+            document.getElementById('modal-p-validity').textContent = `${product.offerExpiry} • Show code to shop owner at billing`;
 
             const mapsUrl = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(currentStore.name + ' ' + currentStore.address)}`;
             document.getElementById('modal-p-maps-btn').href = mapsUrl;
@@ -1984,7 +2075,7 @@
             // Reset copy button
             const copyBtn = document.getElementById('btn-copy-voucher');
             copyBtn.classList.remove('copied');
-            document.getElementById('btn-copy-label').textContent = 'Copy Voucher Code';
+            document.getElementById('btn-copy-label').textContent = 'Copy Coupon Code';
 
             const modal = document.getElementById('product-voucher-modal');
             modal.classList.add('active');
@@ -1999,7 +2090,7 @@
                 const copyBtn = document.getElementById('btn-copy-voucher');
                 copyBtn.classList.add('copied');
                 document.getElementById('btn-copy-label').textContent = '✓ Copied to Clipboard!';
-                showToast(`Voucher code "${currentVoucherCode}" copied successfully!`, 'success');
+                showToast(`Coupon code "${currentVoucherCode}" copied! Give it to the shop owner at checkout for your extra off.`, 'success');
             }).catch(() => {
                 // Fallback copy
                 const tempInput = document.createElement('input');
@@ -2012,7 +2103,7 @@
                 const copyBtn = document.getElementById('btn-copy-voucher');
                 copyBtn.classList.add('copied');
                 document.getElementById('btn-copy-label').textContent = '✓ Copied!';
-                showToast(`Voucher code "${currentVoucherCode}" copied successfully!`, 'success');
+                showToast(`Coupon code "${currentVoucherCode}" copied! Give it to the shop owner at checkout for your extra off.`, 'success');
             });
         });
 

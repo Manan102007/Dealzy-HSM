@@ -1516,6 +1516,129 @@
             box-shadow: 0 4px 14px rgba(255, 93, 0, 0.35);
         }
 
+    
+        /* Pinned Offer % Badge at Top Right Corner */
+        .deal-badge-chip,
+        .badge-discount-tag {
+            position: absolute !important;
+            top: 14px !important;
+            right: 14px !important;
+            left: auto !important;
+            background: var(--gradient-primary, linear-gradient(135deg, #FF5D00 0%, #FF8A00 100%)) !important;
+            color: #FFFFFF !important;
+            font-size: 0.775rem !important;
+            font-weight: 800 !important;
+            padding: 5px 12px !important;
+            border-radius: 8px !important;
+            box-shadow: 0 4px 12px rgba(255, 93, 0, 0.35) !important;
+            letter-spacing: 0.02em !important;
+            z-index: 2 !important;
+        }
+
+        /* Wishlist button at Top Left Corner */
+        .btn-wishlist-card {
+            position: absolute !important;
+            top: 14px !important;
+            left: 14px !important;
+            right: auto !important;
+            width: 36px !important;
+            height: 36px !important;
+            background: rgba(255, 255, 255, 0.92) !important;
+            border-radius: 50% !important;
+            border: none !important;
+            display: flex !important;
+            align-items: center !important;
+            justify-content: center !important;
+            color: #9CA3AF !important;
+            cursor: pointer !important;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1) !important;
+            backdrop-filter: blur(8px) !important;
+            transition: all 0.2s !important;
+            z-index: 2 !important;
+        }
+
+        .btn-wishlist-card:hover,
+        .btn-wishlist-card.active {
+            color: #EF4444 !important;
+            transform: scale(1.08) !important;
+        }
+
+        .btn-wishlist-card.active i {
+            fill: #EF4444 !important;
+        }
+
+        /* Extra Dealzy Voucher Badge on Offers */
+        .deal-extra-voucher-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background: #FFF7ED;
+            color: #C2410C;
+            border: 1px solid #FFEDD5;
+            font-size: 0.78rem;
+            font-weight: 700;
+            padding: 5px 10px;
+            border-radius: 8px;
+            margin-bottom: 12px;
+            letter-spacing: 0.01em;
+        }
+
+        /* Claim Voucher Button on Offers */
+        .btn-claim-deal {
+            flex: 1;
+            height: 44px;
+            background: #18181B;
+            color: #FFFFFF;
+            border: none;
+            border-radius: var(--radius-pill);
+            font-size: 0.875rem;
+            font-weight: 700;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .btn-claim-deal:hover {
+            background: var(--primary-orange);
+            box-shadow: 0 6px 16px rgba(255, 93, 0, 0.28);
+            transform: translateY(-1px);
+        }
+
+        .deal-item-card {
+            cursor: pointer;
+            transition: all 0.28s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .deal-item-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 28px -4px rgba(0, 0, 0, 0.12), 0 4px 10px -2px rgba(0, 0, 0, 0.06);
+            border-color: rgba(255, 93, 0, 0.35);
+        }
+
+        .btn-visit-store-modal {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            padding: 12px 18px;
+            background: #F1F5F9;
+            color: #1E293B;
+            font-size: 0.85rem;
+            font-weight: 700;
+            border-radius: 12px;
+            text-decoration: none;
+            transition: all 0.2s;
+            border: 1px solid #CBD5E1;
+        }
+
+        .btn-visit-store-modal:hover {
+            background: #E2E8F0;
+            color: #0F172A;
+        }
+
     </style>
 </head>
 <body>
@@ -1723,7 +1846,7 @@
             <!-- ── FASHION & APPAREL ─────────────────────────────── -->
 
             <!-- Fashion 1: Gulati Luxury Textiles -->
-            <div class="deal-item-card" data-category="fashion" data-discount="40" data-distance="1.2" data-type="percent" onclick="window.location.href='store.html?id=gulati-luxury-textiles'">
+            <div class="deal-item-card" data-category="fashion" data-discount="40" data-distance="1.2" data-type="percent" onclick="openVoucherModal('Festive Silks &amp; Designer Kurtis', 'Gulati Luxury Textiles', '40% OFF', 'EXTRA5-GULATI1', 'SCO 170-171, Sector 17 Plaza, Chandigarh', 'https://images.unsplash.com/photo-1490481651871-ab68de25d43d?auto=format&fit=crop&q=80&w=600', 'Extra 5% OFF on MRP', 'gulati-luxury-textiles')">
                 <div class="deal-card-visual">
                     <img src="https://images.unsplash.com/photo-1490481651871-ab68de25d43d?auto=format&fit=crop&q=80&w=600" alt="Festive Silks" loading="lazy">
                     <span class="deal-badge-chip">40% OFF</span>
@@ -1738,16 +1861,17 @@
                         <span><i data-lucide="map-pin" size="13"></i> 1.2 km</span>
                         <span><i data-lucide="clock" size="13" class="urgency-icon"></i> 6 days left</span>
                     </div>
-                    <div class="deal-extra-voucher-badge"><i data-lucide="tag" size="12"></i> Extra 2–5% OFF on MRP with In-Store Coupon</div><div class="deal-card-footer">
-                        <button class="btn-claim-deal btn-explore-deal" onclick="event.stopPropagation(); window.location.href='store.html?id=gulati-luxury-textiles';">
-                            <span>Explore Store & Deals</span><i data-lucide="arrow-right" size="16"></i>
+                    <div class="deal-extra-voucher-badge"><i data-lucide="sparkles" size="13"></i> Extra 5% OFF on MRP with Dealzy Voucher</div>
+                    <div class="deal-card-footer">
+                        <button class="btn-claim-deal" onclick="event.stopPropagation(); openVoucherModal('Festive Silks &amp; Designer Kurtis', 'Gulati Luxury Textiles', '40% OFF', 'EXTRA5-GULATI1', 'SCO 170-171, Sector 17 Plaza, Chandigarh', 'https://images.unsplash.com/photo-1490481651871-ab68de25d43d?auto=format&fit=crop&q=80&w=600', 'Extra 5% OFF on MRP', 'gulati-luxury-textiles')">
+                            <span>Claim Voucher</span><i data-lucide="ticket" size="16"></i>
                         </button>
                     </div>
                 </div>
             </div>
 
             <!-- Fashion 2: Biba Chandigarh -->
-            <div class="deal-item-card" data-category="fashion" data-discount="35" data-distance="0.9" data-type="percent" onclick="window.location.href='store.html?id=biba-chandigarh'">
+            <div class="deal-item-card" data-category="fashion" data-discount="35" data-distance="0.9" data-type="percent" onclick="openVoucherModal('Ethnic Salwar Suits &amp; Dupattas', 'Biba', '35% OFF', 'EXTRA5-BIBA1', 'SCO 52, Sector 17-D Market, Chandigarh', 'https://images.unsplash.com/photo-1617137968427-85924c800a22?auto=format&fit=crop&q=80&w=600', 'Extra 5% OFF on MRP', 'biba-chandigarh')">
                 <div class="deal-card-visual">
                     <img src="https://images.unsplash.com/photo-1617137968427-85924c800a22?auto=format&fit=crop&q=80&w=600" alt="Salwar Suits" loading="lazy">
                     <span class="deal-badge-chip">35% OFF</span>
@@ -1762,16 +1886,17 @@
                         <span><i data-lucide="map-pin" size="13"></i> 0.9 km</span>
                         <span><i data-lucide="clock" size="13" class="urgency-icon"></i> 4 days left</span>
                     </div>
-                    <div class="deal-extra-voucher-badge"><i data-lucide="tag" size="12"></i> Extra 2–5% OFF on MRP with In-Store Coupon</div><div class="deal-card-footer">
-                        <button class="btn-claim-deal btn-explore-deal" onclick="event.stopPropagation(); window.location.href='store.html?id=biba-chandigarh';">
-                            <span>Explore Store & Deals</span><i data-lucide="arrow-right" size="16"></i>
+                    <div class="deal-extra-voucher-badge"><i data-lucide="sparkles" size="13"></i> Extra 5% OFF on MRP with Dealzy Voucher</div>
+                    <div class="deal-card-footer">
+                        <button class="btn-claim-deal" onclick="event.stopPropagation(); openVoucherModal('Ethnic Salwar Suits &amp; Dupattas', 'Biba', '35% OFF', 'EXTRA5-BIBA1', 'SCO 52, Sector 17-D Market, Chandigarh', 'https://images.unsplash.com/photo-1617137968427-85924c800a22?auto=format&fit=crop&q=80&w=600', 'Extra 5% OFF on MRP', 'biba-chandigarh')">
+                            <span>Claim Voucher</span><i data-lucide="ticket" size="16"></i>
                         </button>
                     </div>
                 </div>
             </div>
 
             <!-- Fashion 3: Westside Elante -->
-            <div class="deal-item-card" data-category="fashion" data-discount="50" data-distance="3.5" data-type="percent" onclick="window.location.href='store.html?id=westside-elante'">
+            <div class="deal-item-card" data-category="fashion" data-discount="50" data-distance="3.5" data-type="percent" onclick="openVoucherModal('Western Wear &amp; Casual Co-ords', 'Westside', '50% OFF', 'EXTRA5-WESTSIDE1', 'Upper Ground Floor, Elante Mall, Industrial Area, Chandigarh', 'https://images.unsplash.com/photo-1523381210434-271e8be1f52b?auto=format&fit=crop&q=80&w=600', 'Extra 5% OFF on MRP', 'westside-elante')">
                 <div class="deal-card-visual">
                     <img src="https://images.unsplash.com/photo-1523381210434-271e8be1f52b?auto=format&fit=crop&q=80&w=600" alt="Western Wear" loading="lazy">
                     <span class="deal-badge-chip">50% OFF</span>
@@ -1786,16 +1911,17 @@
                         <span><i data-lucide="map-pin" size="13"></i> 3.5 km</span>
                         <span><i data-lucide="clock" size="13" class="urgency-icon"></i> 8 days left</span>
                     </div>
-                    <div class="deal-extra-voucher-badge"><i data-lucide="tag" size="12"></i> Extra 2–5% OFF on MRP with In-Store Coupon</div><div class="deal-card-footer">
-                        <button class="btn-claim-deal btn-explore-deal" onclick="event.stopPropagation(); window.location.href='store.html?id=westside-elante';">
-                            <span>Explore Store & Deals</span><i data-lucide="arrow-right" size="16"></i>
+                    <div class="deal-extra-voucher-badge"><i data-lucide="sparkles" size="13"></i> Extra 5% OFF on MRP with Dealzy Voucher</div>
+                    <div class="deal-card-footer">
+                        <button class="btn-claim-deal" onclick="event.stopPropagation(); openVoucherModal('Western Wear &amp; Casual Co-ords', 'Westside', '50% OFF', 'EXTRA5-WESTSIDE1', 'Upper Ground Floor, Elante Mall, Industrial Area, Chandigarh', 'https://images.unsplash.com/photo-1523381210434-271e8be1f52b?auto=format&fit=crop&q=80&w=600', 'Extra 5% OFF on MRP', 'westside-elante')">
+                            <span>Claim Voucher</span><i data-lucide="ticket" size="16"></i>
                         </button>
                     </div>
                 </div>
             </div>
 
             <!-- Fashion 4: Fabindia Sector 8 -->
-            <div class="deal-item-card" data-category="fashion" data-discount="30" data-distance="2.1" data-type="percent" onclick="window.location.href='store.html?id=fabindia-sector8'">
+            <div class="deal-item-card" data-category="fashion" data-discount="30" data-distance="2.1" data-type="percent" onclick="openVoucherModal('Handloom Cotton Kurtas &amp; Stoles', 'Fabindia', '30% OFF', 'EXTRA5-FABINDIA1', 'SCO 12-14, Inner Market, Sector 8-C, Chandigarh', 'https://images.unsplash.com/photo-1583391733956-3750e0ff4e8b?auto=format&fit=crop&q=80&w=600', 'Extra 5% OFF on MRP', 'fabindia-sector8')">
                 <div class="deal-card-visual">
                     <img src="https://images.unsplash.com/photo-1583391733956-3750e0ff4e8b?auto=format&fit=crop&q=80&w=600" alt="Handloom Cotton" loading="lazy">
                     <span class="deal-badge-chip">30% OFF</span>
@@ -1810,9 +1936,10 @@
                         <span><i data-lucide="map-pin" size="13"></i> 2.1 km</span>
                         <span><i data-lucide="clock" size="13" class="urgency-icon"></i> 10 days left</span>
                     </div>
-                    <div class="deal-extra-voucher-badge"><i data-lucide="tag" size="12"></i> Extra 2–5% OFF on MRP with In-Store Coupon</div><div class="deal-card-footer">
-                        <button class="btn-claim-deal btn-explore-deal" onclick="event.stopPropagation(); window.location.href='store.html?id=fabindia-sector8';">
-                            <span>Explore Store & Deals</span><i data-lucide="arrow-right" size="16"></i>
+                    <div class="deal-extra-voucher-badge"><i data-lucide="sparkles" size="13"></i> Extra 5% OFF on MRP with Dealzy Voucher</div>
+                    <div class="deal-card-footer">
+                        <button class="btn-claim-deal" onclick="event.stopPropagation(); openVoucherModal('Handloom Cotton Kurtas &amp; Stoles', 'Fabindia', '30% OFF', 'EXTRA5-FABINDIA1', 'SCO 12-14, Inner Market, Sector 8-C, Chandigarh', 'https://images.unsplash.com/photo-1583391733956-3750e0ff4e8b?auto=format&fit=crop&q=80&w=600', 'Extra 5% OFF on MRP', 'fabindia-sector8')">
+                            <span>Claim Voucher</span><i data-lucide="ticket" size="16"></i>
                         </button>
                     </div>
                 </div>
@@ -1821,7 +1948,7 @@
             <!-- ── CAFES & DINING ─────────────────────────────────── -->
 
             <!-- Dining 1: The Brew Estate -->
-            <div class="deal-item-card" data-category="dining" data-discount="25" data-distance="0.8" data-type="percent" onclick="window.location.href='store.html?id=brew-estate-sector7'">
+            <div class="deal-item-card" data-category="dining" data-discount="25" data-distance="0.8" data-type="percent" onclick="openVoucherModal('Artisan Coffee &amp; Gourmet Brunch', 'The Brew Estate', '25% OFF', 'EXTRA5-BREW1', 'SCO 25, Madhya Marg, Sector 7-C, Chandigarh', 'https://images.unsplash.com/photo-1555396273-367ea4eb4db5?auto=format&fit=crop&q=80&w=600', 'Extra 5% OFF on MRP', 'brew-estate-sector7')">
                 <div class="deal-card-visual">
                     <img src="https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?auto=format&fit=crop&q=80&w=600" alt="Artisan Coffee" loading="lazy">
                     <span class="deal-badge-chip">25% OFF</span>
@@ -1836,16 +1963,17 @@
                         <span><i data-lucide="map-pin" size="13"></i> 0.8 km</span>
                         <span><i data-lucide="clock" size="13" class="urgency-icon"></i> 3 days left</span>
                     </div>
-                    <div class="deal-extra-voucher-badge"><i data-lucide="tag" size="12"></i> Extra 2–5% OFF on MRP with In-Store Coupon</div><div class="deal-card-footer">
-                        <button class="btn-claim-deal btn-explore-deal" onclick="event.stopPropagation(); window.location.href='store.html?id=brew-estate-sector7';">
-                            <span>Explore Store & Deals</span><i data-lucide="arrow-right" size="16"></i>
+                    <div class="deal-extra-voucher-badge"><i data-lucide="sparkles" size="13"></i> Extra 5% OFF on MRP with Dealzy Voucher</div>
+                    <div class="deal-card-footer">
+                        <button class="btn-claim-deal" onclick="event.stopPropagation(); openVoucherModal('Artisan Coffee &amp; Gourmet Brunch', 'The Brew Estate', '25% OFF', 'EXTRA5-BREW1', 'SCO 25, Madhya Marg, Sector 7-C, Chandigarh', 'https://images.unsplash.com/photo-1555396273-367ea4eb4db5?auto=format&fit=crop&q=80&w=600', 'Extra 5% OFF on MRP', 'brew-estate-sector7')">
+                            <span>Claim Voucher</span><i data-lucide="ticket" size="16"></i>
                         </button>
                     </div>
                 </div>
             </div>
 
             <!-- Dining 2: Pal Dhaba Sector 28 -->
-            <div class="deal-item-card" data-category="dining" data-discount="20" data-distance="1.4" data-type="percent" onclick="window.location.href='store.html?id=pal-dhaba-sector28'">
+            <div class="deal-item-card" data-category="dining" data-discount="20" data-distance="1.4" data-type="percent" onclick="openVoucherModal('Authentic Punjabi Thali &amp; Lassi', 'Pal Dhaba', '20% OFF', 'EXTRA5-PAL1', 'SCO 151-152, Sector 28-D Market, Chandigarh', 'https://images.unsplash.com/photo-1585937421612-70a008356fbe?auto=format&fit=crop&q=80&w=600', 'Extra 5% OFF on MRP', 'pal-dhaba-sector28')">
                 <div class="deal-card-visual">
                     <img src="https://images.unsplash.com/photo-1585937421612-70a008356fbe?auto=format&fit=crop&q=80&w=600" alt="Punjabi Thali" loading="lazy">
                     <span class="deal-badge-chip">20% OFF</span>
@@ -1860,16 +1988,17 @@
                         <span><i data-lucide="map-pin" size="13"></i> 1.4 km</span>
                         <span><i data-lucide="clock" size="13" class="urgency-icon"></i> 7 days left</span>
                     </div>
-                    <div class="deal-extra-voucher-badge"><i data-lucide="tag" size="12"></i> Extra 2–5% OFF on MRP with In-Store Coupon</div><div class="deal-card-footer">
-                        <button class="btn-claim-deal btn-explore-deal" onclick="event.stopPropagation(); window.location.href='store.html?id=pal-dhaba-sector28';">
-                            <span>Explore Store & Deals</span><i data-lucide="arrow-right" size="16"></i>
+                    <div class="deal-extra-voucher-badge"><i data-lucide="sparkles" size="13"></i> Extra 5% OFF on MRP with Dealzy Voucher</div>
+                    <div class="deal-card-footer">
+                        <button class="btn-claim-deal" onclick="event.stopPropagation(); openVoucherModal('Authentic Punjabi Thali &amp; Lassi', 'Pal Dhaba', '20% OFF', 'EXTRA5-PAL1', 'SCO 151-152, Sector 28-D Market, Chandigarh', 'https://images.unsplash.com/photo-1585937421612-70a008356fbe?auto=format&fit=crop&q=80&w=600', 'Extra 5% OFF on MRP', 'pal-dhaba-sector28')">
+                            <span>Claim Voucher</span><i data-lucide="ticket" size="16"></i>
                         </button>
                     </div>
                 </div>
             </div>
 
             <!-- Dining 3: Mocha Sector 9 -->
-            <div class="deal-item-card" data-category="dining" data-discount="30" data-distance="2.2" data-type="percent" onclick="window.location.href='store.html?id=mocha-roasters-sector9'">
+            <div class="deal-item-card" data-category="dining" data-discount="30" data-distance="2.2" data-type="percent" onclick="openVoucherModal('Cold Brews, Waffles &amp; Sandwiches', 'Mocha Coffee Roasters', '30% OFF', 'EXTRA5-MOCHA1', 'SCO 41, Inner Market, Sector 9-D, Chandigarh', 'https://images.unsplash.com/photo-1554118811-1e0d58224f24?auto=format&fit=crop&q=80&w=600', 'Extra 5% OFF on MRP', 'mocha-roasters-sector9')">
                 <div class="deal-card-visual">
                     <img src="https://images.unsplash.com/photo-1559305616-3f99cd43e353?auto=format&fit=crop&q=80&w=600" alt="Cafe Mocha" loading="lazy">
                     <span class="deal-badge-chip">30% OFF</span>
@@ -1884,16 +2013,17 @@
                         <span><i data-lucide="map-pin" size="13"></i> 2.2 km</span>
                         <span><i data-lucide="clock" size="13" class="urgency-icon"></i> 5 days left</span>
                     </div>
-                    <div class="deal-extra-voucher-badge"><i data-lucide="tag" size="12"></i> Extra 2–5% OFF on MRP with In-Store Coupon</div><div class="deal-card-footer">
-                        <button class="btn-claim-deal btn-explore-deal" onclick="event.stopPropagation(); window.location.href='store.html?id=mocha-roasters-sector9';">
-                            <span>Explore Store & Deals</span><i data-lucide="arrow-right" size="16"></i>
+                    <div class="deal-extra-voucher-badge"><i data-lucide="sparkles" size="13"></i> Extra 5% OFF on MRP with Dealzy Voucher</div>
+                    <div class="deal-card-footer">
+                        <button class="btn-claim-deal" onclick="event.stopPropagation(); openVoucherModal('Cold Brews, Waffles &amp; Sandwiches', 'Mocha Coffee Roasters', '30% OFF', 'EXTRA5-MOCHA1', 'SCO 41, Inner Market, Sector 9-D, Chandigarh', 'https://images.unsplash.com/photo-1554118811-1e0d58224f24?auto=format&fit=crop&q=80&w=600', 'Extra 5% OFF on MRP', 'mocha-roasters-sector9')">
+                            <span>Claim Voucher</span><i data-lucide="ticket" size="16"></i>
                         </button>
                     </div>
                 </div>
             </div>
 
             <!-- Dining 4: Barbeque Nation Sector 26 -->
-            <div class="deal-item-card" data-category="dining" data-discount="40" data-distance="2.8" data-type="percent" onclick="window.location.href='store.html?id=bakers-crust-patisserie'">
+            <div class="deal-item-card" data-category="dining" data-discount="40" data-distance="2.8" data-type="percent" onclick="openVoucherModal('Live Barbeque Unlimited Buffet', 'Barbeque Nation', '40% OFF', 'EXTRA5-BBQ1', 'SCO 39, Madhya Marg, Sector 26, Chandigarh', 'https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&q=80&w=600', 'Extra 5% OFF on MRP', 'bakers-crust-patisserie')">
                 <div class="deal-card-visual">
                     <img src="https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&q=80&w=600" alt="BBQ" loading="lazy">
                     <span class="deal-badge-chip">40% OFF</span>
@@ -1908,9 +2038,10 @@
                         <span><i data-lucide="map-pin" size="13"></i> 2.8 km</span>
                         <span><i data-lucide="clock" size="13" class="urgency-icon"></i> 2 days left</span>
                     </div>
-                    <div class="deal-extra-voucher-badge"><i data-lucide="tag" size="12"></i> Extra 2–5% OFF on MRP with In-Store Coupon</div><div class="deal-card-footer">
-                        <button class="btn-claim-deal btn-explore-deal" onclick="event.stopPropagation(); window.location.href='store.html?id=bakers-crust-patisserie';">
-                            <span>Explore Store & Deals</span><i data-lucide="arrow-right" size="16"></i>
+                    <div class="deal-extra-voucher-badge"><i data-lucide="sparkles" size="13"></i> Extra 5% OFF on MRP with Dealzy Voucher</div>
+                    <div class="deal-card-footer">
+                        <button class="btn-claim-deal" onclick="event.stopPropagation(); openVoucherModal('Live Barbeque Unlimited Buffet', 'Barbeque Nation', '40% OFF', 'EXTRA5-BBQ1', 'SCO 39, Madhya Marg, Sector 26, Chandigarh', 'https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&q=80&w=600', 'Extra 5% OFF on MRP', 'bakers-crust-patisserie')">
+                            <span>Claim Voucher</span><i data-lucide="ticket" size="16"></i>
                         </button>
                     </div>
                 </div>
@@ -1919,7 +2050,7 @@
             <!-- ── FOOTWEAR & SNEAKERS ─────────────────────────────── -->
 
             <!-- Footwear 1: Machi Footwear -->
-            <div class="deal-item-card" data-category="footwear" data-discount="50" data-distance="1.8" data-type="bogo" onclick="window.location.href='store.html?id=machi-footwear-studio'">
+            <div class="deal-item-card" data-category="footwear" data-discount="50" data-distance="1.8" data-type="bogo" onclick="openVoucherModal('Pro Running &amp; Casual Sneakers', 'Machi Footwear', 'BUY 1 GET 1', 'EXTRA5-MACHI1', 'SCO 84-85, Sector 22-B Market, Chandigarh', 'https://images.unsplash.com/photo-1542291026-7eec264c27ff?auto=format&fit=crop&q=80&w=600', 'Extra 5% OFF on MRP', 'machi-footwear-studio')">
                 <div class="deal-card-visual">
                     <img src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?auto=format&fit=crop&q=80&w=600" alt="Sneakers" loading="lazy">
                     <span class="deal-badge-chip">BUY 1 GET 1</span>
@@ -1934,16 +2065,17 @@
                         <span><i data-lucide="map-pin" size="13"></i> 1.8 km</span>
                         <span><i data-lucide="clock" size="13" class="urgency-icon"></i> 5 days left</span>
                     </div>
-                    <div class="deal-extra-voucher-badge"><i data-lucide="tag" size="12"></i> Extra 2–5% OFF on MRP with In-Store Coupon</div><div class="deal-card-footer">
-                        <button class="btn-claim-deal btn-explore-deal" onclick="event.stopPropagation(); window.location.href='store.html?id=machi-footwear-studio';">
-                            <span>Explore Store & Deals</span><i data-lucide="arrow-right" size="16"></i>
+                    <div class="deal-extra-voucher-badge"><i data-lucide="sparkles" size="13"></i> Extra 5% OFF on MRP with Dealzy Voucher</div>
+                    <div class="deal-card-footer">
+                        <button class="btn-claim-deal" onclick="event.stopPropagation(); openVoucherModal('Pro Running &amp; Casual Sneakers', 'Machi Footwear', 'BUY 1 GET 1', 'EXTRA5-MACHI1', 'SCO 84-85, Sector 22-B Market, Chandigarh', 'https://images.unsplash.com/photo-1542291026-7eec264c27ff?auto=format&fit=crop&q=80&w=600', 'Extra 5% OFF on MRP', 'machi-footwear-studio')">
+                            <span>Claim Voucher</span><i data-lucide="ticket" size="16"></i>
                         </button>
                     </div>
                 </div>
             </div>
 
             <!-- Footwear 2: Bata Sector 17 -->
-            <div class="deal-item-card" data-category="footwear" data-discount="40" data-distance="1.1" data-type="percent" onclick="window.location.href='store.html?id=bata-sector17'">
+            <div class="deal-item-card" data-category="footwear" data-discount="40" data-distance="1.1" data-type="percent" onclick="openVoucherModal('Formal Leather Shoes &amp; Sandals', 'Bata', '40% OFF', 'EXTRA5-BATA1', 'SCO 40, Sector 17-E Plaza, Chandigarh', 'https://images.unsplash.com/photo-1533867617858-e7b97e060509?auto=format&fit=crop&q=80&w=600', 'Extra 5% OFF on MRP', 'bata-sector17')">
                 <div class="deal-card-visual">
                     <img src="https://images.unsplash.com/photo-1600185365926-3a2ce3cdb9eb?auto=format&fit=crop&q=80&w=600" alt="Formal Shoes" loading="lazy">
                     <span class="deal-badge-chip">40% OFF</span>
@@ -1958,16 +2090,17 @@
                         <span><i data-lucide="map-pin" size="13"></i> 1.1 km</span>
                         <span><i data-lucide="clock" size="13" class="urgency-icon"></i> 9 days left</span>
                     </div>
-                    <div class="deal-extra-voucher-badge"><i data-lucide="tag" size="12"></i> Extra 2–5% OFF on MRP with In-Store Coupon</div><div class="deal-card-footer">
-                        <button class="btn-claim-deal btn-explore-deal" onclick="event.stopPropagation(); window.location.href='store.html?id=bata-sector17';">
-                            <span>Explore Store & Deals</span><i data-lucide="arrow-right" size="16"></i>
+                    <div class="deal-extra-voucher-badge"><i data-lucide="sparkles" size="13"></i> Extra 5% OFF on MRP with Dealzy Voucher</div>
+                    <div class="deal-card-footer">
+                        <button class="btn-claim-deal" onclick="event.stopPropagation(); openVoucherModal('Formal Leather Shoes &amp; Sandals', 'Bata', '40% OFF', 'EXTRA5-BATA1', 'SCO 40, Sector 17-E Plaza, Chandigarh', 'https://images.unsplash.com/photo-1533867617858-e7b97e060509?auto=format&fit=crop&q=80&w=600', 'Extra 5% OFF on MRP', 'bata-sector17')">
+                            <span>Claim Voucher</span><i data-lucide="ticket" size="16"></i>
                         </button>
                     </div>
                 </div>
             </div>
 
             <!-- Footwear 3: Metro Shoes Elante -->
-            <div class="deal-item-card" data-category="footwear" data-discount="35" data-distance="3.5" data-type="percent" onclick="window.location.href='store.html?id=metro-shoes-elante'">
+            <div class="deal-item-card" data-category="footwear" data-discount="35" data-distance="3.5" data-type="percent" onclick="openVoucherModal('Women Heels, Flats &amp; Block Sandals', 'Metro Shoes', '35% OFF', 'EXTRA5-METRO1', 'Store 218, First Floor, Elante Mall, Chandigarh', 'https://images.unsplash.com/photo-1543163521-1bf539c55dd2?auto=format&fit=crop&q=80&w=600', 'Extra 5% OFF on MRP', 'metro-shoes-elante')">
                 <div class="deal-card-visual">
                     <img src="https://images.unsplash.com/photo-1515347619252-60a4bf4fff4f?auto=format&fit=crop&q=80&w=600" alt="Heels" loading="lazy">
                     <span class="deal-badge-chip">35% OFF</span>
@@ -1982,16 +2115,17 @@
                         <span><i data-lucide="map-pin" size="13"></i> 3.5 km</span>
                         <span><i data-lucide="clock" size="13" class="urgency-icon"></i> 6 days left</span>
                     </div>
-                    <div class="deal-extra-voucher-badge"><i data-lucide="tag" size="12"></i> Extra 2–5% OFF on MRP with In-Store Coupon</div><div class="deal-card-footer">
-                        <button class="btn-claim-deal btn-explore-deal" onclick="event.stopPropagation(); window.location.href='store.html?id=metro-shoes-elante';">
-                            <span>Explore Store & Deals</span><i data-lucide="arrow-right" size="16"></i>
+                    <div class="deal-extra-voucher-badge"><i data-lucide="sparkles" size="13"></i> Extra 5% OFF on MRP with Dealzy Voucher</div>
+                    <div class="deal-card-footer">
+                        <button class="btn-claim-deal" onclick="event.stopPropagation(); openVoucherModal('Women Heels, Flats &amp; Block Sandals', 'Metro Shoes', '35% OFF', 'EXTRA5-METRO1', 'Store 218, First Floor, Elante Mall, Chandigarh', 'https://images.unsplash.com/photo-1543163521-1bf539c55dd2?auto=format&fit=crop&q=80&w=600', 'Extra 5% OFF on MRP', 'metro-shoes-elante')">
+                            <span>Claim Voucher</span><i data-lucide="ticket" size="16"></i>
                         </button>
                     </div>
                 </div>
             </div>
 
             <!-- Footwear 4: Liberty Shoes Sector 22 -->
-            <div class="deal-item-card" data-category="footwear" data-discount="45" data-distance="2.0" data-type="percent" onclick="window.location.href='store.html?id=stepup-athletic-studio'">
+            <div class="deal-item-card" data-category="footwear" data-discount="45" data-distance="2.0" data-type="percent" onclick="openVoucherModal('Sports Shoes &amp; Kids Footwear', 'StepUp Athletic Studio', '45% OFF', 'EXTRA5-STEPUP1', 'SCO 112, Sector 35-C, Chandigarh', 'https://images.unsplash.com/photo-1514989940723-e8e51635b782?auto=format&fit=crop&q=80&w=600', 'Extra 5% OFF on MRP', 'stepup-athletic-studio')">
                 <div class="deal-card-visual">
                     <img src="https://images.unsplash.com/photo-1465453869711-7e174808ace9?auto=format&fit=crop&q=80&w=600" alt="Sports Shoes" loading="lazy">
                     <span class="deal-badge-chip">45% OFF</span>
@@ -2006,9 +2140,10 @@
                         <span><i data-lucide="map-pin" size="13"></i> 2.0 km</span>
                         <span><i data-lucide="clock" size="13" class="urgency-icon"></i> 4 days left</span>
                     </div>
-                    <div class="deal-extra-voucher-badge"><i data-lucide="tag" size="12"></i> Extra 2–5% OFF on MRP with In-Store Coupon</div><div class="deal-card-footer">
-                        <button class="btn-claim-deal btn-explore-deal" onclick="event.stopPropagation(); window.location.href='store.html?id=stepup-athletic-studio';">
-                            <span>Explore Store & Deals</span><i data-lucide="arrow-right" size="16"></i>
+                    <div class="deal-extra-voucher-badge"><i data-lucide="sparkles" size="13"></i> Extra 5% OFF on MRP with Dealzy Voucher</div>
+                    <div class="deal-card-footer">
+                        <button class="btn-claim-deal" onclick="event.stopPropagation(); openVoucherModal('Sports Shoes &amp; Kids Footwear', 'StepUp Athletic Studio', '45% OFF', 'EXTRA5-STEPUP1', 'SCO 112, Sector 35-C, Chandigarh', 'https://images.unsplash.com/photo-1514989940723-e8e51635b782?auto=format&fit=crop&q=80&w=600', 'Extra 5% OFF on MRP', 'stepup-athletic-studio')">
+                            <span>Claim Voucher</span><i data-lucide="ticket" size="16"></i>
                         </button>
                     </div>
                 </div>
@@ -2017,7 +2152,7 @@
             <!-- ── ELECTRONICS & GADGETS ──────────────────────────── -->
 
             <!-- Electronics 1: Apex Gaming Hub -->
-            <div class="deal-item-card" data-category="electronics" data-discount="30" data-distance="1.9" data-type="percent" onclick="window.location.href='store.html?id=apex-gaming-hub'">
+            <div class="deal-item-card" data-category="electronics" data-discount="30" data-distance="1.9" data-type="percent" onclick="openVoucherModal('RGB Mechanical Keyboards &amp; Gaming Mice', 'Apex Gaming Hub', '30% OFF', 'EXTRA5-APEX1', 'Booth 33, Sector 20-C Central Market, Chandigarh', 'https://images.unsplash.com/photo-1587829741301-dc798b83add3?auto=format&fit=crop&q=80&w=600', 'Extra 5% OFF on MRP', 'apex-gaming-hub')">
                 <div class="deal-card-visual">
                     <img src="https://images.unsplash.com/photo-1593305841991-05c297ba4575?auto=format&fit=crop&q=80&w=600" alt="Gaming Peripherals" loading="lazy">
                     <span class="deal-badge-chip">30% OFF</span>
@@ -2032,16 +2167,17 @@
                         <span><i data-lucide="map-pin" size="13"></i> 1.9 km</span>
                         <span><i data-lucide="clock" size="13" class="urgency-icon"></i> 5 days left</span>
                     </div>
-                    <div class="deal-extra-voucher-badge"><i data-lucide="tag" size="12"></i> Extra 2–5% OFF on MRP with In-Store Coupon</div><div class="deal-card-footer">
-                        <button class="btn-claim-deal btn-explore-deal" onclick="event.stopPropagation(); window.location.href='store.html?id=apex-gaming-hub';">
-                            <span>Explore Store & Deals</span><i data-lucide="arrow-right" size="16"></i>
+                    <div class="deal-extra-voucher-badge"><i data-lucide="sparkles" size="13"></i> Extra 5% OFF on MRP with Dealzy Voucher</div>
+                    <div class="deal-card-footer">
+                        <button class="btn-claim-deal" onclick="event.stopPropagation(); openVoucherModal('RGB Mechanical Keyboards &amp; Gaming Mice', 'Apex Gaming Hub', '30% OFF', 'EXTRA5-APEX1', 'Booth 33, Sector 20-C Central Market, Chandigarh', 'https://images.unsplash.com/photo-1587829741301-dc798b83add3?auto=format&fit=crop&q=80&w=600', 'Extra 5% OFF on MRP', 'apex-gaming-hub')">
+                            <span>Claim Voucher</span><i data-lucide="ticket" size="16"></i>
                         </button>
                     </div>
                 </div>
             </div>
 
             <!-- Electronics 2: Croma Sector 35 -->
-            <div class="deal-item-card" data-category="electronics" data-discount="15" data-distance="2.7" data-type="percent" onclick="window.location.href='store.html?id=croma-sector35'">
+            <div class="deal-item-card" data-category="electronics" data-discount="15" data-distance="2.7" data-type="percent" onclick="openVoucherModal('Laptops, Tablets &amp; Smart Watches', 'Croma', '15% OFF', 'EXTRA3-CROMA1', 'SCO 142-144, Sector 35-B, Chandigarh', 'https://images.unsplash.com/photo-1593642632823-8f785ba67e45?auto=format&fit=crop&q=80&w=600', 'Extra 3% OFF on MRP', 'croma-sector35')">
                 <div class="deal-card-visual">
                     <img src="https://images.unsplash.com/photo-1588872657578-7efd1f1555ed?auto=format&fit=crop&q=80&w=600" alt="Laptops" loading="lazy">
                     <span class="deal-badge-chip">15% OFF</span>
@@ -2056,16 +2192,17 @@
                         <span><i data-lucide="map-pin" size="13"></i> 2.7 km</span>
                         <span><i data-lucide="clock" size="13" class="urgency-icon"></i> 12 days left</span>
                     </div>
-                    <div class="deal-extra-voucher-badge"><i data-lucide="tag" size="12"></i> Extra 2–5% OFF on MRP with In-Store Coupon</div><div class="deal-card-footer">
-                        <button class="btn-claim-deal btn-explore-deal" onclick="event.stopPropagation(); window.location.href='store.html?id=croma-sector35';">
-                            <span>Explore Store & Deals</span><i data-lucide="arrow-right" size="16"></i>
+                    <div class="deal-extra-voucher-badge"><i data-lucide="sparkles" size="13"></i> Extra 3% OFF on MRP with Dealzy Voucher</div>
+                    <div class="deal-card-footer">
+                        <button class="btn-claim-deal" onclick="event.stopPropagation(); openVoucherModal('Laptops, Tablets &amp; Smart Watches', 'Croma', '15% OFF', 'EXTRA3-CROMA1', 'SCO 142-144, Sector 35-B, Chandigarh', 'https://images.unsplash.com/photo-1593642632823-8f785ba67e45?auto=format&fit=crop&q=80&w=600', 'Extra 3% OFF on MRP', 'croma-sector35')">
+                            <span>Claim Voucher</span><i data-lucide="ticket" size="16"></i>
                         </button>
                     </div>
                 </div>
             </div>
 
             <!-- Electronics 3: Reliance Digital Elante -->
-            <div class="deal-item-card" data-category="electronics" data-discount="20" data-distance="3.5" data-type="percent" onclick="window.location.href='store.html?id=horizon-digital-zone'">
+            <div class="deal-item-card" data-category="electronics" data-discount="20" data-distance="3.5" data-type="percent" onclick="openVoucherModal('Smartphones &amp; Wireless Earbuds', 'Horizon Digital Zone', '20% OFF', 'EXTRA5-HORIZON1', 'Booth 18-19, Sector 20-C Central Market, Chandigarh', 'https://images.unsplash.com/photo-1550009158-9ebf69173e03?auto=format&fit=crop&q=80&w=600', 'Extra 5% OFF on MRP', 'horizon-digital-zone')">
                 <div class="deal-card-visual">
                     <img src="https://images.unsplash.com/photo-1546054454-aa26e2b734c7?auto=format&fit=crop&q=80&w=600" alt="Mobile Phones" loading="lazy">
                     <span class="deal-badge-chip">20% OFF</span>
@@ -2080,16 +2217,17 @@
                         <span><i data-lucide="map-pin" size="13"></i> 3.5 km</span>
                         <span><i data-lucide="clock" size="13" class="urgency-icon"></i> 7 days left</span>
                     </div>
-                    <div class="deal-extra-voucher-badge"><i data-lucide="tag" size="12"></i> Extra 2–5% OFF on MRP with In-Store Coupon</div><div class="deal-card-footer">
-                        <button class="btn-claim-deal btn-explore-deal" onclick="event.stopPropagation(); window.location.href='store.html?id=horizon-digital-zone';">
-                            <span>Explore Store & Deals</span><i data-lucide="arrow-right" size="16"></i>
+                    <div class="deal-extra-voucher-badge"><i data-lucide="sparkles" size="13"></i> Extra 5% OFF on MRP with Dealzy Voucher</div>
+                    <div class="deal-card-footer">
+                        <button class="btn-claim-deal" onclick="event.stopPropagation(); openVoucherModal('Smartphones &amp; Wireless Earbuds', 'Horizon Digital Zone', '20% OFF', 'EXTRA5-HORIZON1', 'Booth 18-19, Sector 20-C Central Market, Chandigarh', 'https://images.unsplash.com/photo-1550009158-9ebf69173e03?auto=format&fit=crop&q=80&w=600', 'Extra 5% OFF on MRP', 'horizon-digital-zone')">
+                            <span>Claim Voucher</span><i data-lucide="ticket" size="16"></i>
                         </button>
                     </div>
                 </div>
             </div>
 
             <!-- Electronics 4: MD Computers Sector 22 -->
-            <div class="deal-item-card" data-category="electronics" data-discount="25" data-distance="2.1" data-type="percent" onclick="window.location.href='store.html?id=apex-gaming-hub'">
+            <div class="deal-item-card" data-category="electronics" data-discount="25" data-distance="2.1" data-type="percent" onclick="openVoucherModal('Custom PC Build Parts &amp; Monitors', 'Apex Gaming Hub', '25% OFF', 'EXTRA5-APEX2', 'Booth 33, Sector 20-C Central Market, Chandigarh', 'https://images.unsplash.com/photo-1527443224154-c4a3942d3acf?auto=format&fit=crop&q=80&w=600', 'Extra 5% OFF on MRP', 'apex-gaming-hub')">
                 <div class="deal-card-visual">
                     <img src="https://images.unsplash.com/photo-1587202372775-e229f172b9d7?auto=format&fit=crop&q=80&w=600" alt="PC Build" loading="lazy">
                     <span class="deal-badge-chip">25% OFF</span>
@@ -2104,9 +2242,10 @@
                         <span><i data-lucide="map-pin" size="13"></i> 2.1 km</span>
                         <span><i data-lucide="clock" size="13" class="urgency-icon"></i> 8 days left</span>
                     </div>
-                    <div class="deal-extra-voucher-badge"><i data-lucide="tag" size="12"></i> Extra 2–5% OFF on MRP with In-Store Coupon</div><div class="deal-card-footer">
-                        <button class="btn-claim-deal btn-explore-deal" onclick="event.stopPropagation(); window.location.href='store.html?id=apex-gaming-hub';">
-                            <span>Explore Store & Deals</span><i data-lucide="arrow-right" size="16"></i>
+                    <div class="deal-extra-voucher-badge"><i data-lucide="sparkles" size="13"></i> Extra 5% OFF on MRP with Dealzy Voucher</div>
+                    <div class="deal-card-footer">
+                        <button class="btn-claim-deal" onclick="event.stopPropagation(); openVoucherModal('Custom PC Build Parts &amp; Monitors', 'Apex Gaming Hub', '25% OFF', 'EXTRA5-APEX2', 'Booth 33, Sector 20-C Central Market, Chandigarh', 'https://images.unsplash.com/photo-1527443224154-c4a3942d3acf?auto=format&fit=crop&q=80&w=600', 'Extra 5% OFF on MRP', 'apex-gaming-hub')">
+                            <span>Claim Voucher</span><i data-lucide="ticket" size="16"></i>
                         </button>
                     </div>
                 </div>
@@ -2115,7 +2254,7 @@
             <!-- ── BEAUTY & WELLNESS ──────────────────────────────── -->
 
             <!-- Beauty 1: Aura Organic Spa -->
-            <div class="deal-item-card" data-category="beauty" data-discount="45" data-distance="2.4" data-type="percent" onclick="window.location.href='store.html?id=aura-organic-spa'">
+            <div class="deal-item-card" data-category="beauty" data-discount="45" data-distance="2.4" data-type="percent" onclick="openVoucherModal('Swedish Massage &amp; Deep Cleansing Facial', 'Aura Organic Spa', '45% OFF', 'EXTRA5-AURA1', 'SCO 91-92, Inner Market, Sector 8-B, Chandigarh', 'https://images.unsplash.com/photo-1540555700478-4be289fbecef?auto=format&fit=crop&q=80&w=600', 'Extra 5% OFF on MRP', 'aura-organic-spa')">
                 <div class="deal-card-visual">
                     <img src="https://images.unsplash.com/photo-1540555700478-4be289fbecef?auto=format&fit=crop&q=80&w=600" alt="Spa" loading="lazy">
                     <span class="deal-badge-chip">45% OFF</span>
@@ -2130,16 +2269,17 @@
                         <span><i data-lucide="map-pin" size="13"></i> 2.4 km</span>
                         <span><i data-lucide="clock" size="13" class="urgency-icon"></i> 5 days left</span>
                     </div>
-                    <div class="deal-extra-voucher-badge"><i data-lucide="tag" size="12"></i> Extra 2–5% OFF on MRP with In-Store Coupon</div><div class="deal-card-footer">
-                        <button class="btn-claim-deal btn-explore-deal" onclick="event.stopPropagation(); window.location.href='store.html?id=aura-organic-spa';">
-                            <span>Explore Store & Deals</span><i data-lucide="arrow-right" size="16"></i>
+                    <div class="deal-extra-voucher-badge"><i data-lucide="sparkles" size="13"></i> Extra 5% OFF on MRP with Dealzy Voucher</div>
+                    <div class="deal-card-footer">
+                        <button class="btn-claim-deal" onclick="event.stopPropagation(); openVoucherModal('Swedish Massage &amp; Deep Cleansing Facial', 'Aura Organic Spa', '45% OFF', 'EXTRA5-AURA1', 'SCO 91-92, Inner Market, Sector 8-B, Chandigarh', 'https://images.unsplash.com/photo-1540555700478-4be289fbecef?auto=format&fit=crop&q=80&w=600', 'Extra 5% OFF on MRP', 'aura-organic-spa')">
+                            <span>Claim Voucher</span><i data-lucide="ticket" size="16"></i>
                         </button>
                     </div>
                 </div>
             </div>
 
             <!-- Beauty 2: Looks Salon Sector 9 -->
-            <div class="deal-item-card" data-category="beauty" data-discount="40" data-distance="1.6" data-type="percent" onclick="window.location.href='store.html?id=looks-salon-sector9'">
+            <div class="deal-item-card" data-category="beauty" data-discount="40" data-distance="1.6" data-type="percent" onclick="openVoucherModal('Keratin Hair Treatment &amp; Blow Dry', 'Looks Salon', '40% OFF', 'EXTRA5-LOOKS1', 'SCO 45, Sector 9-D, Chandigarh', 'https://images.unsplash.com/photo-1560066984-138dadb4c035?auto=format&fit=crop&q=80&w=600', 'Extra 5% OFF on MRP', 'looks-salon-sector9')">
                 <div class="deal-card-visual">
                     <img src="https://images.unsplash.com/photo-1560066984-138daaa0d044?auto=format&fit=crop&q=80&w=600" alt="Hair Treatment" loading="lazy">
                     <span class="deal-badge-chip">40% OFF</span>
@@ -2154,16 +2294,17 @@
                         <span><i data-lucide="map-pin" size="13"></i> 1.6 km</span>
                         <span><i data-lucide="clock" size="13" class="urgency-icon"></i> 6 days left</span>
                     </div>
-                    <div class="deal-extra-voucher-badge"><i data-lucide="tag" size="12"></i> Extra 2–5% OFF on MRP with In-Store Coupon</div><div class="deal-card-footer">
-                        <button class="btn-claim-deal btn-explore-deal" onclick="event.stopPropagation(); window.location.href='store.html?id=looks-salon-sector9';">
-                            <span>Explore Store & Deals</span><i data-lucide="arrow-right" size="16"></i>
+                    <div class="deal-extra-voucher-badge"><i data-lucide="sparkles" size="13"></i> Extra 5% OFF on MRP with Dealzy Voucher</div>
+                    <div class="deal-card-footer">
+                        <button class="btn-claim-deal" onclick="event.stopPropagation(); openVoucherModal('Keratin Hair Treatment &amp; Blow Dry', 'Looks Salon', '40% OFF', 'EXTRA5-LOOKS1', 'SCO 45, Sector 9-D, Chandigarh', 'https://images.unsplash.com/photo-1560066984-138dadb4c035?auto=format&fit=crop&q=80&w=600', 'Extra 5% OFF on MRP', 'looks-salon-sector9')">
+                            <span>Claim Voucher</span><i data-lucide="ticket" size="16"></i>
                         </button>
                     </div>
                 </div>
             </div>
 
             <!-- Beauty 3: Naturals Salon Sector 35 -->
-            <div class="deal-item-card" data-category="beauty" data-discount="30" data-distance="2.9" data-type="percent" onclick="window.location.href='store.html?id=aura-organic-spa'">
+            <div class="deal-item-card" data-category="beauty" data-discount="30" data-distance="2.9" data-type="percent" onclick="openVoucherModal('Hydra Facial &amp; Mani-Pedi Combo', 'Aura Organic Spa', '30% OFF', 'EXTRA5-AURA2', 'SCO 91-92, Inner Market, Sector 8-B, Chandigarh', 'https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?auto=format&fit=crop&q=80&w=600', 'Extra 5% OFF on MRP', 'aura-organic-spa')">
                 <div class="deal-card-visual">
                     <img src="https://images.unsplash.com/photo-1607008829749-c0f284a49fc4?auto=format&fit=crop&q=80&w=600" alt="Facial" loading="lazy">
                     <span class="deal-badge-chip">30% OFF</span>
@@ -2178,16 +2319,17 @@
                         <span><i data-lucide="map-pin" size="13"></i> 2.9 km</span>
                         <span><i data-lucide="clock" size="13" class="urgency-icon"></i> 9 days left</span>
                     </div>
-                    <div class="deal-extra-voucher-badge"><i data-lucide="tag" size="12"></i> Extra 2–5% OFF on MRP with In-Store Coupon</div><div class="deal-card-footer">
-                        <button class="btn-claim-deal btn-explore-deal" onclick="event.stopPropagation(); window.location.href='store.html?id=aura-organic-spa';">
-                            <span>Explore Store & Deals</span><i data-lucide="arrow-right" size="16"></i>
+                    <div class="deal-extra-voucher-badge"><i data-lucide="sparkles" size="13"></i> Extra 5% OFF on MRP with Dealzy Voucher</div>
+                    <div class="deal-card-footer">
+                        <button class="btn-claim-deal" onclick="event.stopPropagation(); openVoucherModal('Hydra Facial &amp; Mani-Pedi Combo', 'Aura Organic Spa', '30% OFF', 'EXTRA5-AURA2', 'SCO 91-92, Inner Market, Sector 8-B, Chandigarh', 'https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?auto=format&fit=crop&q=80&w=600', 'Extra 5% OFF on MRP', 'aura-organic-spa')">
+                            <span>Claim Voucher</span><i data-lucide="ticket" size="16"></i>
                         </button>
                     </div>
                 </div>
             </div>
 
             <!-- Beauty 4: VLCC Sector 11 -->
-            <div class="deal-item-card" data-category="beauty" data-discount="35" data-distance="1.3" data-type="percent" onclick="window.location.href='store.html?id=aura-organic-spa'">
+            <div class="deal-item-card" data-category="beauty" data-discount="35" data-distance="1.3" data-type="percent" onclick="openVoucherModal('Slimming Package &amp; Body Polishing', 'Aura Organic Spa', '35% OFF', 'EXTRA5-AURA3', 'SCO 91-92, Inner Market, Sector 8-B, Chandigarh', 'https://images.unsplash.com/photo-1519823551278-64ac92734fb1?auto=format&fit=crop&q=80&w=600', 'Extra 5% OFF on MRP', 'aura-organic-spa')">
                 <div class="deal-card-visual">
                     <img src="https://images.unsplash.com/photo-1519823551278-64ac92734fb1?auto=format&fit=crop&q=80&w=600" alt="Wellness" loading="lazy">
                     <span class="deal-badge-chip">35% OFF</span>
@@ -2202,9 +2344,10 @@
                         <span><i data-lucide="map-pin" size="13"></i> 1.3 km</span>
                         <span><i data-lucide="clock" size="13" class="urgency-icon"></i> 4 days left</span>
                     </div>
-                    <div class="deal-extra-voucher-badge"><i data-lucide="tag" size="12"></i> Extra 2–5% OFF on MRP with In-Store Coupon</div><div class="deal-card-footer">
-                        <button class="btn-claim-deal btn-explore-deal" onclick="event.stopPropagation(); window.location.href='store.html?id=aura-organic-spa';">
-                            <span>Explore Store & Deals</span><i data-lucide="arrow-right" size="16"></i>
+                    <div class="deal-extra-voucher-badge"><i data-lucide="sparkles" size="13"></i> Extra 5% OFF on MRP with Dealzy Voucher</div>
+                    <div class="deal-card-footer">
+                        <button class="btn-claim-deal" onclick="event.stopPropagation(); openVoucherModal('Slimming Package &amp; Body Polishing', 'Aura Organic Spa', '35% OFF', 'EXTRA5-AURA3', 'SCO 91-92, Inner Market, Sector 8-B, Chandigarh', 'https://images.unsplash.com/photo-1519823551278-64ac92734fb1?auto=format&fit=crop&q=80&w=600', 'Extra 5% OFF on MRP', 'aura-organic-spa')">
+                            <span>Claim Voucher</span><i data-lucide="ticket" size="16"></i>
                         </button>
                     </div>
                 </div>
@@ -2213,7 +2356,7 @@
             <!-- ── HOME & KITCHENWARE ──────────────────────────────── -->
 
             <!-- Home 1: Sharma Kitchen -->
-            <div class="deal-item-card" data-category="home" data-discount="35" data-distance="1.1" data-type="percent" onclick="window.location.href='store.html?id=sharma-kitchen-metalware'">
+            <div class="deal-item-card" data-category="home" data-discount="35" data-distance="1.1" data-type="percent" onclick="openVoucherModal('Tri-Ply Steel Cookware &amp; Kadhai Set', 'Sharma Kitchen &amp; Metalware', '35% OFF', 'EXTRA5-SHARMA1', 'SCO 88, Sector 22-C Shastri Market, Chandigarh', 'https://images.unsplash.com/photo-1556911220-e15b29be8c8f?auto=format&fit=crop&q=80&w=600', 'Extra 5% OFF on MRP', 'sharma-kitchen-metalware')">
                 <div class="deal-card-visual">
                     <img src="https://images.unsplash.com/photo-1556911220-e15b29be8c8f?auto=format&fit=crop&q=80&w=600" alt="Cookware" loading="lazy">
                     <span class="deal-badge-chip">35% OFF</span>
@@ -2228,16 +2371,17 @@
                         <span><i data-lucide="map-pin" size="13"></i> 1.1 km</span>
                         <span><i data-lucide="clock" size="13" class="urgency-icon"></i> 5 days left</span>
                     </div>
-                    <div class="deal-extra-voucher-badge"><i data-lucide="tag" size="12"></i> Extra 2–5% OFF on MRP with In-Store Coupon</div><div class="deal-card-footer">
-                        <button class="btn-claim-deal btn-explore-deal" onclick="event.stopPropagation(); window.location.href='store.html?id=sharma-kitchen-metalware';">
-                            <span>Explore Store & Deals</span><i data-lucide="arrow-right" size="16"></i>
+                    <div class="deal-extra-voucher-badge"><i data-lucide="sparkles" size="13"></i> Extra 5% OFF on MRP with Dealzy Voucher</div>
+                    <div class="deal-card-footer">
+                        <button class="btn-claim-deal" onclick="event.stopPropagation(); openVoucherModal('Tri-Ply Steel Cookware &amp; Kadhai Set', 'Sharma Kitchen &amp; Metalware', '35% OFF', 'EXTRA5-SHARMA1', 'SCO 88, Sector 22-C Shastri Market, Chandigarh', 'https://images.unsplash.com/photo-1556911220-e15b29be8c8f?auto=format&fit=crop&q=80&w=600', 'Extra 5% OFF on MRP', 'sharma-kitchen-metalware')">
+                            <span>Claim Voucher</span><i data-lucide="ticket" size="16"></i>
                         </button>
                     </div>
                 </div>
             </div>
 
             <!-- Home 2: Casa Bella Living -->
-            <div class="deal-item-card" data-category="home" data-discount="30" data-distance="3.1" data-type="percent" onclick="window.location.href='store.html?id=casa-bella-living'">
+            <div class="deal-item-card" data-category="home" data-discount="30" data-distance="3.1" data-type="percent" onclick="openVoucherModal('Aesthetic Lamps &amp; Handwoven Rugs', 'Casa Bella Living Studio', '30% OFF', 'EXTRA5-CASA1', 'SCO 14, Sector 35-D Interior Decor Market, Chandigarh', 'https://images.unsplash.com/photo-1540518614846-7eded433c457?auto=format&fit=crop&q=80&w=600', 'Extra 5% OFF on MRP', 'casa-bella-living')">
                 <div class="deal-card-visual">
                     <img src="https://images.unsplash.com/photo-1540518614846-7eded433c457?auto=format&fit=crop&q=80&w=600" alt="Lamps and Rugs" loading="lazy">
                     <span class="deal-badge-chip">30% OFF</span>
@@ -2252,16 +2396,17 @@
                         <span><i data-lucide="map-pin" size="13"></i> 3.1 km</span>
                         <span><i data-lucide="clock" size="13" class="urgency-icon"></i> 8 days left</span>
                     </div>
-                    <div class="deal-extra-voucher-badge"><i data-lucide="tag" size="12"></i> Extra 2–5% OFF on MRP with In-Store Coupon</div><div class="deal-card-footer">
-                        <button class="btn-claim-deal btn-explore-deal" onclick="event.stopPropagation(); window.location.href='store.html?id=casa-bella-living';">
-                            <span>Explore Store & Deals</span><i data-lucide="arrow-right" size="16"></i>
+                    <div class="deal-extra-voucher-badge"><i data-lucide="sparkles" size="13"></i> Extra 5% OFF on MRP with Dealzy Voucher</div>
+                    <div class="deal-card-footer">
+                        <button class="btn-claim-deal" onclick="event.stopPropagation(); openVoucherModal('Aesthetic Lamps &amp; Handwoven Rugs', 'Casa Bella Living Studio', '30% OFF', 'EXTRA5-CASA1', 'SCO 14, Sector 35-D Interior Decor Market, Chandigarh', 'https://images.unsplash.com/photo-1540518614846-7eded433c457?auto=format&fit=crop&q=80&w=600', 'Extra 5% OFF on MRP', 'casa-bella-living')">
+                            <span>Claim Voucher</span><i data-lucide="ticket" size="16"></i>
                         </button>
                     </div>
                 </div>
             </div>
 
             <!-- Home 3: Urban Home Sector 17 -->
-            <div class="deal-item-card" data-category="home" data-discount="25" data-distance="1.5" data-type="percent" onclick="window.location.href='store.html?id=urban-home-sector17'">
+            <div class="deal-item-card" data-category="home" data-discount="25" data-distance="1.5" data-type="percent" onclick="openVoucherModal('Sofas, Cushion Covers &amp; Curtains', 'Urban Home Furnishings', '25% OFF', 'EXTRA5-URBAN1', 'SCO 205-206, Sector 17-C, Chandigarh', 'https://images.unsplash.com/photo-1555041469-a586c61ea9bc?auto=format&fit=crop&q=80&w=600', 'Extra 5% OFF on MRP', 'urban-home-sector17')">
                 <div class="deal-card-visual">
                     <img src="https://images.unsplash.com/photo-1555041469-a586c61ea9bc?auto=format&fit=crop&q=80&w=600" alt="Sofa" loading="lazy">
                     <span class="deal-badge-chip">25% OFF</span>
@@ -2276,16 +2421,17 @@
                         <span><i data-lucide="map-pin" size="13"></i> 1.5 km</span>
                         <span><i data-lucide="clock" size="13" class="urgency-icon"></i> 11 days left</span>
                     </div>
-                    <div class="deal-extra-voucher-badge"><i data-lucide="tag" size="12"></i> Extra 2–5% OFF on MRP with In-Store Coupon</div><div class="deal-card-footer">
-                        <button class="btn-claim-deal btn-explore-deal" onclick="event.stopPropagation(); window.location.href='store.html?id=urban-home-sector17';">
-                            <span>Explore Store & Deals</span><i data-lucide="arrow-right" size="16"></i>
+                    <div class="deal-extra-voucher-badge"><i data-lucide="sparkles" size="13"></i> Extra 5% OFF on MRP with Dealzy Voucher</div>
+                    <div class="deal-card-footer">
+                        <button class="btn-claim-deal" onclick="event.stopPropagation(); openVoucherModal('Sofas, Cushion Covers &amp; Curtains', 'Urban Home Furnishings', '25% OFF', 'EXTRA5-URBAN1', 'SCO 205-206, Sector 17-C, Chandigarh', 'https://images.unsplash.com/photo-1555041469-a586c61ea9bc?auto=format&fit=crop&q=80&w=600', 'Extra 5% OFF on MRP', 'urban-home-sector17')">
+                            <span>Claim Voucher</span><i data-lucide="ticket" size="16"></i>
                         </button>
                     </div>
                 </div>
             </div>
 
             <!-- Home 4: Pepperfry Studio Sector 34 -->
-            <div class="deal-item-card" data-category="home" data-discount="20" data-distance="2.6" data-type="percent" onclick="window.location.href='store.html?id=pepperfry-sector34'">
+            <div class="deal-item-card" data-category="home" data-discount="20" data-distance="2.6" data-type="percent" onclick="openVoucherModal('Designer Furniture &amp; Decor Accents', 'Pepperfry Studio', '20% OFF', 'EXTRA5-PEPPER1', 'SCO 34-35, Sector 34-A Market, Chandigarh', 'https://images.unsplash.com/photo-1493663284031-b7e3aefcae8e?auto=format&fit=crop&q=80&w=600', 'Extra 5% OFF on MRP', 'pepperfry-sector34')">
                 <div class="deal-card-visual">
                     <img src="https://images.unsplash.com/photo-1493663284031-b7e3aefcae8e?auto=format&fit=crop&q=80&w=600" alt="Furniture" loading="lazy">
                     <span class="deal-badge-chip">20% OFF</span>
@@ -2300,9 +2446,10 @@
                         <span><i data-lucide="map-pin" size="13"></i> 2.6 km</span>
                         <span><i data-lucide="clock" size="13" class="urgency-icon"></i> 7 days left</span>
                     </div>
-                    <div class="deal-extra-voucher-badge"><i data-lucide="tag" size="12"></i> Extra 2–5% OFF on MRP with In-Store Coupon</div><div class="deal-card-footer">
-                        <button class="btn-claim-deal btn-explore-deal" onclick="event.stopPropagation(); window.location.href='store.html?id=pepperfry-sector34';">
-                            <span>Explore Store & Deals</span><i data-lucide="arrow-right" size="16"></i>
+                    <div class="deal-extra-voucher-badge"><i data-lucide="sparkles" size="13"></i> Extra 5% OFF on MRP with Dealzy Voucher</div>
+                    <div class="deal-card-footer">
+                        <button class="btn-claim-deal" onclick="event.stopPropagation(); openVoucherModal('Designer Furniture &amp; Decor Accents', 'Pepperfry Studio', '20% OFF', 'EXTRA5-PEPPER1', 'SCO 34-35, Sector 34-A Market, Chandigarh', 'https://images.unsplash.com/photo-1493663284031-b7e3aefcae8e?auto=format&fit=crop&q=80&w=600', 'Extra 5% OFF on MRP', 'pepperfry-sector34')">
+                            <span>Claim Voucher</span><i data-lucide="ticket" size="16"></i>
                         </button>
                     </div>
                 </div>
@@ -2311,7 +2458,7 @@
             <!-- ── GROCERY & SUPERMARKET ──────────────────────────── -->
 
             <!-- Grocery 1: FreshBasket -->
-            <div class="deal-item-card" data-category="grocery" data-discount="25" data-distance="2.2" data-type="percent" onclick="window.location.href='store.html?id=freshbasket-supermarket'">
+            <div class="deal-item-card" data-category="grocery" data-discount="25" data-distance="2.2" data-type="percent" onclick="openVoucherModal('Cold-Pressed Oils, Imported Cheese &amp; Honey', 'FreshBasket Gourmet Supermarket', '25% OFF', 'EXTRA5-FRESHBASKET1', 'SCO 41, Madhya Marg, Sector 26 Timber Market, Chandigarh', 'https://images.unsplash.com/photo-1578916171728-46686eac8d58?auto=format&fit=crop&q=80&w=600', 'Extra 5% OFF on MRP', 'freshbasket-supermarket')">
                 <div class="deal-card-visual">
                     <img src="https://images.unsplash.com/photo-1578916171728-46686eac8d58?auto=format&fit=crop&q=80&w=600" alt="Gourmet Grocery" loading="lazy">
                     <span class="deal-badge-chip">25% OFF</span>
@@ -2326,16 +2473,17 @@
                         <span><i data-lucide="map-pin" size="13"></i> 2.2 km</span>
                         <span><i data-lucide="clock" size="13" class="urgency-icon"></i> 3 days left</span>
                     </div>
-                    <div class="deal-extra-voucher-badge"><i data-lucide="tag" size="12"></i> Extra 2–5% OFF on MRP with In-Store Coupon</div><div class="deal-card-footer">
-                        <button class="btn-claim-deal btn-explore-deal" onclick="event.stopPropagation(); window.location.href='store.html?id=freshbasket-supermarket';">
-                            <span>Explore Store & Deals</span><i data-lucide="arrow-right" size="16"></i>
+                    <div class="deal-extra-voucher-badge"><i data-lucide="sparkles" size="13"></i> Extra 5% OFF on MRP with Dealzy Voucher</div>
+                    <div class="deal-card-footer">
+                        <button class="btn-claim-deal" onclick="event.stopPropagation(); openVoucherModal('Cold-Pressed Oils, Imported Cheese &amp; Honey', 'FreshBasket Gourmet Supermarket', '25% OFF', 'EXTRA5-FRESHBASKET1', 'SCO 41, Madhya Marg, Sector 26 Timber Market, Chandigarh', 'https://images.unsplash.com/photo-1578916171728-46686eac8d58?auto=format&fit=crop&q=80&w=600', 'Extra 5% OFF on MRP', 'freshbasket-supermarket')">
+                            <span>Claim Voucher</span><i data-lucide="ticket" size="16"></i>
                         </button>
                     </div>
                 </div>
             </div>
 
             <!-- Grocery 2: Chandigarh Organic Store Sector 36 -->
-            <div class="deal-item-card" data-category="grocery" data-discount="20" data-distance="3.0" data-type="percent" onclick="window.location.href='store.html?id=chandigarh-organic-sector36'">
+            <div class="deal-item-card" data-category="grocery" data-discount="20" data-distance="3.0" data-type="percent" onclick="openVoucherModal('Organic Farm Greens &amp; Seasonal Fruits', 'Chandigarh Organic Store', '20% OFF', 'EXTRA5-ORGANIC1', 'SCO 9, Sector 36-B Market, Chandigarh', 'https://images.unsplash.com/photo-1542838132-92c53300491e?auto=format&fit=crop&q=80&w=600', 'Extra 5% OFF on MRP', 'chandigarh-organic-sector36')">
                 <div class="deal-card-visual">
                     <img src="https://images.unsplash.com/photo-1542838132-92c53300491e?auto=format&fit=crop&q=80&w=600" alt="Organic Veggies" loading="lazy">
                     <span class="deal-badge-chip">20% OFF</span>
@@ -2350,16 +2498,17 @@
                         <span><i data-lucide="map-pin" size="13"></i> 3.0 km</span>
                         <span><i data-lucide="clock" size="13" class="urgency-icon"></i> 5 days left</span>
                     </div>
-                    <div class="deal-extra-voucher-badge"><i data-lucide="tag" size="12"></i> Extra 2–5% OFF on MRP with In-Store Coupon</div><div class="deal-card-footer">
-                        <button class="btn-claim-deal btn-explore-deal" onclick="event.stopPropagation(); window.location.href='store.html?id=chandigarh-organic-sector36';">
-                            <span>Explore Store & Deals</span><i data-lucide="arrow-right" size="16"></i>
+                    <div class="deal-extra-voucher-badge"><i data-lucide="sparkles" size="13"></i> Extra 5% OFF on MRP with Dealzy Voucher</div>
+                    <div class="deal-card-footer">
+                        <button class="btn-claim-deal" onclick="event.stopPropagation(); openVoucherModal('Organic Farm Greens &amp; Seasonal Fruits', 'Chandigarh Organic Store', '20% OFF', 'EXTRA5-ORGANIC1', 'SCO 9, Sector 36-B Market, Chandigarh', 'https://images.unsplash.com/photo-1542838132-92c53300491e?auto=format&fit=crop&q=80&w=600', 'Extra 5% OFF on MRP', 'chandigarh-organic-sector36')">
+                            <span>Claim Voucher</span><i data-lucide="ticket" size="16"></i>
                         </button>
                     </div>
                 </div>
             </div>
 
             <!-- Grocery 3: BigBazaar Sector 34 -->
-            <div class="deal-item-card" data-category="grocery" data-discount="15" data-distance="2.5" data-type="percent" onclick="window.location.href='store.html?id=big-bazaar-sector34'">
+            <div class="deal-item-card" data-category="grocery" data-discount="15" data-distance="2.5" data-type="percent" onclick="openVoucherModal('Monthly Staples &amp; Household Bundle', 'Big Bazaar Supercenter', '15% OFF', 'EXTRA4-BIGBAZ1', 'SCO 99-100, Sector 34-A Commercial Complex, Chandigarh', 'https://images.unsplash.com/photo-1534723452862-4c874018d66d?auto=format&fit=crop&q=80&w=600', 'Extra 4% OFF on MRP', 'big-bazaar-sector34')">
                 <div class="deal-card-visual">
                     <img src="https://images.unsplash.com/photo-1534723452862-4c874018d66d?auto=format&fit=crop&q=80&w=600" alt="Supermarket" loading="lazy">
                     <span class="deal-badge-chip">15% OFF</span>
@@ -2374,16 +2523,17 @@
                         <span><i data-lucide="map-pin" size="13"></i> 2.5 km</span>
                         <span><i data-lucide="clock" size="13" class="urgency-icon"></i> 10 days left</span>
                     </div>
-                    <div class="deal-extra-voucher-badge"><i data-lucide="tag" size="12"></i> Extra 2–5% OFF on MRP with In-Store Coupon</div><div class="deal-card-footer">
-                        <button class="btn-claim-deal btn-explore-deal" onclick="event.stopPropagation(); window.location.href='store.html?id=big-bazaar-sector34';">
-                            <span>Explore Store & Deals</span><i data-lucide="arrow-right" size="16"></i>
+                    <div class="deal-extra-voucher-badge"><i data-lucide="sparkles" size="13"></i> Extra 4% OFF on MRP with Dealzy Voucher</div>
+                    <div class="deal-card-footer">
+                        <button class="btn-claim-deal" onclick="event.stopPropagation(); openVoucherModal('Monthly Staples &amp; Household Bundle', 'Big Bazaar Supercenter', '15% OFF', 'EXTRA4-BIGBAZ1', 'SCO 99-100, Sector 34-A Commercial Complex, Chandigarh', 'https://images.unsplash.com/photo-1534723452862-4c874018d66d?auto=format&fit=crop&q=80&w=600', 'Extra 4% OFF on MRP', 'big-bazaar-sector34')">
+                            <span>Claim Voucher</span><i data-lucide="ticket" size="16"></i>
                         </button>
                     </div>
                 </div>
             </div>
 
             <!-- Grocery 4: Natures Basket Sector 9 -->
-            <div class="deal-item-card" data-category="grocery" data-discount="30" data-distance="1.7" data-type="percent" onclick="window.location.href='store.html?id=natures-basket-sector9'">
+            <div class="deal-item-card" data-category="grocery" data-discount="30" data-distance="1.7" data-type="percent" onclick="openVoucherModal('Premium Dry Fruits &amp; Specialty Nuts', 'Nature&#x27;s Basket Specialty Foods', '30% OFF', 'EXTRA5-NATBASK1', 'SCO 33, Sector 9-C Inner Market, Chandigarh', 'https://images.unsplash.com/photo-1608686207856-001b95cf60ca?auto=format&fit=crop&q=80&w=600', 'Extra 5% OFF on MRP', 'natures-basket-sector9')">
                 <div class="deal-card-visual">
                     <img src="https://images.unsplash.com/photo-1608686207856-001b95cf60ca?auto=format&fit=crop&q=80&w=600" alt="Dry Fruits" loading="lazy">
                     <span class="deal-badge-chip">30% OFF</span>
@@ -2398,9 +2548,10 @@
                         <span><i data-lucide="map-pin" size="13"></i> 1.7 km</span>
                         <span><i data-lucide="clock" size="13" class="urgency-icon"></i> 6 days left</span>
                     </div>
-                    <div class="deal-extra-voucher-badge"><i data-lucide="tag" size="12"></i> Extra 2–5% OFF on MRP with In-Store Coupon</div><div class="deal-card-footer">
-                        <button class="btn-claim-deal btn-explore-deal" onclick="event.stopPropagation(); window.location.href='store.html?id=natures-basket-sector9';">
-                            <span>Explore Store & Deals</span><i data-lucide="arrow-right" size="16"></i>
+                    <div class="deal-extra-voucher-badge"><i data-lucide="sparkles" size="13"></i> Extra 5% OFF on MRP with Dealzy Voucher</div>
+                    <div class="deal-card-footer">
+                        <button class="btn-claim-deal" onclick="event.stopPropagation(); openVoucherModal('Premium Dry Fruits &amp; Specialty Nuts', 'Nature&#x27;s Basket Specialty Foods', '30% OFF', 'EXTRA5-NATBASK1', 'SCO 33, Sector 9-C Inner Market, Chandigarh', 'https://images.unsplash.com/photo-1608686207856-001b95cf60ca?auto=format&fit=crop&q=80&w=600', 'Extra 5% OFF on MRP', 'natures-basket-sector9')">
+                            <span>Claim Voucher</span><i data-lucide="ticket" size="16"></i>
                         </button>
                     </div>
                 </div>
@@ -2760,7 +2911,7 @@
         </div>
     </footer>
 
-    <!-- Interactive Deal Voucher Claim Modal -->
+        <!-- Interactive Deal Voucher Claim Modal -->
     <div class="deal-voucher-modal" id="deal-voucher-modal">
         <div class="voucher-card-popup">
             <div class="voucher-header-img">
@@ -2770,19 +2921,30 @@
                 </button>
             </div>
             <div class="voucher-body">
-                <div class="voucher-discount-pill" id="popup-discount-pill">50% OFF</div>
-                <h3 class="voucher-title" id="popup-deal-title">Offer Title</h3>
-                <div class="voucher-store" id="popup-store-name">Store Name</div>
+                <div style="display:flex; align-items:center; gap:8px; margin-bottom:10px; flex-wrap:wrap;">
+                    <div class="voucher-discount-pill" id="popup-discount-pill">50% OFF</div>
+                    <div style="background:#FFF7ED; border:1px solid #FFEDD5; color:#C2410C; font-size:0.75rem; font-weight:800; padding:4px 10px; border-radius:999px; display:inline-flex; align-items:center; gap:5px;" id="popup-extra-badge">
+                        <i data-lucide="sparkles" size="13"></i>
+                        <span id="popup-extra-off-text">Extra 2–5% OFF on MRP</span>
+                    </div>
+                </div>
 
-                <div style="background:#FEF3C7; border:1px solid #FDE68A; color:#92400E; font-size:0.8rem; font-weight:700; padding:6px 12px; border-radius:12px; margin-bottom:12px; display:flex; align-items:center; gap:6px;">
-                    <i data-lucide="sparkles" size="14"></i>
-                    <span>Dealzy Voucher: Extra 2-5% OFF on MRP at checkout!</span>
+                <h3 class="voucher-title" id="popup-deal-title">Offer Title</h3>
+                <div class="voucher-store" id="popup-store-name" style="margin-bottom:12px;">Store Name</div>
+
+                <!-- Dealzy Extra Off Feature Highlight -->
+                <div style="background:#FEF3C7; border:1px solid #FDE68A; color:#92400E; font-size:0.83rem; font-weight:700; padding:10px 14px; border-radius:12px; margin-bottom:14px; display:flex; align-items:flex-start; gap:8px; line-height:1.45;">
+                    <i data-lucide="sparkles" size="16" style="color:#D97706; flex-shrink:0; margin-top:2px;"></i>
+                    <div>
+                        <div style="font-size:0.75rem; text-transform:uppercase; letter-spacing:0.04em; color:#B45309; font-weight:800; margin-bottom:2px;">Dealzy In-Store Perk</div>
+                        <span>Show this voucher code at checkout to claim your <strong>extra discount on the MRP</strong> directly from the shop owner!</span>
+                    </div>
                 </div>
 
                 <!-- Code box -->
                 <div class="coupon-code-ticket">
                     <div>
-                        <span style="font-size:0.72rem; color:#EA580C; font-weight:800; display:block; letter-spacing:0.5px;">GIVE CODE TO SHOP OWNER</span>
+                        <span style="font-size:0.72rem; color:#EA580C; font-weight:800; display:block; letter-spacing:0.5px; text-transform:uppercase;">GIVE THIS CODE TO SHOP OWNER</span>
                         <span class="ticket-code-val" id="popup-voucher-code">DEALZY50</span>
                     </div>
                     <button type="button" class="btn-copy-code" id="btn-copy-voucher">
@@ -2791,13 +2953,17 @@
                 </div>
 
                 <p class="voucher-instructions" style="background:#F8FAFC; padding:10px 14px; border-radius:12px; border:1px solid #E2E8F0; font-size:0.85rem; line-height:1.5; color:#334155;">
-                    💡 <strong>How to Redeem:</strong> Give this coupon code to the shop owner at checkout to claim your <strong>extra percentage off on the MRP</strong>. Valid in-store at <strong id="popup-store-address">Store Location</strong>.
+                    💡 <strong>How to Redeem:</strong> Give this coupon code to the shop owner or cashier at checkout. Valid in-store at <strong id="popup-store-address">Store Location</strong>.
                 </p>
 
-                <div class="voucher-actions-row">
+                <div class="voucher-actions-row" style="display:flex; flex-direction:column; gap:10px;">
                     <a href="https://maps.google.com" target="_blank" class="btn-navigate-store" id="popup-map-link">
                         <i data-lucide="navigation" size="16"></i>
                         <span>Get Store Directions</span>
+                    </a>
+                    <a href="store.html" class="btn-visit-store-modal" id="popup-store-page-link">
+                        <i data-lucide="store" size="16"></i>
+                        <span>Explore Full Store &amp; All Products &rarr;</span>
                     </a>
                 </div>
             </div>
@@ -2918,7 +3084,7 @@
         }
 
         // Voucher Modal Handlers
-        function openVoucherModal(title, store, discount, code, address, img) {
+        function openVoucherModal(title, store, discount, code, address, img, extraOff, storeId) {
             document.getElementById('popup-deal-title').textContent = title;
             document.getElementById('popup-store-name').textContent = store;
             document.getElementById('popup-discount-pill').textContent = discount;
@@ -2926,6 +3092,13 @@
             document.getElementById('popup-store-address').textContent = address;
             document.getElementById('popup-deal-img').src = img;
             document.getElementById('popup-map-link').href = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(store + ' ' + address)}`;
+            
+            if (extraOff && document.getElementById('popup-extra-off-text')) {
+                document.getElementById('popup-extra-off-text').textContent = extraOff;
+            }
+            if (storeId && document.getElementById('popup-store-page-link')) {
+                document.getElementById('popup-store-page-link').href = `store.html?id=${storeId}`;
+            }
 
             const modal = document.getElementById('deal-voucher-modal');
             modal.classList.add('active');

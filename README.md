@@ -1,36 +1,35 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# DEALZY | Discover Local. Shop Smart.
+
+Dealzy is a modern web platform connecting shoppers with local neighborhood stores, exclusive discounts, and verified in-store voucher deals.
+
+## Project Structure
+
+The project is built with lightweight, fast, modern HTML5, CSS3, and JavaScript:
+
+- `index.html` - Interactive video splash loader screen that automatically transitions to the login screen.
+- `login.html` - Authentication and onboarding page with glassmorphism UI, phone/email login, and guest preview.
+- `home.html` - Main marketplace featuring curated deals, verified stores, category filters, and offer voucher modals.
+- `store.html` - Detailed store profile page with inventory catalog, store ratings, timings, in-store extra voucher codes, and Google Maps directions.
+- `css/`
+  - `style.css` - Core design system, color tokens, typography, and card layouts.
+  - `responsive.css` - Mobile, tablet, and desktop responsive breakpoints.
+  - `animations.css` - Smooth transitions, hover effects, and keyframe animations.
+- `js/`
+  - `app.js` - Global application UI logic, modal controls, and state management.
+  - `stores-data.js` - Comprehensive store directory, catalog data, and in-store voucher definitions.
+- `assets/`
+  - `images/` - Brand logos and background artwork.
+  - `videos/` - Splash intro video.
 
 ## Getting Started
 
-First, run the development server:
+Because Dealzy runs entirely on standard web technologies with no build steps, you can run it using any static server or open it directly in your browser:
 
+### Using Python (recommended for local video/asset serving)
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+python3 -m http.server 8000
 ```
+Then visit: [http://localhost:8000](http://localhost:8000)
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
-
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+### Or Open Directly
+Double-click `index.html` to open it in your default web browser.
